@@ -1,5 +1,7 @@
 {
   "pages":[
+    "pages/index/index",
+
     "pages/mine/bill/index",
     "pages/mine/bill/allBill",
     
@@ -8,10 +10,13 @@
     "pages/mine/card/cardForm",
     "pages/mine/card/bank",
     "pages/mine/bill/detail",
-    "pages/index/index",
     "pages/user/phoneLogin",
     "pages/user/login",
-    "pages/user/forget"
+    "pages/user/forget",
+
+    "pages/index/billing/billing",
+    "pages/index/billing/productDetail",
+    "pages/index/billing/productList"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -41,6 +46,10 @@
   },
   "networkTimeout": {
     "request": 50000
+  },
+  "usingComponents": {
+    "labelInput": "/component/labelInput/index",
+    "labelSelect": "/component/labelSelect/index"
   },
   "sitemapLocation": "sitemap.json"
 }

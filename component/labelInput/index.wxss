@@ -1,0 +1,21 @@
+/* component/labelInput/index.wxss */
+.label-content{
+  display: flex;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+.label-view{
+  display: flex;
+  flex-direction: column;
+}
+
+.line{
+  height: 2rpx;
+  background-color: rgba(233, 233, 233,1);
+}
+
+.label-input{
+  flex-grow: 1;
+  text-align: right;
+  margin-left: 20rpx;
+}

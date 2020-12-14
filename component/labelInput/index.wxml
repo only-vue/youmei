@@ -1,0 +1,9 @@
+<!--component/labelInput/index.wxml-->
+<view class="label-view">
+  <view class="label-content">
+    <text class="label-text">{{label}}</text>
+    <input class="label-input" placeholder="{{placeholder}}" />
+    
+  </view>
+  <view class="line"></view>
+</view>

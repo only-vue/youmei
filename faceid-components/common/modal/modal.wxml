@@ -1,0 +1,13 @@
+<!--plugin/components/modal/modal.wxml-->
+<view class="verify-modal" wx:if="{{type}}">
+    <view class="modal-content" wx:if="{{type === 'normal'}}">
+        <text class="message">{{message}}</text>
+        <button slot="btn-cancel" type="default" bindtap="hideModal" wx:if="{{!!action_btn_text}}">{{action_btn_text}}</button>
+        <slot name="btn-ok"></slot>
+    </view>
+    <view class="modal-loading-content" wx:if="{{type === 'loading' || type === 'success'}}">
+        <image src="../../resources/images/loading.gif" wx:if="{{type == 'loading'}}"/>
+        <image src="../../resources/images/loading.gif" wx:if="{{type == 'success'}}"/>
+        <text>{{title}}</text>
+    </view>
+</view>

@@ -1,0 +1,17 @@
+<!--pages/billing/productDetail.wxml-->
+<view class="container">
+  <text class="title">商品/商品服务</text>
+
+  <text class="product-title">商品标题</text>
+  <text class="store-name">店面给</text>
+  <text class="location">地址</text>
+
+  <view class="drivder"> </view>
+  <labelInput class="formInput" label="项目名称" placeholder ="询问商户后输入"/>
+  <labelInput class="formInput" label="商品/服务金额" placeholder ="询问商户后输入"/>
+  <labelSelect class="formInput" label="服务次数" placeholder ="选择服务次数"/>
+  <labelSelect class="formInput" label="线下业务员" placeholder ="选择线下业务员" bind:myevent="onMyEvent"/>
+  <view class="next" bindtap="nexttap">
+    下一步
+  </view>
+</view>

@@ -1,5 +1,5 @@
 <!--index.wxml-->
 <view class="container">
   <image src="../../assets/images/home_bg.png" mode="widthFix"></image>
-  <view class="scan-btns">点击蜕变</view>
+  <view class="scan-btns" bindtap="scan">点击蜕变</view>
 </view>

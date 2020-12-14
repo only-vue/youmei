@@ -1,0 +1,21 @@
+<!--plugin/components/base/base.wxml-->
+<view class="verify-component" wx:if="{{!finished}}">
+    <view class="header header-class">
+        <text>身份证识别服务</text>
+    </view>
+    <view class="container container-class">
+        <slot name="container"></slot>
+
+
+        <view class="footer footer-class">
+            <slot name="agreement"></slot>
+            <slot name="action"></slot>
+            <view class="exit" bindtap="onExit">退出验证</view>
+        </view>
+    </view>
+    
+   
+    <verifyModal id="verify-modal">
+        <button slot="btn-ok" type="default" bindtap="onFinish" class="{{show_exit_btn ? 'exit-plain': ''}}" wx:if="{{show_exit_btn}}">退出验证</button>
+    </verifyModal>
+</view>

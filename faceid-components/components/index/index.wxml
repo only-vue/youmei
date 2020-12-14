@@ -1,0 +1,10 @@
+
+
+<landing wx:if="{{step === STEP_TO['landing'] }}"
+    token="{{token}}"
+    verify-type="{{verify_type}}"
+    bind:nextstep="onNextStep"/>
+<verify wx:if="{{step === STEP_TO['verify']}}"
+    verify-type="{{verify_type}}"
+    token="{{token}}"
+    retry-times="{{retry_times}}"/>

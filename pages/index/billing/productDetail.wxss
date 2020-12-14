@@ -1,0 +1,56 @@
+/* pages/billing/productDetail.wxss */
+
+.container{
+  display: flex;
+  flex-direction: column;
+}
+.title{
+  color: black;
+  font-size: 80rpx;
+  font-weight: 600;
+  margin-left: 40rpx;
+  margin-top: 20rpx;
+ }
+ .product-title{
+  color: black;
+  font-size: 40rpx;
+  font-weight: 600;
+  margin-left: 40rpx;
+  margin-top: 20rpx;
+ }
+ .store-name{
+  color: black;
+  font-size: 40rpx;
+  font-weight: 600;
+  margin-left: 40rpx;
+  margin-top: 20rpx;
+ }
+ .location{
+  color: black;
+  font-size: 40rpx;
+  font-weight: 600;
+  margin-left: 40rpx;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+ }
+ .drivder{
+  height: 10rpx;
+  background-color: rgba(233, 233, 233,1);
+ }
+ .formInput{
+   padding-left: 30rpx;
+   padding-right: 30rpx;
+ }
+ .next{
+   width: 300rpx;
+   text-align: center;
+   background-color: rgb(207, 79, 142);
+   padding-left: 50rpx;
+   padding-right: 50rpx;
+   padding-top: 10rpx;
+   padding-bottom: 10rpx;
+   border-radius: 36rpx;
+   color: white;
+   margin: 40rpx auto;
+   font-size: 30rpx;
+ }
