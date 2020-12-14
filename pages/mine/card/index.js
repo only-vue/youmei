@@ -25,9 +25,9 @@ Page({
   onLoad: function (options) {
  
   },
-  //立即还款
-  bindSubmit() {
-
+  //添加银行卡
+  bindAdd() {
+    navigateTo('/pages/mine/card/cardForm');
   },
   //下拉复位
   onPullDownRefresh() {

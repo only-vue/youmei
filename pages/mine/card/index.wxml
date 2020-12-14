@@ -2,7 +2,7 @@
 <view class="container">
   <view class="card-top">
     <view class="title">银行卡还款管理</view>
-    <view class="add-btns">+</view>
+    <view class="add-btns" bindtap="bindAdd">+</view>
   </view>
   <view class="card-warp">
      <view class="item" wx:for="{{list}}">
