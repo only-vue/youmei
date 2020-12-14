@@ -1,0 +1,59 @@
+/* pages/mine/index.wxss */
+page{
+  background: #f8f8f8;
+}
+.top-panel{
+  height: 460rpx;
+  background: #fff;
+  padding: 0 40rpx;
+}
+.news-warp{
+  padding: 40rpx 0 0;
+  text-align: right;
+}
+.news-warp image{
+   width: 50rpx;
+   height: 50rpx;
+}
+.user-warp{
+  text-align: center;
+}
+.user-warp image{
+  width: 220rpx;
+  height: 220rpx;
+}
+.user-warp .text{
+  font-size: 34rpx;
+  margin: 20rpx 0 0;
+  color: #666;
+}
+
+.bottom-panel{
+   margin: 30rpx 0 60rpx 0;
+   background: #fff;
+}
+.bottom-panel .item{
+   display: flex;
+   height: 100rpx;
+}
+.bottom-panel .item .icon,.bottom-panel .item .content{
+   display: flex;
+   align-items: center;
+   height: 100%;
+}
+.bottom-panel .item .icon{
+  width:100rpx;
+  justify-content: center;
+}
+.bottom-panel .item .icon image{
+  width: 38rpx;
+  height: 30rpx;
+}
+.bottom-panel .item .content{
+  flex: 1;
+  border-bottom:solid 1rpx #eee; 
+  font-size: 30rpx;
+}
+.bottom-panel .item:last-child .content{
+  border: none;
+}

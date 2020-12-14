@@ -1,0 +1,45 @@
+/* pages/mine/bill/allBill.wxss */
+page{
+  background:#f8f8f8;
+}
+.list .item{
+  display: inline-block;
+  width: 100%;
+}
+.list .item .year{
+  padding: 20rpx 40rpx;
+  font-size: 30rpx;
+  color:#666;
+}
+.list .item .sub-list{
+  padding: 0 40rpx;
+  background:#fff;
+}
+
+.list .item .sub-list .sub-item{
+  display: flex;
+  padding: 30rpx 0;
+  border-bottom:solid 1rpx #eee;
+  align-items: center;
+}
+.list .item .sub-list .sub-item:last-child{
+  border:none;
+}
+.list .item .sub-list .sub-item .content{
+  flex:1;
+}
+
+.list .item .sub-list .sub-item .content .name{
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
+}
+
+.list .item .sub-list .sub-item .content .money{
+  color:#DC5096;
+  font-size: 32rpx;
+}
+
+.list .item .sub-list .sub-item .status{
+   color:#999;
+   font-size: 32rpx;
+}

@@ -1,0 +1,125 @@
+<!--pages/mine/bill/index.wxml-->
+<view class="container">
+  <view class="bill-top">
+    <image src="../../../assets/images/bill_bg.png" mode="widthFix" />
+    <view class="fix-warp">
+       <view class="name">我的服务计划</view>
+       <view class="content">
+          <view class="title">
+             <view class="time">2019-04</view>
+             <view class="picker-warp">
+                <view class="picker" bindtap="bindAllBill">
+                  全部账单
+                </view>
+             </view>
+          </view>
+          <view class="other">
+              <view class="tag">剩余待还（元）</view>
+              <view class="money">169.00</view>
+              <view class="tips">你已逾期5天，请尽快还款</view>
+          </view>
+       </view>
+    </view>
+  </view>
+  <view class="bill-list">
+    <view class="title">本月账单共3笔</view>
+    <view class="list">
+       <view class="item" bindtap="bindDetail">
+           <view class="top">
+              <view class="time">出账日：2020-08-16</view>
+              <view class="info">查看详情 ></view>
+           </view>
+           <view class="content">
+             <view class="left">
+                 <view class="name">面部调整</view>
+                 <view class="info">超值顾客套餐超值顾客套餐超值顾客套餐超值顾客套餐</view>
+                 <view class="tips">最后还款日：2019-12-12</view>
+             </view>
+             <view class="right">
+               <view class="money">¥ <text>5000.45</text></view>
+               <view class="btns">已还款</view>
+             </view>
+           </view>
+       </view>
+        <view class="item" bindtap="bindDetail">
+           <view class="top">
+              <view class="time">出账日：2020-08-16</view>
+              <view class="info">查看详情 ></view>
+           </view>
+           <view class="content">
+             <view class="left">
+                 <view class="name">面部调整</view>
+                 <view class="info">超值顾客套餐超值顾客套餐超值顾客套餐超值顾客套餐</view>
+                 <view class="tips">最后还款日：2019-12-12</view>
+             </view>
+             <view class="right">
+               <view class="money">¥ <text>5000.45</text></view>
+               <view class="btns paywait" catchtap="openReplay">立即还款</view>
+             </view>
+           </view>
+        </view>
+         <view class="item" bindtap="bindDetail">
+           <view class="top">
+              <view class="time">出账日：2020-08-16</view>
+              <view class="info">查看详情 ></view>
+           </view>
+           <view class="content">
+             <view class="left">
+                 <view class="name">面部调整</view>
+                 <view class="info">超值顾客套餐超值顾客套餐超值顾客套餐超值顾客套餐</view>
+                 <view class="tips">最后还款日：2019-12-12</view>
+             </view>
+             <view class="right">
+               <view class="money">¥ <text>5000.45</text></view>
+               <view class="btns paying">还款中</view>
+             </view>
+           </view>
+        </view>
+    </view>
+  </view>
+  <!--弹框立即还款 -->
+  <view class="popup-warp" wx:if="{{replayStatus || bankStatus}}">
+    <view class="popup-panel" wx:if="{{replayStatus}}">
+      <view class="popup-title">确认还款</view>
+      <view class="popup-close" catchtap="onClose">×</view>
+      <view class="popup-content">
+          <view class="replay-warp">
+              <view class="money">¥ <text>0.33</text></view>
+              <view class="list">
+                 <view class="item">
+                     <view class="name">产品名称</view>
+                     <view class="content">测试进件</view>
+                 </view>
+                 <view class="item">
+                     <view class="name">项目名称</view>
+                     <view class="content">测试</view>
+                 </view>
+                 <view class="item">
+                     <view class="name">期数</view>
+                     <view class="content">1/3期</view>
+                 </view>
+                 <view class="item">
+                     <view class="name">还款银行</view>
+                     <view class="content" catchtap="openBank">中国建设银行-建设银行(5681) ></view>
+                 </view>
+                 <view class="form-btns" bindtap="bindRepaySubmit">立即还款</view>
+              </view>
+          </view>
+      </view>
+    </view>
+    <view class="popup-panel" wx:if="{{bankStatus}}">
+      <view class="popup-title">选择银行卡</view>
+      <view class="popup-close" catchtap="onClose">×</view>
+      <view class="popup-content">
+          <view class="replay-warp">
+            <view class="bank-warp">
+                <view class="item" catchtap="bindSelBank">建设银行(3577)</view>
+                <view class="item" catchtap="bindSelBank">招商银行(2288)</view>
+            </view>
+            <view class="form-btns" bindtap="bindBankSubmit">添加银行卡</view>
+          </view> 
+      </view>
+    </view>
+  </view>
+</view>
+

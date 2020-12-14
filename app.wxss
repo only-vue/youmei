@@ -1,0 +1,104 @@
+/**app.wxss**/
+.container {
+ 
+} 
+
+.form-btns {
+  width: 580rpx;
+  height:100rpx;
+  margin: 0 auto 30rpx;
+  background: #DC5096;
+  border-radius: 61rpx;
+  font-size: 34rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.form-btns:active{
+  opacity: 0.6;
+}
+.place-holder{
+  font-size: 28rpx;
+  color:#999;
+}
+
+.red{
+  color:#ff0000;
+}
+
+.popup-warp{
+  background:rgba(0,0,0,0.3);
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 8;
+}
+.popup-panel{
+  min-height: 400rpx;
+  max-height: 800rpx;
+  background:#fff;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.popup-title{
+   height: 90rpx;
+   background:#f8f8f8;
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color:#666;
+   font-size: 32rpx;
+   padding: 0 90rpx;
+   box-sizing: border-box;
+}
+.popup-close{
+  width: 90rpx;
+  height: 90rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 42rpx;
+}
+.popup-content{
+  margin: 90rpx 0 0;
+  padding: 30rpx;
+}
+
+.replay-warp .money{
+  padding: 10rpx 0;
+  text-align: center;
+  font-size: 30rpx;
+}
+.replay-warp .money text{
+ font-size: 50rpx;
+}
+.replay-warp .item{
+ padding: 30rpx 0;
+ font-size: 30rpx;
+}
+
+.replay-warp .item .name{
+ float: left;
+ color:#666;
+}
+.replay-warp .item .content{
+ float: right;
+}
+.bank-warp .item{
+  border-bottom: solid 1rpx #eee;
+}

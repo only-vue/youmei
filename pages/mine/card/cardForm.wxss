@@ -1,0 +1,68 @@
+/* pages/mine/card/cardForm.wxss */
+page{
+  background:#f8f8f8;
+}
+.card-top{
+  padding: 40rpx;
+  display: inline-block;
+  width: 100%;
+  background:#fff;
+  font-size: 40rpx;
+}
+.card-tips{
+  padding: 20rpx 40rpx;
+  font-size: 28rpx;
+  color:#999;
+}
+.card-tips text{
+  color:#DC5096;
+}
+.card-form{
+  background:#fff;
+  display: inline-block;
+  width: 100%;
+}
+.card-form .item{
+  padding: 0 40rpx;
+  height: 90rpx;
+  border-bottom:solid 1rpx #f8f8f8;
+  display: flex;
+  align-items: center;
+}
+.card-form .item .name,.card-form .item .content{
+   font-size: 30rpx;
+   height: 100%;
+   display: flex;
+   align-items: center;
+}
+.card-form .item .name{
+  width: 160rpx;
+}
+.card-form .item .content{
+  flex:1;
+}
+.card-form .item .content input{
+  border:none;
+  background:none;
+  text-align: right;
+  font-size: 30rpx;
+  width: 100%;
+}
+.card-agree{
+  padding: 20rpx 40rpx;
+  font-size: 28rpx;
+  color:#999;
+}
+.card-agree image{
+   width: 40rpx;
+   height: 40rpx;
+   vertical-align: -8rpx;
+   margin: 0 0 0 6rpx;
+}
+.card-agree text{
+  color:#DC5096;
+}
+
+.form-btns{
+  margin: 30rpx auto;
+}

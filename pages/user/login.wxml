@@ -1,0 +1,39 @@
+<!--pages/login/index.wxml-->
+<view class="container">
+  <view class="logo">
+    <image src="../../assets/images/logo.png" />
+  </view>
+  <view class="content">
+    <view class="item">
+      <view class="name">
+        账号
+      </view>
+      <view class="input">
+        <input maxlength="50" value="{{userName}}" placeholder-class="place-holder" placeholder="请输入手机号" bindinput="bindInput" data-key="userName"></input>
+      </view>
+      <view class="arrow" wx:if="{{userName}}" data-key="userName" catchtap="bindRemove">
+        <image src="../../assets/images/clear.png"></image>
+      </view>
+    </view>
+    <view class="item">
+      <view class="name">
+        密码
+      </view>
+      <view class="input">
+        <input maxlength="20"  type="password" value="{{password}}" placeholder-class="place-holder" placeholder="请输入6位登录密码" bindinput="bindInput" data-key="password"></input>
+      </view>
+      <view class="arrow" wx:if="{{password}}" data-key="password" bindtap="bindRemove">
+        <image src="../../assets/images/clear.png"></image>
+      </view>
+    </view>
+  </view>
+  <view class="tips" bindtap="bindPassword">
+    <text>忘记密码</text>
+  </view>
+  <view class="logo-btns" bindtap="bindSubmit">
+    登录
+  </view>
+  <view class="logo-tips" bindtap="bindPhoneLogin">
+   验证码登录
+  </view>
+</view>

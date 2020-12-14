@@ -1,0 +1,19 @@
+<!--pages/mine/bill/allBill.wxml-->
+<view class="containe">
+  <view class="list">
+      <view class="item" wx:for="{{list}}" :key="{{index}}" bindtap="bindBill">
+          <view class="year">
+             {{item.year}}
+          </view>
+          <view class="sub-list">
+             <view class="sub-item" wx:for="{{item.list}}" wx:for-index="subIndex" :key="subIndex" wx:for-item="subItem">
+                  <view class="content">
+                    <view class="name">{{subItem.name}}</view>
+                    <view class="money">{{subItem.money}}</view>
+                </view>
+                <view class="status">{{subItem.status}}</view>
+             </view>
+          </view>
+      </view>
+  </view>
+</view>

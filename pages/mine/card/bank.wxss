@@ -1,0 +1,20 @@
+/* pages/mine/card/bank.wxss */
+page{
+  background:#DC5096;
+}
+.item{
+   float: left;
+   height: 88rpx;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   color:#fff;
+   font-size: 30rpx;
+   width: 25%;
+}
+.tips{
+  padding: 40rpx;
+  color:#fff;
+  font-size: 30rpx;
+  line-height: 48rpx;
+}

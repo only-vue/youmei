@@ -1,0 +1,174 @@
+/* pages/mine/bill/index.wxss */
+.bill-top{
+  position: relative;
+  height: 660rpx;
+}
+.bill-top .fix-warp{
+  position: absolute;
+  width: calc(100% - 80rpx);
+  left: 40rpx;
+  top: 80rpx;
+}
+
+.bill-top .fix-warp .name{
+  font-size: 46rpx;
+  color: #fff;
+}
+
+.bill-top .fix-warp .content{
+   background:#fff;
+   border-radius: 20rpx;
+   height: 460rpx;
+   margin: 50rpx 0 0;
+   box-shadow: 0px 0px 14px 0px rgba(101, 101, 101, 0.14);
+}
+
+.bill-top .fix-warp .content .title{
+  height: 100rpx;
+  background:#F3E5FD;
+  padding: 0 30rpx;
+  border-radius: 20rpx 20rpx 0 0;
+}
+.bill-top .fix-warp .content .title .time,.bill-top .fix-warp .content .title .picker-warp{
+  height: 100%;
+  width: 50%;
+  float: left;
+  display: flex;
+  align-items: center;
+  font-size: 32rpx;
+}
+.bill-top .fix-warp .content .title .picker-warp{
+  justify-content: flex-end;
+  position: relative;
+  padding: 0 30rpx 0 0;
+  box-sizing: border-box;
+  color: #DC5096;
+}
+
+.bill-top .fix-warp .content .title .picker-warp::after{
+  content:'';
+  width: 20rpx;
+  height: 20rpx;
+  position: absolute;
+  z-index: 99;
+  right: 0;
+  top: 50%;
+  margin: -8rpx 0 0 0;
+  border-left: solid 2rpx #DC5096;
+  border-top: solid 2rpx #DC5096;
+  box-sizing: border-box;
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+}
+
+.bill-top .fix-warp .content .other{
+  padding: 60rpx;
+  text-align: center;
+}
+.bill-top .fix-warp .content .other .tag{
+  font-size: 28rpx;
+  color: #999;
+}
+.bill-top .fix-warp .content .other .money{
+  padding: 24rpx 0;
+  font-size: 56rpx;
+}
+.bill-top .fix-warp .content .other .tips{
+  color: #ff0000;
+  font-size: 28rpx;
+}
+.bill-top image{
+  width: 100%;
+}
+.bill-list{
+  padding: 0 40rpx;
+}
+.bill-list .title{
+  font-size: 30rpx;
+  padding: 30rpx 0;
+}
+.bill-list .item{
+  box-shadow: 0px 0px 14px 0px rgba(101, 101, 101, 0.14);
+  border-radius:20rpx;  
+  margin-bottom: 30rpx;
+  display: inline-block;
+  width: 100%;  
+} 
+
+.bill-list .item .top{
+   padding: 30rpx;
+   border-bottom: solid 1rpx #eee;
+   font-size: 30rpx;
+   color: #999;
+   display: inline-block;
+   width: 100%;
+   box-sizing: border-box;
+}
+.bill-list .item .top .time{
+  float: left;
+}
+.bill-list .item .top .info{
+  float: right;
+}
+
+.bill-list .item .content{
+  display: flex;
+  padding: 30rpx;
+  font-size: 30rpx;
+}
+.bill-list .item .content .left{
+  flex: 1;
+}
+
+.bill-list .item .content .left .name{
+  font-size: 32rpx;
+}
+.bill-list .item .content .left .info{
+  padding: 10rpx 0;
+  font-size: 28rpx;
+  color: #999;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+.bill-list .item .content .left .tips{
+  margin: 10rpx 0 0;
+  font-size: 28rpx;
+  color: #999;
+}
+
+.bill-list .item .content .right{
+  width: 240rpx;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bill-list .item .content .right .money text{
+  font-size: 40rpx;
+}
+
+.bill-list .item .content .right .btns{
+  padding: 14rpx 24rpx;
+  margin: 20rpx;
+  border: solid 1rpx #999;
+  font-size: 30rpx;
+  border-radius:60rpx;
+  color: #999; 
+}
+.paywait{
+  border: solid 1rpx #DC5096!important;
+  color: #DC5096!important;
+}
+.paying{
+  border: none!important;
+  background: #DC5096;
+  color: #fff!important;
+}
+
+.form-btns{
+  margin: 60rpx auto 20rpx;
+}

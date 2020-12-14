@@ -1,0 +1,41 @@
+<!--pages/user/phoneLogin.wxml-->
+<view class="container">
+  <view class="logo">
+    <image src="../../assets/images/logo.png" />
+  </view>
+  <view class="content">
+    <view class="item">
+      <view class="name">
+        账号
+      </view>
+      <view class="input">
+        <input maxlength="50" value="{{userName}}" placeholder-class="place-holder" placeholder="请输入手机号" bindinput="bindInput" data-key="userName"></input>
+      </view>
+      <view class="arrow" wx:if="{{userName}}" data-key="userName" catchtap="bindRemove">
+        <image src="../../assets/images/clear.png"></image>
+      </view>
+    </view>
+    <view class="item">
+      <view class="name">
+        验证码
+      </view>
+      <view class="input_code">
+        <input class="code"  maxlength="6" type="number" value="{{code}}" placeholder-class="place-holder" placeholder="请输入验证码" bindinput="bindInput" data-key="code"></input>
+        <view class="row">
+          <view class="clumn_line"></view>
+          <button class="code-button" bindtap="sendCode" disabled="{{smsFlag}}" style='color:{{sendColor}};'>{{sendTime}}</button>
+        </view>
+      </view>
+     
+    </view>
+  </view>
+  <view class="tips" bindtap="bindPassword">
+    <text>忘记密码</text>
+  </view>
+  <view class="logo-btns" bindtap="bindSubmit">
+    登录
+  </view>
+  <view class="logo-tips" bindtap="bindPhoneLogin">
+   账号密码登录
+  </view>
+</view>

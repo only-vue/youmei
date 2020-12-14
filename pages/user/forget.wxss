@@ -1,0 +1,95 @@
+/* pages/user/forget.wxss */
+
+.content {
+  margin: 0 30rpx;
+}
+
+.content .item {
+  display: flex;
+  flex-flow: row nowrap;
+  height: 100rpx;
+  background: #f6f6f6;
+  margin-bottom: 30rpx;
+  align-items: center;
+  color: #444;
+  border-radius: 10rpx;
+  font-size: 32rpx;
+}
+
+.content .item:last-child {
+  margin-bottom: 0;
+}
+
+.content .item .name {
+  width: 110rpx;
+  display: flex;
+  padding: 0 0 0 30rpx;
+}
+
+.content .item .input {
+  width: calc(100% - 400rpx);
+}
+
+.content .item .arrow {
+  width: 90rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.content .item .arrow image {
+  width: 38rpx;
+  height: 38rpx;
+}
+
+.tips {
+  margin: 20rpx 30rpx 50rpx;
+  display: flex;
+  justify-content: flex-end;
+  color: #DC5096;
+  font-size: 28rpx;
+}
+
+.logo-btns {
+  width: 580rpx;
+  height:100rpx;
+  margin: 70rpx auto 50rpx;
+  background: #DC5096;
+  border-radius: 61rpx;
+  font-size: 34rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.logo-btns:active{
+  opacity: 0.6;
+}
+.margenTop{
+  margin-top: 80rpx;
+}
+.input_code{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.clumn_line{
+  width: 2rpx;
+  height: 50rpx;
+  background-color:rgba(232,232,232,1);
+  display: block;
+}
+.code-button{
+  color:#DC5096;
+  font-size:28rpx;
+  margin: 0 20rpx 0 20rpx;
+  padding: 0px;
+}
+.code-button::after{
+  border: none;
+}
+
+.row{
+  display: flex;
+  align-items: center;
+}

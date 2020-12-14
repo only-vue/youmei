@@ -1,0 +1,17 @@
+<!--pages/mine/card/index.wxml-->
+<view class="container">
+  <view class="card-top">
+    <view class="title">银行卡还款管理</view>
+    <view class="add-btns">+</view>
+  </view>
+  <view class="card-warp">
+     <view class="item" wx:for="{{list}}">
+        <view class="icon"> 卡 </view>
+        <view class="content">
+           <view class="name">{{item.name}}</view>
+           <view class="type">储蓄卡</view>
+           <view class="card-no"> <text>****</text> <text>****</text> <text>****</text> <text>{{item.no}}</text> </view>
+        </view>
+     </view>
+  </view>
+</view>

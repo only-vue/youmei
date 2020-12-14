@@ -1,0 +1,36 @@
+<!--pages/mine/bill/detail.wxml-->
+<view class="container">
+  <view class="detail-top">5月账单明细</view>
+  <view class="detail-warp">
+     <view class="top">
+        <view class="name">某成都小启科技有限公司</view>
+        <view class="money">289.18</view>
+        <view class="tips">最后还款日 <text>06月13日</text></view>
+     </view>
+     <view class="list">
+        <view class="item">
+           <view class="name">产品</view>
+           <view class="content">脸部spa</view>
+        </view>
+        <view class="item">
+           <view class="name">项目名称</view>
+           <view class="content">脸部整体微调</view>
+        </view>
+        <view class="item">
+           <view class="name">交易时间</view>
+           <view class="content">2020-10-22 12：20</view>
+        </view>
+        <view class="item">
+           <view class="name">订单号</view>
+           <view class="content">13435554545</view>
+        </view>
+        <view class="item">
+           <view class="name">创建时间</view>
+           <view class="content">2020-10-10 11：11</view>
+        </view>
+     </view>
+  </view>
+  <view class="form-btns" bindtap="bindSubmit">
+    立即还款
+  </view>
+</view>

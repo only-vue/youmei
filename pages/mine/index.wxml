@@ -1,0 +1,26 @@
+<!-- pages/mine/index.wxml -->
+<view class="container">
+   <view class="top-panel">
+      <view class="news-warp">
+        <image src="../../assets/images/news.png" />
+      </view>
+      <view class="user-warp">
+         <image src="../../assets/images/user.jpg" />
+         <view class="text" bindtap="bindLogin">登录/注册</view>
+      </view>
+   </view>
+   <view class="bottom-panel">
+      <view class="item" bindtap="bindView" data-url="/pages/mine/bill/index">
+         <view class="icon">
+           <image src="../../assets/images/mine_1.jpg" />
+         </view>
+         <view class="content">我的服务计划</view>
+      </view>
+       <view class="item" bindtap="bindView" data-url="/pages/mine/card/index">
+         <view class="icon">
+           <image src="../../assets/images/mine_2.jpg" />
+         </view>
+         <view class="content">银行卡管理</view>
+      </view>
+   </view>
+</view>

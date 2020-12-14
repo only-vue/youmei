@@ -1,0 +1,22 @@
+<!--pages/mine/card/bank.wxml-->
+<view class="container">
+  <view class="title">
+     <view class="item">银行</view>
+     <view class="item">单笔限额</view>
+     <view class="item">单日限额</view>
+     <view class="item">单月限额</view>
+  </view>
+  <view class="list">
+     <view wx:for="{{list}}">
+         <view class="item">{{item.name}}</view>
+         <view class="item">{{item.oneMoney}}</view>
+         <view class="item">{{item.dayMoney}}</view>
+         <view class="item">{{item.monthMoney}}</view>
+     </view>
+  </view>
+  <view class="tips">
+    <view>注：</view>
+    <view>1、柜面开通银联无卡支付业务支持大部分地区（存在少部分地区不支持）开通银联无卡支付业务建议网上开通，使用网上银行或通过银联官网开通，开通成功几率更高。网银如何开通建议咨询银行客服</view>
+    <view>2、以上额度均表示我司最高支持额度，用户实际额度取决于商户限额、用户银行卡本身限额。</view>
+  </view>
+</view>

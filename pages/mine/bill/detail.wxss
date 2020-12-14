@@ -1,0 +1,54 @@
+/* pages/mine/bill/detail.wxss */
+page{
+  background: #f8f8f8;
+}
+.detail-top{
+  background: #fff;
+  padding: 50rpx;
+  font-size: 36rpx;
+}
+.detail-warp{
+  padding: 0 50rpx;
+  margin: 30rpx 0 40rpx;
+  background: #fff;
+}
+
+.detail-warp .top{
+  padding: 50rpx 0;
+  border-bottom:solid 1px #eee; 
+  text-align: center;
+  font-size: 32rpx;
+}
+
+.detail-warp .top .money{
+   font-size: 50rpx;
+   margin: 20rpx 0;
+}
+.detail-warp .top .tips{
+  color: #999;
+  font-size: 28rpx;
+}
+
+.detail-warp .top .tips text{
+  color: #DC5096;
+  
+}
+
+.detail-warp .list{
+  padding: 10rpx 0 20rpx;
+  display: inline-block;
+  width: 100%;
+}
+
+.detail-warp .list .item{
+   padding: 34rpx 0;
+   font-size: 28rpx;
+}
+.detail-warp .list .item .name{
+  float: left;
+  color: #666;
+}
+.detail-warp .list .item .content{
+  float: right;
+}
+

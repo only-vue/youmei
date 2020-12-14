@@ -1,0 +1,46 @@
+{
+  "pages":[
+    "pages/mine/bill/index",
+    "pages/mine/bill/allBill",
+    
+    "pages/mine/index",
+    "pages/mine/card/index",
+    "pages/mine/card/cardForm",
+    "pages/mine/card/bank",
+    "pages/mine/bill/detail",
+    "pages/index/index",
+    "pages/user/phoneLogin",
+    "pages/user/login",
+    "pages/user/forget"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "优美",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#DC5096",
+    "borderStyle": "black",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "selectedIconPath": "/assets/images/home-active.png",
+        "iconPath": "/assets/images/home.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "/assets/images/user-active.png",
+        "iconPath": "/assets/images/user.png",
+        "pagePath": "pages/mine/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 50000
+  },
+  "sitemapLocation": "sitemap.json"
+}
