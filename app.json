@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/user/login",
     "pages/index/index",
     "pages/mine/bill/index",
     "pages/mine/bill/allBill",
@@ -9,7 +10,7 @@
     "pages/mine/card/bank",
     "pages/mine/bill/detail",
     "pages/user/phoneLogin",
-    "pages/user/login",
+   
     "pages/user/forget",
     "pages/index/billing/billing",
     "pages/index/billing/productDetail",

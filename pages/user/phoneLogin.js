@@ -50,14 +50,14 @@ Page({
     if (!checkNull(this.data.userName, '请输入账号')) {
       return false;
     }
-    if (!checkNull(this.data.password, '请输入登录密码')) {
+    if (!checkNull(this.data.code, '请输入短信验证码')) {
       return false;
     }
     let params = {
-      userName: this.data.userName,
-      pwd: this.data.password
+      mobile: this.data.userName,
+      verCode: this.data.code
     }
-    postRequest(this, api.login, params, (data) => {
+    postRequest(this, api.smsLogin, params, (data) => {
       setSession('token', data.token);
       setSession('role', data.role);
       setSession('user', data.user);
@@ -91,7 +91,7 @@ Page({
   },
   // 获取验证码
   sendCode: function (mobile) {
-    if (!checkNull(this.data.userName, '请输入账号')) {
+    if (!checkNull(this.data.userName, '请输入手机号')) {
       return false;
     }
     if (!checkPhone(this.data.userName, '手机号格式错误')) {

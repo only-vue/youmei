@@ -50,16 +50,14 @@ Page({
       return false;
     }
     let params = {
-      userName: this.data.userName,
-      pwd: this.data.password
+      mobile: this.data.userName,
+      password: this.data.password,
+      jgPushId:'151832220571608036011119'
     }
-    postRequest(this, api.login, params, (data) => {
+    postRequest(this, api.pwLogin, params, (data) => {
       setSession('token', data.token);
-      setSession('role', data.role);
-      setSession('user', data.user);
-      setSession('userName', this.data.userName);
-      setSession('pwd', this.data.password);
-      reLaunch('/pages/dateManage/index');
+      setSession('mobile', this.data.userName);
+      reLaunch('/pages/index/index');
     })
 
   },

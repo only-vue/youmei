@@ -55,7 +55,6 @@ export function postRequest(that, api, data, callback, completeBack) {
     method: 'POST',
     header: {
       'token': getSession('token') ? getSession('token'):'',
-      'user': getSession('user') ? getSession('user') : '',
       'content-type': 'application/json'
     },
     success: (res) => {
@@ -129,7 +128,7 @@ export function callRequest(val) {
     case '10000':
       return '10000';
       break;
-    case '10008':
+    case '70000':
       showModal('提示', val.msg, '取消', '确定', true,(val)=>{
         if(val){
           reLaunch('/pages/login/index');

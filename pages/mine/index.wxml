@@ -6,7 +6,8 @@
       </view>
       <view class="user-warp">
          <image src="../../assets/images/user.jpg" />
-         <view class="text" bindtap="bindLogin">登录/注册</view>
+         <view class="text" bindtap="bindLogin" wx:if="{{!mobile}}">登录/注册</view>
+         <view wx:else>{{mobile}}</view>
       </view>
    </view>
    <view class="bottom-panel">
@@ -23,4 +24,7 @@
          <view class="content">银行卡管理</view>
       </view>
    </view>
+   <view class="form-btns" bindtap="bindLogin">
+   退出
+  </view>
 </view>
