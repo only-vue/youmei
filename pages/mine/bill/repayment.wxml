@@ -1,0 +1,61 @@
+<!--pages/mine/bill/repayment.wxml-->
+<view class="container">
+  <view class="title">立即还款</view>
+  <view class="tips">
+     <view>请在每期最终还款日前进行还款</view>
+     <view>请主动联系平台客户或线下业务员进行还款，以免造成不必要的麻烦</view>
+  </view>
+  <view class="wx-title">客服微信</view>
+  <view class="wx-content">
+      <view>微信号:<text>xianyin2001</text></view>
+      <view class="phone">客服电话:<text>028-86752983</text></view>
+  </view>
+  <view class="wx-code">
+      <image src="{{imgurl}}" data-url="{{imgurl}}" bindlongpress="saveImage" />
+      <view>长按保存二维码图片至手机</view>
+  </view>
+   <!--弹框立即还款 -->
+   <view class="popup-warp" wx:if="{{replayStatus || bankStatus}}">
+    <view class="popup-panel" wx:if="{{replayStatus}}">
+      <view class="popup-title">确认还款</view>
+      <view class="popup-close" catchtap="onClose">×</view>
+      <view class="popup-content">
+          <view class="replay-warp">
+              <view class="money">¥ <text>0.33</text></view>
+              <view class="list">
+                 <view class="item">
+                     <view class="name">产品名称</view>
+                     <view class="content">测试进件</view>
+                 </view>
+                 <view class="item">
+                     <view class="name">项目名称</view>
+                     <view class="content">测试</view>
+                 </view>
+                 <view class="item">
+                     <view class="name">期数</view>
+                     <view class="content">1/3期</view>
+                 </view>
+                 <view class="item">
+                     <view class="name">还款银行</view>
+                     <view class="content" catchtap="openBank">中国建设银行-建设银行(5681) ></view>
+                 </view>
+                 <view class="form-btns" bindtap="bindRepaySubmit">立即还款</view>
+              </view>
+          </view>
+      </view>
+    </view>
+    <view class="popup-panel" wx:if="{{bankStatus}}">
+      <view class="popup-title">选择银行卡</view>
+      <view class="popup-close" catchtap="onClose">×</view>
+      <view class="popup-content">
+          <view class="replay-warp">
+            <view class="bank-warp">
+                <view class="item" catchtap="bindSelBank">建设银行(3577)</view>
+                <view class="item" catchtap="bindSelBank">招商银行(2288)</view>
+            </view>
+            <view class="form-btns" bindtap="bindBankSubmit">添加银行卡</view>
+          </view> 
+      </view>
+    </view>
+  </view>
+</view>

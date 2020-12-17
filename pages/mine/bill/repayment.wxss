@@ -1,0 +1,47 @@
+/* pages/mine/bill/repayment.wxss */
+.container{
+  padding: 40rpx;
+}
+
+.title{
+  font-size: 50rpx;
+}
+
+.tips view{
+   margin: 20rpx 0 0;
+   font-size: 28rpx;
+   color:#999;
+}
+.wx-title{
+  font-size: 28rpx;
+  padding: 30rpx 0;
+}
+.wx-content{
+  font-size: 28rpx;
+  color:#999;
+}
+.wx-content text{
+  color:#49864A;
+}
+.wx-content .phone text{
+  color:#000;
+}
+.wx-code{
+   width: 400rpx;
+   margin: 80rpx auto 40rpx;
+   text-align: center;
+}
+.wx-code image{
+  width: 300rpx;
+  height: 300rpx;
+}
+
+.wx-code view{
+   font-size: 28rpx;
+   color:#999;
+   margin: 40rpx 0 0;
+}
+
+.form-btns{
+  margin: 60rpx auto 40rpx;
+}
