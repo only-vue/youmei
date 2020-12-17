@@ -10,31 +10,31 @@
     <view class="item">
         <view class="name">姓名</view>
         <view class="content">
-          <input  value="{{form.name}}" placeholder-class="place-holder" placeholder="请输入姓名" bindinput="bindInput" data-key="userName"></input>
+          <input  value="{{name}}" placeholder-class="place-holder" placeholder="请输入姓名" bindinput="bindInput" data-key="name"></input>
         </view>
      </view>
      <view class="item">
         <view class="name">身份证号</view>
         <view class="content">
-          <input  value="{{form.idCard}}" placeholder-class="place-holder" placeholder="请输入身份证号" bindinput="bindInput" data-key="userName"></input>
+          <input  value="{{idCard}}" placeholder-class="place-holder" placeholder="请输入身份证号" bindinput="bindInput" data-key="idCard"></input>
         </view>
      </view>
      <view class="item">
         <view class="name">银行卡号</view>
         <view class="content">
-          <input  value="{{form.bankNo}}" placeholder-class="place-holder" placeholder="请输入银行卡号" bindinput="bindInput" data-key="userName"></input>
+          <input  value="{{bankNo}}" placeholder-class="place-holder" placeholder="请输入银行卡号" bindinput="bindInput" data-key="bankNo"></input>
         </view>
      </view>
      <view class="item">
         <view class="name">预留手机号</view>
         <view class="content">
-          <input  value="{{form.mobile}}" placeholder-class="place-holder" placeholder="请输入预留手机号" bindinput="bindInput" data-key="userName"></input>
+          <input  value="{{mobile}}" placeholder-class="place-holder" placeholder="请输入预留手机号" bindinput="bindInput" data-key="mobile"></input>
         </view>
      </view>
      <view class="item">
         <view class="name">账单邮箱</view>
         <view class="content">
-          <input  value="{{form.email}}" placeholder-class="place-holder" placeholder="请输入账单邮箱(选填)" bindinput="bindInput" data-key="userName"></input>
+          <input  value="{{email}}" placeholder-class="place-holder" placeholder="请输入账单邮箱(选填)" bindinput="bindInput" data-key="email"></input>
         </view>
      </view>
   </view>

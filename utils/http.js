@@ -24,7 +24,8 @@ export function getRequest(that, api, data, callback) {
     url: base + api + data,
     method: 'GET',
     header: {
-      // 'token': getSession('token') ? getSession('token') : '',
+      'token': getSession('token') ? getSession('token') : '',
+      'Authorization':getSession('token') ? getSession('token'):'',
       'content-type': 'application/json'
     },
     success: (res) => {
@@ -55,6 +56,7 @@ export function postRequest(that, api, data, callback, completeBack) {
     method: 'POST',
     header: {
       'token': getSession('token') ? getSession('token'):'',
+      'Authorization':getSession('token') ? getSession('token'):'',
       'content-type': 'application/json'
     },
     success: (res) => {
@@ -88,6 +90,7 @@ export function deleteRequest(that, api, data, callback) {
     method: 'DELETE',
     header: {
       'token': getSession('token'),
+      'Authorization':getSession('token') ? getSession('token'):'',
       'content-type': 'application/json'
     },
     success: (res) => {

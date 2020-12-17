@@ -59,7 +59,6 @@ Page({
       setSession('mobile', this.data.userName);
       reLaunch('/pages/index/index');
     })
-
   },
   //获取表单输入值
   bindInput(e) {
@@ -76,6 +75,10 @@ Page({
   bindPhoneLogin() {
     navigateTo("/pages/user/phoneLogin");
   },
+  //跳转注册
+  bindRegister(){
+    navigateTo("/pages/user/register");
+  },
   //删除表单内容
   bindRemove(e) {
     let key = e.currentTarget.dataset.key;
@@ -90,14 +93,7 @@ Page({
   //分享
   onShareAppMessage() {
     return {
-      // path: '/pages/index/index',
-      // imageUrl: "",
-      // success: (res) => {
-      //   console.log("转发成功", res);
-      // },
-      // fail: (res) => {
-      //   console.log("转发失败", res);
-      // }
+    
     }
   }
 })

@@ -1,0 +1,5 @@
+/* pages/user/register.wxss */
+@import 'phoneLogin.wxss';
+.logo-btns{
+  margin: 40rpx auto;
+}

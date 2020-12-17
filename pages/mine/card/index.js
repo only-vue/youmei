@@ -1,29 +1,21 @@
 // pages/mine/card/index.js
-import { postRequest } from '../../../utils/http.js'
+import { postRequest,getRequest } from '../../../utils/http.js'
 import { api } from '../../../service/index.js'
-import {
-  reLaunch,
-  navigateTo,
-  setSession,
-  getSession,
-  removeSession
-} from '../../../utils/util.js'
-import { checkNull } from '../../../utils/rule.js'
+import { navigateTo } from '../../../utils/util.js'
 Page({
   data: {
-     list:[
-       {
-         name:'招商银行',
-         no:'5638'
-       },
-       {
-         name: '农业银行',
-         no: '9697'
-       }
-     ]    
+     list:[]   
   },
   onLoad: function (options) {
- 
+    this.getLoad();
+  },
+  //初始化加载
+  getLoad(){
+    postRequest(this, api.getBankCardInfo, {}, (data) => {
+       this.setData({
+         list:data
+       })
+    })
   },
   //添加银行卡
   bindAdd() {

@@ -1,21 +1,8 @@
 // pages/user/phoneLogin.js
-import {
-  postRequest
-} from '../../utils/http.js'
-import {
-  api
-} from '../../service/index.js'
-import {
-  reLaunch,
-  navigateTo,
-  setSession,
-  getSession,
-  removeSession
-} from '../../utils/util.js'
-import {
-  checkNull
-} from '../../utils/rule.js'
-
+import { postRequest } from '../../utils/http.js'
+import { api } from '../../service/index.js'
+import { reLaunch, navigateTo, setSession } from '../../utils/util.js'
+import { checkNull, checkPhone } from '../../utils/rule.js'
 Page({
   data: {
     userName: "",
@@ -26,25 +13,8 @@ Page({
     snsMsgWait: 60
   },
   onLoad() {
-    removeSession('role');
-    this.setUserInfo();
+   
   },
-  //获取保存的账号信息
-  setUserInfo() {
-    let userName = getSession('userName');
-    let pwd = getSession('pwd');
-    if (userName) {
-      this.setData({
-        userName: userName + ""
-      });
-    }
-    if (pwd) {
-      this.setData({
-        password: pwd + ""
-      });
-    }
-  },
-
   //提交登录
   bindSubmit() {
     if (!checkNull(this.data.userName, '请输入账号')) {
@@ -55,15 +25,13 @@ Page({
     }
     let params = {
       mobile: this.data.userName,
-      verCode: this.data.code
+      verCode: this.data.code,
+      jgPushId: "182803250591608111391136",
     }
     postRequest(this, api.smsLogin, params, (data) => {
       setSession('token', data.token);
-      setSession('role', data.role);
-      setSession('user', data.user);
-      setSession('userName', this.data.userName);
-      setSession('pwd', this.data.password);
-      reLaunch('/pages/dateManage/index');
+      setSession('mobile', this.data.userName);
+      reLaunch('/pages/index/index');
     })
 
   },
@@ -97,8 +65,11 @@ Page({
     if (!checkPhone(this.data.userName, '手机号格式错误')) {
       return false;
     }
-    let params = { mobile: this.data.userName }
-    postRequest(this, api.sendMsg, params, (data) => {
+    let params = { 
+       mobile: this.data.userName,
+       type:'2'
+     }
+    postRequest(this, api.sendValidate, params, (data) => {
       // 60秒后重新获取验证码
       var inter = setInterval(function () {
         this.setData({
@@ -117,6 +88,10 @@ Page({
       }.bind(this), 1000);
     })
   },
+  //跳转注册
+  bindRegister(){
+    navigateTo("/pages/user/register");
+  },
   //下拉复位
   onPullDownRefresh() {
     wx.stopPullDownRefresh();
@@ -124,14 +99,6 @@ Page({
   //分享
   onShareAppMessage() {
     return {
-      // path: '/pages/index/index',
-      // imageUrl: "",
-      // success: (res) => {
-      //   console.log("转发成功", res);
-      // },
-      // fail: (res) => {
-      //   console.log("转发失败", res);
-      // }
     }
   }
 })

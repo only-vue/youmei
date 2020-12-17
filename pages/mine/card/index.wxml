@@ -8,9 +8,9 @@
      <view class="item" wx:for="{{list}}">
         <view class="icon"> 卡 </view>
         <view class="content">
-           <view class="name">{{item.name}}</view>
+           <view class="name">{{item.bankName}}</view>
            <view class="type">储蓄卡</view>
-           <view class="card-no"> <text>****</text> <text>****</text> <text>****</text> <text>{{item.no}}</text> </view>
+           <view class="card-no"> {{item.bankCardNo}} </view>
         </view>
      </view>
   </view>

@@ -1,13 +1,7 @@
 // pages/mine/bill/index.js
 import { postRequest } from '../../../utils/http.js'
 import { api } from '../../../service/index.js'
-import {
-  reLaunch,
-  navigateTo,
-  setSession,
-  getSession,
-  removeSession
-} from '../../../utils/util.js'
+import { navigateTo } from '../../../utils/util.js'
 import { checkNull } from '../../../utils/rule.js'
 Page({
   data: {

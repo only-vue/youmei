@@ -219,11 +219,16 @@ export function hideLoad() {
 /**
  * 错误信息提示
  */
-export function showToast(value) {
+export function showToast(value,callback) {
   wx.showToast({
     title: value ? value : '请求失败',
     icon: 'none',
-    duration: 2000
+    duration: 2000,
+    success:function(){
+      if(callback){
+        callback();
+      }
+    }
   })
 }
 
