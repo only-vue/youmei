@@ -45,6 +45,7 @@ Page({
       bankStatus: false
     })
   },
+  //保存图片
   saveImage(e) {
     let that = this;
     let url = e.currentTarget.dataset.url;
@@ -60,7 +61,6 @@ Page({
                   that.saveImgSuccess(url);
                 },
                 fail: (res) => {
-                  console.log(res);
                   wx.showModal({
                     title: '保存失败',
                     content: '请开启访问手机相册的权限',
