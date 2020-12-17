@@ -7,9 +7,9 @@
     </view> -->
 
     
-    <picker class="label-input" bindchange="bindPickerChange" value="{{index}}" range="{{array}}" placeholder="666666">
+    <picker class="label-input" bindchange="bindPickerChange" value="{{index}}" range="{{list}}" range-key="{{'name'}}">
       <view wx:if="{{index}}" class="picker">
-            {{array[index]}}
+            {{list[index].name}}
           </view>
           <text class="placeholder" wx:else>{{placeholder}}</text>
     </picker>

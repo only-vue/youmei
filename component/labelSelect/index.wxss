@@ -22,8 +22,8 @@
   margin-left: 20rpx;
 }
 .arrow{
-  width: 50rpx;
-  height: 50rpx;
+  width: 40rpx;
+  height: 40rpx;
 }
 .placeholder{
   color: #777777;

@@ -17,13 +17,16 @@
   font-weight: 600;
   margin-left: 40rpx;
   margin-top: 20rpx;
+  margin-bottom: 20rpx;
  }
  .store-name{
-  color: black;
+  color: #db5397;
   font-size: 40rpx;
   font-weight: 600;
   margin-left: 40rpx;
-  margin-top: 20rpx;
+  background-color: #EBF9F9;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
  }
  .location{
   color: black;
@@ -54,3 +57,11 @@
    margin: 40rpx auto;
    font-size: 30rpx;
  }
+ .recommended-point{
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+}
+.packge{
+  margin-top: 20rpx;
+}

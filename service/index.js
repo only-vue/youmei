@@ -11,4 +11,9 @@ export const api = {
   saveBankCardInfo:'api/78dk/app/process/saveBankCardInfo', //保存银行卡信息
   getMyBill:'api/78dk/app/bill/getMyBill',
   loginOut: 'api/78dk/app/login/loginOut', //退出登录
+
+
+  querySaList: 'api/78dk/app/process/querySaList',//线下业务员
+  getStoreAndProduct: 'api/78dk/app/process/getStoreAndProduct',//获取产品列表
+  loanCalculator: 'api/78dk/app/process/loanCalculatorV2',//选择服务次数
 }

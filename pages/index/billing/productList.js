@@ -9,7 +9,8 @@ Page({
    */
   data: {
     uuid:'',
-    list: ["1","2","2","2","2"]
+    productList: [],
+    store:{},
   },
 
   /**
@@ -25,8 +26,12 @@ Page({
       isDiscount: false,
       storeUuid: options.uuid
     }
-    postRequest(this, api.productList, params, (data) => {
-      
+    postRequest(this, api.getStoreAndProduct, params, (data) => {
+        console.log(data)
+        this.setData({
+          productList:data.productList,
+          store:data.store
+        })
     })
   },
   bigGift: function () {
@@ -44,8 +49,10 @@ Page({
     }, 200)
 
   },
-  btnGet: function () {
-    navigateTo('productDetail')
+  btnGet: function (options) {
+    let product = options.currentTarget.dataset.product
+    navigateTo(`productDetail?name=${product.name}&productDetailUuid=${product.productDetailUuid}&storeUuid=${this.data.store.storeUuid}
+    &storeName=${this.data.store.storeName}&storeLocation=${this.data.store.businessAddressGpsLoction}`)
   },
   // 隐藏遮罩层 
   hideModal: function() {

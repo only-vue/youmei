@@ -6,13 +6,14 @@ Component({
   properties: {
     label:String,
     placeholder:String,
+    serviceAmount:Number,
+    list:Array,
   },
 
   /**
    * 组件的初始数据
    */
   data: {
-    array: ['美国', '中国', '巴西', '日本'],
     index: undefined,
   },
 
@@ -26,7 +27,7 @@ Component({
       this.triggerEvent('myevent', myEventDetail, myEventOption)
     },
     bindPickerChange: function (e) {
-      console.log('picker下拉项发生变化后，下标为：', e.detail.value)
+      // console.log('picker下拉项发生变化后，下标为：', e.detail.value)
       this.setData({
           index: e.detail.value
       })
