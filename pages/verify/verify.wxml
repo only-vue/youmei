@@ -1,0 +1,2 @@
+<!--pages/verify/verify.wxml-->
+<faceid-verify token="{{token}}" bind:onFinish="onFinish"/>

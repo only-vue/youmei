@@ -13,7 +13,7 @@
       <view class="face-view-item">
         <view class="photo-view">
           <image class="bg-img" src="../../../assets/images/src_pages_home_productapply_imgs_card_front.png" />
-          <image class="add-img" src="../../../assets/images/src_pages_home_productapply_imgs_add.png" />
+          <image class="add-img" bindtap="startFace" src="../../../assets/images/src_pages_home_productapply_imgs_add.png" />
         </view>
         <text class="font-size-30">上传身份证正面照</text>
       </view>
@@ -47,9 +47,9 @@
   <!--手持身份证拍照-->
   <view class="step-handcard margin-common container" wx:elif="{{step==2}}">
     <text class="comment-text ">手持身份证拍照：示例图</text>
-    <image class="hand-card-img" src="../../../assets/images/src_pages_home_productapply_handidcardimage_photos.png" />
-    <view class="camera-btn">
-      <image class="camera-img" src="../../../assets/images/src_pages_home_productapply_handidcardimage_camera.png" />
+    <image class="hand-card-img" src="{{handCardImg}}" />
+    <view class="camera-btn" bindtap="handCard">
+      <image class="camera-img"  src="../../../assets/images/src_pages_home_productapply_handidcardimage_camera.png" />
       点击拍摄
     </view>
     <text class="comment-text ">拍摄要求：</text>

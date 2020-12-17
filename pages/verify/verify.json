@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "faceid-verify": "../../faceid-components/components/index/index"
+  }
+}
