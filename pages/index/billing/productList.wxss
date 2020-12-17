@@ -110,3 +110,99 @@
   padding-left: 40rpx;
   padding-right: 40rpx;
 }
+
+/*模态框*/
+.modals-cancel {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+ 
+.bottom-dialog-body {
+  position: absolute;
+  z-index: 10001;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 680rpx;
+  background-color: #fff;
+}
+ 
+/*动画前初始位置*/
+ 
+.bottom-pos {
+  -webkit-transform: translateY(100%);
+  transform: translateY(100%);
+}
+.modal-title{
+  text-align: center;
+  padding: 15rpx;
+  background-color: #e5e5e5;
+}
+.modal-close{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 15rpx;
+  bottom: 15rpx;
+  right: 15rpx;
+}
+.modal-content{
+  margin: 30rpx;
+}
+.gift-title{
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #333333;
+}
+.gift-title2{
+  font-size: 34rpx;
+  color: #db5397;
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
+}
+.gift-title2-order{
+  font-size: 30rpx;
+  background-color: #db5397;
+  color: white;
+  height: 36rpx;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+}
+.gift-item-info{
+  font-size: 30rpx;
+  color: #999999;
+  margin-left: 50rpx;
+}
+
+.table-content{
+  border: 1px solid #db5397; 
+  border-radius: 2px;  
+  background-color: white;
+}
+.table-title{
+  display: flex;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+.table-title-item{
+  flex-flow: 1;
+  width: 100%;
+  text-align: center;
+  
+}
+.title-color{
+  color: #db5397;
+}
+.margin-top20{
+  margin-top: 20rpx;
+}
+.table-color{
+  background-color: #EBF9F9;
+}
+ 
+

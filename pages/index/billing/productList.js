@@ -18,6 +18,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       uuid: options.uuid,
+      hideModal: true, //模态框的状态  true-隐藏  false-显示
     })
     console.log(this.data.uuid)
     let params = {
@@ -29,66 +30,50 @@ Page({
     })
   },
   bigGift: function () {
+    this.setData({
+      hideModal: false
+    })
+    var animation = wx.createAnimation({
+      duration: 600, //动画的持续时间 默认400ms 数值越大，动画越慢 数值越小，动画越快 
+      timingFunction: 'ease', //动画的效果 默认值是linear 
+    })
+    this.animation = animation
+    var that = this;
+    setTimeout(function() {
+      that.fadeIn(); //调用显示动画 
+    }, 200)
 
   },
   btnGet: function () {
     navigateTo('productDetail')
   },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-    // wx.getLocation({
-    //   type: 'wgs84',
-      // success (res) {
-      //   console.log(res)
-      //   const latitude = res.latitude
-      //   const longitude = res.longitude
-      //   const speed = res.speed
-      //   const accuracy = res.accuracy
-      // }
-    //  })
+  // 隐藏遮罩层 
+  hideModal: function() {
+    var animation = wx.createAnimation({
+      duration: 800, //动画的持续时间 默认400ms 数值越大，动画越慢 数值越小，动画越快 
+      timingFunction: 'ease', //动画的效果 默认值是linear 
+    })
+    this.animation = animation
+    var that = this;
+    this.fadeDown(); //调用隐藏动画 
+    setTimeout(function() {
+      that.setData({
+        hideModal: true
+      })
+    }, 720) //先执行下滑动画，再隐藏模块 
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  //动画集 
+  fadeIn: function() {
+    this.animation.translateY(0).step()
+    this.setData({
+      animationData: this.animation.export() //动画实例的export方法导出动画数据传递给组件的animation属性 
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  fadeDown: function() {
+    this.animation.translateY(300).step()
+    this.setData({
+      animationData: this.animation.export(),
+    })
   },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+ 
 })
