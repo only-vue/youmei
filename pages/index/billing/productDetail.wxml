@@ -16,7 +16,7 @@
   <myPicker class="formInput" label="服务次数" placeholder ="选择服务次数" list="{{listService}}" value="{{pickerValue}}"
   bind:inputClick="serviceClick" showDialog="{{showListService}}" bindmyPickerChange="servicePickerChange" bindmyPickerHide ="pickerHide"/>
   
-  <labelSelect class="formInput" label="线下业务员" placeholder ="选择线下业务员" list="{{listSA}}" bind:myevent="onMyEvent"/>
+  <labelSelect class="formInput" label="线下业务员" placeholder ="选择线下业务员" list="{{listSA}}" bind:pickerChange="onSaChange"/>
   <labelInput wx:if="{{prePrincipal}}" class="formInput" label="每次金额" bind:inputChange="projectNameChange" placeholder ="" disabled="{{true}}" value="{{prePrincipal}}"/>
   <labelInput wx:if="{{preHandlingFee}}" class="formInput" label="每次服务费" bind:inputChange="projectNameChange" placeholder ="" disabled="{{true}}" value="{{preHandlingFee}}"/>
   <view class="formInput packge">

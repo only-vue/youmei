@@ -2,10 +2,6 @@
 <view class="label-view">
   <view class="label-content">
     <text class="label-text">{{label}}</text>
-    <!-- <view bindtap="selected" class="label-input">
-      <input class="label-input" placeholder="{{placeholder}}" disabled="false"/>
-    </view> -->
-
     
     <picker class="label-input" bindchange="bindPickerChange" value="{{index}}" range="{{list}}" range-key="{{'name'}}">
       <view wx:if="{{index}}" class="picker">

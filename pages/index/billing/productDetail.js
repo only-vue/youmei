@@ -1,66 +1,101 @@
 // pages/billing/productDetail.js
-import { navigateTo,showToast } from '../../../utils/util.js'
-import { postRequest} from '../../../utils/http.js'
-import {api} from '../../../service/index.js'
+import { navigateTo, showToast } from '../../../utils/util.js'
+import { postRequest } from '../../../utils/http.js'
+import { api } from '../../../service/index.js'
+import {
+  checkNull
+} from '../../../utils/rule.js'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    name:'',
-    storeUuid:'',
-    storeName:'',
-    storeLocation:'',
-    productDetailUuid:'',
-    serviceAmount:'',//服务金额
-    projectName:'',//项目名称
-    listService:[],//服务列表
-    listServiceData:[],
-    listSA:[],//线下业务员
-
-    showListService:false,
-    pickerValue:'',
-    prePrincipal:'',//每次金额
-    preHandlingFee:''//每次服务费
+    name: '',
+    storeUuid: '',
+    storeName: '',
+    storeLocation: '',
+    productDetailUuid: '',
+    productDetailConfigUuid:'',//选择服务次数后的uuid
+    serviceAmount: '',//服务金额
+    projectName: '',//项目名称
+    listService: [],//服务列表
+    listServiceData: [],
+    listSA: [],//线下业务员
+    saUuid: '',
+    showListService: false,
+    pickerValue: '',
+    prePrincipal: '',//每次金额
+    preHandlingFee: ''//每次服务费
   },
-  onMyEvent: function(e){
-    e.detail // 自定义组件触发事件时提供的detail对象
-    console.log("自定义组件触发事件时提供的detail对象")
+  onSaChange: function (e) {
+   console.log(  )
+   let index = e.detail.value
+   this.setData({
+     saUuid:this.data.listSA[index].saUuid
+   })
+   
   },
-  nexttap:function(){
-    navigateTo('billing')
-  },
-  projectNameChange:function(event){
-    this.setData({
-      projectName:event.detail.value
+  nexttap: function () {
+    if (!checkNull(this.data.projectName, '请输入项目名称')) {
+      return false;
+    }
+    if (!checkNull(this.data.serviceAmount, '请输入商品\服务金额')) {
+      return false;
+    }
+    if (!checkNull(this.data.productDetailConfigUuid, '请选择服务次数')) {
+      return false;
+    }
+    if (!checkNull(this.data.saUuid, '请选择线下业务员')) {
+      return false;
+    }
+    
+    let params = {
+      "isDiscount": false,
+      "projectName": this.data.projectName,
+      "loanAmount": this.data.serviceAmount,
+      "productDetailUuid": this.data.productDetailUuid,
+      "storeUuid": this.data.storeUuid,
+      "productDetailConfigUuid": this.data.productDetailConfigUuid,
+      "selectRepayDiscount": "select_repay_discount_yes",//select_repay_discount_no
+      "saUuid": this.data.saUuid
+    }
+    postRequest(this, api.createContract, params, (data) => {
+      console.log(data)
+      navigateTo('billing?productDetailUuid='+this.data.productDetailUuid)
     })
   },
-  serviceAmountChange:function(event){
+  projectNameChange: function (event) {
     this.setData({
-      serviceAmount:event.detail.value,
-      prePrincipal:'',
-      preHandlingFee:'',
-      pickerValue:''
-    })
-  }, 
-  servicePickerChange:function(event){
-    let {value,position} = event.detail
-    let {prePrincipal,preHandlingFee} = this.data.listServiceData[position]
-    this.setData({
-      pickerValue:value,
-      showListService:false,
-      prePrincipal:prePrincipal,
-      preHandlingFee:preHandlingFee
+      projectName: event.detail.value
     })
   },
-  pickerHide:function(){
+  serviceAmountChange: function (event) {
     this.setData({
-      showListService:false
+      serviceAmount: event.detail.value,
+      prePrincipal: '',
+      preHandlingFee: '',
+      pickerValue: ''
     })
   },
-  serviceClick:function(){
-    if(!this.data.serviceAmount){
+  servicePickerChange: function (event) {
+    let { value, position } = event.detail
+    let { prePrincipal, preHandlingFee,productDetailConfigUuid } = this.data.listServiceData[position]
+    this.setData({
+      pickerValue: value,
+      showListService: false,
+      productDetailConfigUuid:productDetailConfigUuid,
+      prePrincipal: prePrincipal,
+      preHandlingFee: preHandlingFee
+    })
+  },
+  pickerHide: function () {
+    this.setData({
+      showListService: false
+    })
+  },
+  serviceClick: function () {
+    if (!this.data.serviceAmount) {
       showToast("请输入商品/服务金额");
       return
     }
@@ -72,31 +107,31 @@ Page({
     }
     postRequest(this, api.loanCalculator, params, (data) => {
       let list = data.map(item => item.prePeriod)
-        this.setData({
-          listService:list,
-          listServiceData:data,
-          showListService:true
-        })
+      this.setData({
+        listService: list,
+        listServiceData: data,
+        showListService: true
+      })
     })
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var {name,storeUuid,productDetailUuid,storeName,storeLocation} = options
+    var { name, storeUuid, productDetailUuid, storeName, storeLocation } = options
+    this.setData({
+      name: name,
+      storeUuid: storeUuid,
+      productDetailUuid: productDetailUuid,
+      storeName: storeName,
+      storeLocation: storeLocation,
+    })
+
+    postRequest(this, api.querySaList, {}, (data) => {
+      console.log(data)
       this.setData({
-        name:name,
-        storeUuid:storeUuid,
-        productDetailUuid:productDetailUuid,
-        storeName:storeName,
-        storeLocation:storeLocation,
+        listSA: data
       })
-    
-     postRequest(this, api.querySaList, {}, (data) => {
-        console.log(data)
-        this.setData({
-          listSA:data
-        })
     })
   },
 
