@@ -131,13 +131,9 @@ export function callRequest(val) {
     case '10000':
       return '10000';
       break;
-    case '70000':
-      showModal('提示', val.msg, '取消', '确定', true,(val)=>{
-        if(val){
-          reLaunch('/pages/login/index');
-        }else{
-          wx.navigateBack()
-        }
+    case 'S0018':
+      showModal('提示', '登录已过期，请重新登录', '取消', '确定', true,(val)=>{
+        reLaunch('/pages/user/login');
       })
       break;
     default:

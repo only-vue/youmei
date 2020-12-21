@@ -1,19 +1,31 @@
 /**
  * 时间戳转化时间
  */
-export const formatTime = (date, isInfo) => {
+export const formatTime = (date, type='ymd') => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
   const day = date.getDate()
   const hour = date.getHours()
   const minute = date.getMinutes()
   const second = date.getSeconds()
-  if (isInfo) {
-    return [year, month, day].map(formatNumber).join('.') + ' ' + [hour, minute].map(formatNumber).join(':')
-  } else {
-    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+  if(type==='y'){
+    return year
   }
-
+  if(type==='m'){
+    return month<10?`0${month}`:month;
+  }
+  if(type==='ym'){
+    return [year, month].map(formatNumber).join('-')
+  }
+  if(type==='md'){
+    return [month, day].map(formatNumber).join('-')
+  }
+  if(type==='ymd'){
+    return [year, month, day].map(formatNumber).join('-')
+  }
+  if(type==='ymdhms'){
+    return [year, month, day].map(formatNumber).join('-') + ' ' + [hour, minute].map(formatNumber).join(':')
+  }
 }
 
 export const formatNumber = n => {

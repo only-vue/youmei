@@ -1,17 +1,25 @@
 <!--pages/mine/bill/allBill.wxml-->
 <view class="containe">
   <view class="list">
-      <view class="item" wx:for="{{list}}" :key="{{index}}" bindtap="bindBill">
+      <view class="item" wx:for="{{list}}" wx:key="index">
           <view class="year">
              {{item.year}}
           </view>
-          <view class="sub-list">
-             <view class="sub-item" wx:for="{{item.list}}" wx:for-index="subIndex" :key="subIndex" wx:for-item="subItem">
+          <view class="sub-list" >
+             <view class="sub-item"  wx:for-index="subIndex" wx:for="{{item.subList}}" wx:for-item="subItem" wx:key="subIndex" data-billDate="{{subItem.billDate}}" bindtap="bindBill">
                   <view class="content">
-                    <view class="name">{{subItem.name}}</view>
-                    <view class="money">{{subItem.money}}</view>
+                    <view class="name">{{subItem.month}}月账单</view>
+                    <view class="money">{{subItem.principal}}</view>
                 </view>
-                <view class="status">{{subItem.status}}</view>
+                <block wx:if="{{subItem.payState==='pay_state_settle'}}">
+                  <view class="status">已结清</view>
+                </block>
+                <block wx:elif="{{subItem.payState==='pay_state_doing'}}">
+                  <view class="status">已逾期</view>
+                </block>
+                <block wx:else>
+                  <view class="status red">已出账</view>
+                </block>
              </view>
           </view>
       </view>

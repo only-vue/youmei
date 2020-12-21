@@ -9,6 +9,9 @@ export const api = {
   idCardInit:'api/78dk/app/common/idCardInit', //获取登录人信息
   getBankCardInfo:'api/78dk/app/process/getBankCardInfo', //获取银行卡列表
   saveBankCardInfo:'api/78dk/app/process/saveBankCardInfo', //保存银行卡信息
-  getMyBill:'api/78dk/app/bill/getMyBill',
+  getMyBill:'api/78dk/app/bill/getMyBill', //获取账单信息
+  getBillPage:'api/78dk/app/bill/getBillPage', //获取账单列表
+  getBillDetail:'api/78dk/app/bill/getBillDetail',//账单详情
+  repayBillOnline:'api/78dk/app/bill/repayBillOnline',//调用连连支付
   loginOut: 'api/78dk/app/login/loginOut', //退出登录
 }

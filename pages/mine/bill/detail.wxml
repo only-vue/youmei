@@ -1,11 +1,11 @@
 <!--pages/mine/bill/detail.wxml-->
-<view class="container">
-  <view class="detail-top">5月账单明细</view>
+<view class="container" wx:if="{{obj}}">
+  <view class="detail-top">{{obj.month}}月账单明细</view>
   <view class="detail-warp">
      <view class="top">
         <view class="name">某成都小启科技有限公司</view>
-        <view class="money">289.18</view>
-        <view class="tips">最后还款日 <text>06月13日</text></view>
+        <view class="money">{{obj.remainPayAmount}}</view>
+        <view class="tips">最后还款日 <text>{{obj.day}}</text></view>
      </view>
      <view class="list">
         <view class="item">
