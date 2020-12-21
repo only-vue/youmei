@@ -50,6 +50,9 @@
   height: 220rpx;
   z-index: -999;
 }
+.marginLeft10{
+  margin-left: 10rpx;
+}
 
 .add-img {
   width: 80rpx;

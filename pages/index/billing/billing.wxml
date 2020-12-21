@@ -2,24 +2,24 @@
 <view class="container">
   <text class="title">申请信息</text>
   <view class="progress-box">
-    <progress percent="20" show-info stroke-width="3" color="#10AEFF" />
+    <progress percent="{{progress}}" show-info stroke-width="3" color="#10AEFF" />
   </view>
 
-  <!--人脸识别-->
+  <!--身份证正反面-->
   <view class="step-face" wx:if="{{step==1}}">
 
     <text class="comment-text margin-common">识别本人身份证照片，请保证亮度清晰，字迹均匀</text>
     <view class="face-view margin-common">
       <view class="face-view-item">
         <view class="photo-view">
-          <image class="bg-img" src="../../../assets/images/src_pages_home_productapply_imgs_card_front.png" />
+          <image class="bg-img" mode="aspectFill" src="{{idCardInfo.frontUrl?idCardInfo.frontUrl:'../../../assets/images/src_pages_home_productapply_imgs_card_front.png'}}" />
           <image class="add-img" bindtap="startFace" src="../../../assets/images/src_pages_home_productapply_imgs_add.png" />
         </view>
         <text class="font-size-30">上传身份证正面照</text>
       </view>
-      <view class="face-view-item">
+      <view class="face-view-item marginLeft10">
         <view class="photo-view">
-          <image class="bg-img" src="../../../assets/images/src_pages_home_productapply_imgs_card_back.png" />
+          <image class="bg-img" mode="aspectFill" src="{{idCardInfo.oppositeUrl?idCardInfo.oppositeUrl:'../../../assets/images/src_pages_home_productapply_imgs_card_back.png'}}" />
           <image class="add-img" src="../../../assets/images/src_pages_home_productapply_imgs_add.png" />
         </view>
         <text class="font-size-30">上传身份证反面照</text>
@@ -30,14 +30,14 @@
     <view class="label-view margin-common">
       <view class="label-content">
         <text class="label-text">姓名</text>
-        <input class="label-input" placeholder="" />
+        <input class="label-input" placeholder="" value="{{idCardInfo.cardScanName}}" />
       </view>
       <view class="label-line"></view>
     </view>
     <view class="label-view margin-common">
       <view class="label-content">
         <text class="label-text">身份证</text>
-        <input class="label-input" placeholder="" />
+        <input class="label-input" placeholder="" value="{{idCardInfo.cardScanIdcardNo}}" />
       </view>
       <view class="label-line"></view>
     </view>

@@ -14,4 +14,13 @@ export const api = {
   getBillDetail:'api/78dk/app/bill/getBillDetail',//账单详情
   repayBillOnline:'api/78dk/app/bill/repayBillOnline',//调用连连支付
   loginOut: 'api/78dk/app/login/loginOut', //退出登录
+
+
+  querySaList: 'api/78dk/app/process/querySaList',//线下业务员
+  getStoreAndProduct: 'api/78dk/app/process/getStoreAndProduct',//获取产品列表
+  loanCalculator: 'api/78dk/app/process/loanCalculatorV2',//选择服务次数
+  createContract: 'api/78dk/app/process/createContract',//创建订单
+  getProductDetail: 'api/78dk/app/process/getProductDetail',//订单详情
+  getNewestIdCardInfo: 'api/78dk/app/process/getNewestIdCardInfo',//身份证识别保留信息
+  // getNewestIdCardInfo: '/api/78dk/app/process/getNewestIdCardInfo' //
 }

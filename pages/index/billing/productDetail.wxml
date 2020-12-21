@@ -2,15 +2,27 @@
 <view class="container">
   <text class="title">商品/商品服务</text>
 
-  <text class="product-title">商品标题</text>
-  <text class="store-name">店面给</text>
-  <text class="location">地址</text>
+  <text class="product-title">{{name}}</text>
+  <view>
+    <text class="store-name">{{storeName}}</text>
+  </view>
+  <view class="location">
+    <image class="recommended-point" src="../../../assets/images/src_pages_home_productlist_address.png" />
+    {{storeLocation}}</view>
 
   <view class="drivder"> </view>
-  <labelInput class="formInput" label="项目名称" placeholder ="询问商户后输入"/>
-  <labelInput class="formInput" label="商品/服务金额" placeholder ="询问商户后输入"/>
-  <labelSelect class="formInput" label="服务次数" placeholder ="选择服务次数"/>
-  <labelSelect class="formInput" label="线下业务员" placeholder ="选择线下业务员" bind:myevent="onMyEvent"/>
+  <labelInput class="formInput" label="项目名称" bind:inputChange="projectNameChange" placeholder ="询问商户后输入"/>
+  <labelInput class="formInput" label="商品/服务金额" bind:inputChange="serviceAmountChange" placeholder ="询问商户后输入"/>
+  <myPicker class="formInput" label="服务次数" placeholder ="选择服务次数" list="{{listService}}" value="{{pickerValue}}"
+  bind:inputClick="serviceClick" showDialog="{{showListService}}" bindmyPickerChange="servicePickerChange" bindmyPickerHide ="pickerHide"/>
+  
+  <labelSelect class="formInput" label="线下业务员" placeholder ="选择线下业务员" list="{{listSA}}" bind:pickerChange="onSaChange"/>
+  <labelInput wx:if="{{prePrincipal}}" class="formInput" label="每次金额" bind:inputChange="projectNameChange" placeholder ="" disabled="{{true}}" value="{{prePrincipal}}"/>
+  <labelInput wx:if="{{preHandlingFee}}" class="formInput" label="每次服务费" bind:inputChange="projectNameChange" placeholder ="" disabled="{{true}}" value="{{preHandlingFee}}"/>
+  <view class="formInput packge">
+    <switch class="switch" checked="{{switch1Checked}}" bindchange="switch1Change"/>
+    <text >还款优惠包</text>
+  </view>
   <view class="next" bindtap="nexttap">
     下一步
   </view>

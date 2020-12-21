@@ -6,12 +6,15 @@
     <view class="store">
       <View class="avater">
         <view class="avater-circle">
-          <text class="avater-text">测</text>
+          <text class="avater-text">{{store.storeName[0]}}</text>
         </view>
       </View>
       <view>
-        <text class="store-title">测试</text>
-        <text class="store-location">测试</text>
+        <text class="store-title">{{store.storeName}}</text>
+        <view class="store-location">
+          <image class="recommended-point" src="../../../assets/images/src_pages_home_productlist_address.png" />
+          {{store.businessAddressGpsLoction}}
+        </view>
       </view>
     </view>
     <image class="bg-img" src="../../../assets/images/src_pages_home_productlist_background.png" />
@@ -24,14 +27,14 @@
   <view class="drivder"> </view>
 
   <!--列表-->
-  <view class='page-body' wx:for="{{list}}" wx:key="id">
+  <view class='page-body' wx:for="{{productList}}" wx:key="id">
     <view class='item'>
       <view class="item-content">
         <view>
-          <text class='item-title'>{{item}}</text>
-          <text class="big-gift" bindtap="bigGift">大礼包说明>></text>
+          <text class='item-title'>{{item.name}}</text>
+          <text class="big-gift" bindtap="bigGift" wx:if="{{item.repayDiscountPackageShow === 'show_state_yes'}}">大礼包说明>></text>
         </view>
-        <view class="btn_get" bindtap="btnGet"> 立即领取 </view>
+        <view class="btn_get" bindtap="btnGet" data-product="{{item}}"> 立即领取 </view>
       </view>
       <view class="item_line"></view>
     </view>

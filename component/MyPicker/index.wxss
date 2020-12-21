@@ -1,0 +1,101 @@
+/* component/MyPicker/index.wxss */
+.free-dialog__mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9998;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+ }
+ .title_line{
+   padding-top: 20rpx;border-bottom: 1px solid #f2f2f2;
+   margin-bottom: 30rpx;
+ }
+ .free-dialog__container {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 750rpx;
+  background: white;
+  transform: translateY(150%);
+  transition: all 0.4s ease;
+  z-index: 9999;
+ }
+ .free-dialog--show .free-dialog__container {
+  transform: translateY(0);
+ }
+ .free-dialog--show .free-dialog__mask {
+  display: block;
+ }
+ /*模态框中的内容*/
+ .free-button{
+  display: inline-block;
+  width:100rpx;
+  text-align: center;
+  font-size:36rpx;
+  color:#707070;
+  margin-bottom:10px;
+ }
+ .free-radios{
+   height: 385rpx;
+   padding-bottom: 40rpx;
+ }
+ .free-radio{
+   padding: 10rpx;
+   text-align: center;
+ }
+ .free-dialog-submit{
+  float: right;
+  color:#48c23d;
+ }
+ radio-group{
+  margin:10rpx 0rpx;
+ }
+ radio-group>label{
+  width:100%;
+  display: inline-block;
+  /* border:1px solid #ddd; */
+  padding:10px 0px;
+  margin:0px 2px 2px;
+ }
+  
+ .checked{
+  background:#48c23d;
+  color:#fff;
+ }
+ radio-group label .free-text{
+  width:100%;
+  margin: 20rpx;
+  text-align: center;
+  font-size:28rpx;
+  border-top: 1px solid #f2f2f2;
+  border-bottom: 1px solid #f2f2f2;
+  display: inline-block;
+ }
+
+ .label-content{
+  display: flex;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+.label-view{
+  display: flex;
+  flex-direction: column;
+}
+
+.line{
+  height: 2rpx;
+  background-color: rgba(233, 233, 233,1);
+}
+
+.label-input{
+  flex-grow: 1;
+  text-align: right;
+  margin-left: 20rpx;
+}
+.arrow{
+  width: 40rpx;
+  height: 40rpx;
+}
