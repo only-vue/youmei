@@ -1,7 +1,10 @@
 // pages/billing/billing.js
 import { postRequest } from '../../../utils/http.js'
-import { navigateTo } from '../../../utils/util.js'
+import { navigateTo, showToast } from '../../../utils/util.js'
 import { api } from '../../../service/index.js'
+import { checkNull } from '../../../utils/rule.js'
+const qiniuUploader = require("../../../utils/qiniuUploader");
+
 var ItemIndexMap = {
   idcardDetect: 1,//身份证正反面
   handIdCardPick: 2,//手持身份证拍照
@@ -17,13 +20,20 @@ Page({
    * 页面的初始数据
    */
   data: {
-    step: 1,
-    progress:0,
+    step: 5,
+    currentIndex: 0,
+    progress: 0,
     verifyList: [],//需验证列表
     productDetailUuid: '',
+    uptoken: '',//七牛token
     //手持身份证图片
-    handCardImg: "../../../assets/images/src_pages_home_productapply_handidcardimage_photos.png",
-    idCardInfo: {},//身份证信息
+    handCardImg: "",
+    idCardInfo: undefined,//身份证信息
+    bankCardList:[],
+    bankInfo:undefined,//当前选中的银行卡
+    showBankList:false,
+    personInfo:undefined,//基本信息
+    personIdCard:undefined,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -46,7 +56,8 @@ Page({
       this.setData({
         idCardInfo: data
       })
-    })
+    });
+    // this.getNewestPersonInfo();
   },
   //获取所有进件项
   getItemNumberList: function (incomingPartsTemplateList) {
@@ -82,18 +93,178 @@ Page({
     }
     this.setData({
       verifyList: list,
-      step:list[0],
-      progress:100/list.length
+      step: list[0],
+      progress: ((100 / list.length) * list[0]).toFixed(0)
     })
   },
-  nexttap: function () {
-    this.setData({
-      step: this.data.step + 1
+  //获取七牛token
+  getQiniuToken: function () {
+    postRequest(this, api.queryQiNiuToken, {}, (data) => {
+      this.setData({
+        uptoken: data
+      })
     })
+  },
+  //第二步，上传手持身份证照片
+  handCard: function () {
+    var that = this;
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'],
+      sourceType: ['camera'], 
+      success(res) {
+        // tempFilePath可以作为img标签的src属性显示图片
+        const tempFilePaths = res.tempFilePaths[0]
+        that.setData({
+          handCardImg: tempFilePaths
+        })
+      }
+    })
+  },
+  //保存手持身份证照7牛key 成功后下一步
+  saveHoldKey: function (imgHoldKey) {
+    postRequest(this, api.saveHoldKey, {
+      holdKey:imgHoldKey
+    }, (data) => {
+     this.calculateNext()
+    })
+  },
+  //第三步，人脸识别
+  faceVerif:function(){
+    
+  },
+  //第四步，关联银行卡
+  getBankCardInfo: function () {
+    postRequest(this, api.getBankCardInfo, {}, (data) => {
+      // let list = [...data,...data,...data]
+      this.setData({
+        bankCardList:data,
+        showBankList:true
+      })
+    })
+  },
+  //第五步，基本信息
+  getNewestPersonInfo: function () {
+    postRequest(this, api.getNewestPersonInfo, {}, (data) => {
+      this.setData({
+        personInfo:data,
+      })
+    })
+    postRequest(this, api.idCardInit, {}, (data) => {
+      this.setData({
+        personIdCard:data,
+      })
+    })
+  },
+  bankClick:function(){
+    this.getBankCardInfo();
+  },
+  bankChange:function(event){
+    let bankInfo = event.detail.value
+    this.setData({
+      bankInfo:bankInfo
+    })
+  },
+  pickerHide:function(){
+    this.setData({
+      showBankList:false
+    })
+  },
+  getProgress: function (step) {
+    return ((100 / this.data.verifyList.length) * step).toFixed(0)
+  },
+  //计算下一步进度
+  calculateNext:function(){
+    let curStep = this.data.verifyList[this.data.currentIndex + 1]
+    this.setData({
+      currentIndex: this.data.currentIndex + 1,
+      step: curStep,
+      progress: this.getProgress(curStep)
+    },()=>{
+      if (this.data.step === ItemIndexMap.baseInfo){
+        this.getNewestPersonInfo();
+      }
+    })
+  },
+  //点击下一步
+  nexttap: function () {
+    if (this.data.step === ItemIndexMap.idcardDetect) {
+      if (!checkNull(this.data.idCardInfo.frontKey, '请上传身份证正面')) {
+        return false;
+      }
+      if (!checkNull(this.data.idCardInfo.oppositeKey, '请上传身份证反面')) {
+        return false;
+      }
+      let params = {
+        "cardScanIdcardNo": this.data.idCardInfo.cardScanIdcardNo,
+        "cardScanName": this.data.idCardInfo.cardScanName,
+        "frontKey": this.data.idCardInfo.frontKey,
+        "frontNote": this.data.idCardInfo.frontNote,
+        "oppositeKey": this.data.idCardInfo.oppositeKey,
+        "oppositeNote": this.data.idCardInfo.oppositeNote,
+      }
+      postRequest(this, api.saveIdCardInfo, params, (data) => {
+        this.calculateNext();
+        this.getQiniuToken();
+      })
+    } else if (this.data.step === ItemIndexMap.handIdCardPick) {
+      if (!checkNull(this.data.handCardImg, '请上传手持身份证照片')) {
+        return false;
+      }
+      // 向七牛云上传
+      // console.log(this.data.handCardImg)
+      qiniuUploader.upload(this.data.handCardImg, (res) => {
+        // console.log(res)
+        // console.log('提示: wx.chooseImage 目前微信官方尚未开放获取原图片名功能(2020.4.22)');
+        // console.log('file url is: ' + res.fileURL);
+        this.saveHoldKey(res.key)
+      }, (error) => {
+        console.error('error: ' + JSON.stringify(error));
+      }, {
+        region: 'SCN',	//华南
+        // key: 'customFileName.jpg',
+        // domain: 'http://[yourBucketId].bkt.clouddn.com', // 
+        uptoken: this.data.uptoken, // 由其他程序生成七牛 uptoken
+      },
+        (progress) => {
+          // console.log('上传进度', progress.progress);
+          // console.log('已经上传的数据长度', progress.totalBytesSent);
+          // console.log('预期需要上传的数据总长度', progress.totalBytesExpectedToSend);
+        }, cancelTask => 
+       {
+        // that.setData({ cancelTask })
+       }
+      );
+
+    } else if (this.data.step === ItemIndexMap.idLiveDetect) {
+      this.calculateNext()
+    } else if (this.data.step === ItemIndexMap.bankcard) {
+     
+      if(this.data.bankInfo==undefined){
+        showToast('请选择关联银行卡')
+        return false;
+      }
+      let params = {
+        "userBankCardUuid": this.data.bankInfo.userBankCardUuid,
+      }
+      postRequest(this, api.choiceBankCard, params, (data) => {
+        this.calculateNext();
+      })
+    } else if (this.data.step === ItemIndexMap.baseInfo) {
+      this.calculateNext()
+    } else if (this.data.step === ItemIndexMap.workingInfo) {
+      this.calculateNext()
+    } else if (this.data.step === ItemIndexMap.specialInfo) {
+      this.calculateNext()
+    }
+  
   },
   lasttap: function () {
+    let curStep = this.data.verifyList[this.data.currentIndex - 1]
     this.setData({
-      step: this.data.step - 1
+      currentIndex: this.data.currentIndex - 1,
+      step: curStep,
+      progress: this.getProgress(curStep)
     })
   },
   startFace: function () {
@@ -159,22 +330,7 @@ Page({
     // var result = Buffer.concat([digest, buffer]).toString('base64')
     return sign;
   },
-  handCard: function () {
-    var that = this;
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original', 'compressed'],
-      sourceType: ['camera'],
-      success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths
-        console.log(tempFilePaths);
-        that.setData({
-          handCardImg: tempFilePaths
-        })
-      }
-    })
-  },
+
   stringToByte: function (str) {
     var bytes = new Array();
     var len, c;

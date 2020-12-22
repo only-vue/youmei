@@ -17,6 +17,12 @@
          </view>
          <view class="content">我的服务计划</view>
       </view>
+      <view class="item" bindtap="bindView" data-url="/pages/mine/mybill/index">
+         <view class="icon">
+           <image src="../../assets/images/mine_2.jpg" />
+         </view>
+         <view class="content">我的订单</view>
+      </view>
        <view class="item" bindtap="bindView" data-url="/pages/mine/card/index">
          <view class="icon">
            <image src="../../assets/images/mine_2.jpg" />

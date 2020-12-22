@@ -1,8 +1,15 @@
 {
+<<<<<<< HEAD
   "pages":[
     "pages/user/login",
     "pages/index/index",
     "pages/mine/index",
+=======
+  "pages": [
+    "pages/index/index",
+    "pages/mine/index",
+    "pages/mine/bill/index",
+>>>>>>> 187b8b0d108907e6010a2059ecc016dd0aedc9c9
     "pages/mine/bill/allBill",
     "pages/mine/bill/detail",
     "pages/mine/bill/repayment",
@@ -14,15 +21,16 @@
     "pages/user/forget",
     "pages/user/updataPassword",
     "pages/user/register",
-    "pages/index/billing/billing",
     "pages/index/billing/productDetail",
-    "pages/index/billing/productList"
+    "pages/index/billing/billing",
+    "pages/index/billing/productList",
+    "pages/mine/mybill/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "优美",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#999999",

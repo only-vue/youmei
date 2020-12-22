@@ -1,0 +1,128 @@
+/* component/MyPicker/index.wxss */
+.free-dialog__mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 9998;
+  background: rgba(0, 0, 0, 0.7);
+  display: none;
+ }
+ .title_line{
+   padding-top: 20rpx;border-bottom: 1px solid #f2f2f2;
+   margin-bottom: 30rpx;
+ }
+ .free-dialog__container {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 750rpx;
+  background: white;
+  transform: translateY(150%);
+  transition: all 0.4s ease;
+  z-index: 9999;
+ }
+ .free-dialog--show .free-dialog__container {
+  transform: translateY(0);
+ }
+ .free-dialog--show .free-dialog__mask {
+  display: block;
+ }
+ /*模态框中的内容*/
+ .free-button{
+  display: inline-block;
+  width:100rpx;
+  text-align: center;
+  font-size:36rpx;
+  color:#707070;
+  margin-bottom:10px;
+ }
+ .free-radios{
+   height: 385rpx;
+   padding-bottom: 40rpx;
+ }
+ .free-radio{
+   /* padding: 10rpx; */
+ }
+ .free-dialog-submit{
+  float: right;
+  color:#48c23d;
+ }
+ radio-group{
+  margin:10rpx 0rpx;
+ }
+ radio-group>label{
+  width:100%;
+  display: inline-block;
+  /* border:1px solid #ddd; */
+  padding:10px 0px;
+  margin:0px 2px 2px;
+ }
+  
+ .checked{
+  background:#48c23d;
+  color:#fff;
+ }
+
+
+ .label-content{
+  display: flex;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+.label-view{
+  display: flex;
+  flex-direction: column;
+}
+
+.line{
+  height: 2rpx;
+  background-color: rgba(233, 233, 233,1);
+}
+
+.label-input{
+  flex-grow: 1;
+  text-align: right;
+  margin-left: 20rpx;
+}
+.arrow{
+  width: 40rpx;
+  height: 40rpx;
+}
+.modal-title{
+  text-align: center;
+  padding: 15rpx;
+  background-color: #e5e5e5;
+}
+.modal-close{
+  width: 40rpx;
+  height: 40rpx;
+  position: absolute;
+  top: 15rpx;
+  left: 15rpx;
+  right: 15rpx;
+}
+.card-item{
+  padding: 20rpx;
+  display: flex;
+  flex-direction: row;
+}
+.add-label{
+  flex-grow: 1;
+  margin-left: 20rpx;
+}
+.add-label-icon{
+  width: 40rpx;
+  height: 40rpx;
+}
+.close-icon{
+  width: 40rpx;
+  height: 40rpx;
+}
+.free-text{
+  flex-grow: 1;
+  margin-left: 20rpx;
+  font-size:24rpx;
+  line-height: 40rpx;
+ }

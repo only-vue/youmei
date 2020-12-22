@@ -40,7 +40,7 @@
     </view>
 
   </view>
-
+<!--还款优惠包-->
   <view class="modals modals-bottom-dialog" hidden="{{hideModal}}">
     <view class="modals-cancel" bindtap="hideModal"></view>
     <view class="bottom-dialog-body bottom-pos" animation="{{animationData}}">
