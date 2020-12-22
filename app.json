@@ -1,15 +1,8 @@
 {
-<<<<<<< HEAD
   "pages":[
     "pages/user/login",
     "pages/index/index",
     "pages/mine/index",
-=======
-  "pages": [
-    "pages/index/index",
-    "pages/mine/index",
-    "pages/mine/bill/index",
->>>>>>> 187b8b0d108907e6010a2059ecc016dd0aedc9c9
     "pages/mine/bill/allBill",
     "pages/mine/bill/detail",
     "pages/mine/bill/repayment",
