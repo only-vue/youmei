@@ -23,24 +23,7 @@ Page({
   },
   onLoad() {
     removeSession('role');
-    this.setUserInfo();
   },
-  //获取保存的账号信息
-  setUserInfo() {
-    let userName = getSession('userName');
-    let pwd = getSession('pwd');
-    if (userName) {
-      this.setData({
-        userName: userName + ""
-      });
-    }
-    if (pwd) {
-      this.setData({
-        password: pwd + ""
-      });
-    }
-  },
-
   //提交登录
   bindSubmit() {
     if (!checkNull(this.data.userName, '请输入登录账号')) {
