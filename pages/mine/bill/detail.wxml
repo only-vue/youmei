@@ -3,34 +3,54 @@
   <view class="detail-top">{{obj.month}}月账单明细</view>
   <view class="detail-warp">
      <view class="top">
-        <view class="name">某成都小启科技有限公司</view>
+        <view class="name">{{obj.merchantName}}</view>
         <view class="money">{{obj.remainPayAmount}}</view>
-        <view class="tips">最后还款日 <text>{{obj.day}}</text></view>
+        <view class="tips">
+           <block wx:if="{{obj.overdueState==='overdue_state_doing'}}">
+               <text>已逾期，逾期费用{{obj.overdueAmount}}元</text>
+           </block>
+           <block wx:elif="{{obj.payState==='pay_state_settle'}}">
+               <text>还款成功</text>
+           </block>
+           <block wx:else>
+              <view wx:if="{{obj.deferredPayment=== 1}}">[已申请延期] </view>
+             最后还款日 {{ obj.day }}
+           </block>
+        </view>
      </view>
      <view class="list">
         <view class="item">
            <view class="name">产品</view>
-           <view class="content">脸部spa</view>
+           <view class="content">{{obj.productName}}</view>
         </view>
         <view class="item">
            <view class="name">项目名称</view>
-           <view class="content">脸部整体微调</view>
+           <view class="content">{{obj.projectName}}</view>
         </view>
         <view class="item">
            <view class="name">交易时间</view>
-           <view class="content">2020-10-22 12：20</view>
+           <view class="content">{{obj.created}}</view>
         </view>
         <view class="item">
            <view class="name">订单号</view>
-           <view class="content">13435554545</view>
+           <view class="content">{{obj.contractNumber}}</view>
         </view>
         <view class="item">
            <view class="name">创建时间</view>
-           <view class="content">2020-10-10 11：11</view>
+           <view class="content">{{obj.created}}</view>
         </view>
      </view>
   </view>
-  <view class="form-btns" bindtap="bindSubmit">
-    立即还款
-  </view>
+  <block wx:if="{{obj.payStateNopay === 'no_pay'}}"></block>
+  <block wx:else>
+      <block wx:if="{{obj.payStateNopay==='at_once'}}">
+         <view class="form-btns" bindtap="bindSubmit">
+            立即还款
+         </view>
+      </block>
+      <block wx:else>
+         <view class="form-btns">还款中</view>
+      </block>
+  </block>
+
 </view>

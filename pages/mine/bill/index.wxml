@@ -70,7 +70,7 @@
                      <view class="name">还款银行</view>
                      <view class="content" catchtap="openBank">
                        <block wx:if="{{bankRows.bankName}}">{{bankRows.bankName}}（{{item.tips}}）</block>
-                       <block wx:else>请选择银行卡 ></block>
+                       <block wx:else>请选择银行卡</block> >
                       </view>
                  </view>
                  <view class="form-btns" catchtap="bindRepaySubmit">立即还款</view>

@@ -1,16 +1,15 @@
 {
   "pages":[
-    "pages/mine/bill/index",
+    "pages/user/login",
     "pages/index/index",
     "pages/mine/index",
-    
     "pages/mine/bill/allBill",
     "pages/mine/bill/detail",
     "pages/mine/bill/repayment",
     "pages/mine/card/index",
     "pages/mine/card/cardForm",
     "pages/mine/card/bank",
-    "pages/user/login",
+    "pages/mine/bill/index",
     "pages/user/phoneLogin",
     "pages/user/forget",
     "pages/user/updataPassword",

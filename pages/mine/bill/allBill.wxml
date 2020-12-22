@@ -15,10 +15,13 @@
                   <view class="status">已结清</view>
                 </block>
                 <block wx:elif="{{subItem.payState==='pay_state_doing'}}">
-                  <view class="status">已逾期</view>
+                  <view class="status red">已逾期</view>
                 </block>
                 <block wx:else>
-                  <view class="status red">已出账</view>
+                  <block wx:if="{{subItem.overdueState==='overdue_state_doing'}}">
+                    <view class="status red">已逾期</view>
+                  </block>
+                  <view wx:else class="status">已出账</view>
                 </block>
              </view>
           </view>
