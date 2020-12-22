@@ -1,0 +1,37 @@
+<!--component/MyPicker/index.wxml-->
+<view class="label-view">
+  <view class="label-content">
+    <text class="label-text">{{label}}</text>
+    <input class="label-input" placeholder="{{placeholder}}" bindtap="onClick" disabled="true" value="{{value}}"/>
+    <image class="arrow" src="../../assets/images/src_pages_mine_mybill_grey_arrow.png" />
+  </view>
+  <view class="line"></view>
+</view>
+<view class="free-dialog {{ showDialog ? 'free-dialog--show' : '' }}">
+  <view class="free-dialog__mask" bindtap="myPickerHide" />
+  <view class="free-dialog__container">
+ 
+    <view class="modal-title">
+        <image class="modal-close" bindtap="myPickerHide" src="../../assets/images/src_pages_home_productlist_close.png" />
+        选择还款银行卡
+      </view>
+     <!-- <view bindtap='myPickerHide' class="free-button free-dialog-reset">取消</view>
+     <view bindtap='freeBack' class="free-button free-dialog-submit">确定</view></view> -->
+ 
+     <scroll-view class='free-radios' scroll-y='true'>
+      <view class="free-radio" wx:for="{{list}}" wx:key="id" catchtap="radioChange" data-data='{{item}}' data-id="{{index}}" style="{{index==picker_id?'color:#333;':'color:#333;'}}">
+       <view class="card-item" bindtap='freeBack'>
+        <image class="add-label-icon"  src="{{errImg?errImg:item.bankImageUrl}}" binderror="cardImgErr"/>
+        <text class="free-text">{{item.bankName+'('+item.bankCardNo+')'}}</text>
+        <image wx:if="{{index==picker_id}}" class="close-icon"  src="../../assets/images/src_pages_home_productapply_bankcardselect_select02.png" />
+       </view>
+      </view>
+      <view class="card-item" bindtap="addCard">
+        <image class="add-label-icon"  src="../../assets/images/src_pages_home_productapply_bankcardselect_add.png" />
+        <text class="add-label">添加银行储蓄卡</text>
+        <image class="close-icon" src="../../assets/images/src_pages_mine_mybill_grey_arrow.png" />
+      </view>
+    </scroll-view>
+ 
+ </view>
+</view>

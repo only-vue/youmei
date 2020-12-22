@@ -2,9 +2,7 @@
 import { navigateTo, showToast } from '../../../utils/util.js'
 import { postRequest } from '../../../utils/http.js'
 import { api } from '../../../service/index.js'
-import {
-  checkNull
-} from '../../../utils/rule.js'
+import {  checkNull} from '../../../utils/rule.js'
 Page({
 
   /**
@@ -61,7 +59,7 @@ Page({
       "saUuid": this.data.saUuid
     }
     postRequest(this, api.createContract, params, (data) => {
-      console.log(data)
+      // console.log(data)
       navigateTo('billing?productDetailUuid='+this.data.productDetailUuid)
     })
   },
@@ -128,7 +126,7 @@ Page({
     })
 
     postRequest(this, api.querySaList, {}, (data) => {
-      console.log(data)
+      // console.log(data)
       this.setData({
         listSA: data
       })

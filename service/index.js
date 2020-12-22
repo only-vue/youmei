@@ -22,5 +22,16 @@ export const api = {
   createContract: 'api/78dk/app/process/createContract',//创建订单
   getProductDetail: 'api/78dk/app/process/getProductDetail',//订单详情
   getNewestIdCardInfo: 'api/78dk/app/process/getNewestIdCardInfo',//身份证识别保留信息
-  // getNewestIdCardInfo: '/api/78dk/app/process/getNewestIdCardInfo' //
+  saveIdCardInfo: '/api/78dk/app/process/saveIdCardInfo', //保存身份证识别保留信息
+  queryQiNiuToken: '/api/78dk/app/common/queryQiNiuToken', //获取七牛token
+  saveHoldKey: '/api/78dk/app/process/saveHoldKey', //保存手持身份证照7牛key
+  saveOrcInfo: '/api/78dk/app/process/saveOrcInfo', //保存人脸识别信息
+  // getBankCardInfo: '/api/78dk/app/process/getBankCardInfo', //获取银行卡列表
+  choiceBankCard: '/api/78dk/app/process/choiceBankCard', //选择银行卡
+  idCardInit: '/api/78dk/app/common/idCardInit', //？？？？拿取基本信息中的手机号
+  getNewestPersonInfo: '/api/78dk/app/process/getNewestPersonInfo', //获取个人信息
+  viewByStagesLists: '/api/78dk/app/perCenter/viewByStagesLists', //订单列表
+  // getNewestIdCardInfo: '/api/78dk/app/process/getNewestIdCardInfo', //
+  // getNewestIdCardInfo: '/api/78dk/app/process/getNewestIdCardInfo', //
+  // getNewestIdCardInfo: '/api/78dk/app/process/getNewestIdCardInfo', //
 }

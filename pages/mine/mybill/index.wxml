@@ -1,0 +1,8 @@
+<!--pages/mine/mybill/index.wxml-->
+<view  wx:if="{{dataList}}">
+  <text>我的订单</text>
+</view>
+
+<view wx:else>
+
+</view>
