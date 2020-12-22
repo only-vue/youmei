@@ -1,8 +1,7 @@
 // pages/mine/mybill/index.js
 import { postRequest } from '../../../utils/http.js'
-import { navigateTo, showToast } from '../../../utils/util.js'
+import { navigateTo, showToast,formatTime } from '../../../utils/util.js'
 import { api } from '../../../service/index.js'
-import { checkNull } from '../../../utils/rule.js'
 Page({
 
   /**
@@ -16,63 +15,34 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.getList()
+  },
+  getList:function(){
     let params = {
       "pageCurrent": 1,
       "pageSize": 100,
     }
     postRequest(this, api.viewByStagesLists, params, (data) => {
+     data.dataList.forEach(function(item, index){
+        item.date = formatTime(new Date(parseInt(item.created,10)),'ymd')
+      })
       this.setData({
         dataList:data.dataList
       })
     })
   },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
+  toDetail:function(e){
+    navigateTo(e.currentTarget.dataset.url);
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  giveUp:function(e){
+   let data = e.currentTarget.dataset.data
+   let params = {
+    "loanOrderUuid": data.loanOrderUuid
   }
+  postRequest(this, api.renounceApplication, params, (data) => {
+    this.getList()
+  })
+  }
+
+  
 })

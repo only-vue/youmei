@@ -1,23 +1,26 @@
 {
-  "pages":[
-    "pages/user/login",
+  "pages": [
+    "pages/index/billing/billing",
     "pages/index/index",
+    "pages/mine/mybill/applyData",
+    "pages/mine/mybill/billDetail",
+    "pages/mine/mybill/index",
     "pages/mine/index",
+    "pages/mine/bill/index",
     "pages/mine/bill/allBill",
     "pages/mine/bill/detail",
     "pages/mine/bill/repayment",
     "pages/mine/card/index",
     "pages/mine/card/cardForm",
     "pages/mine/card/bank",
-    "pages/mine/bill/index",
+    "pages/user/login",
     "pages/user/phoneLogin",
     "pages/user/forget",
     "pages/user/updataPassword",
     "pages/user/register",
     "pages/index/billing/productDetail",
-    "pages/index/billing/billing",
     "pages/index/billing/productList",
-    "pages/mine/mybill/index"
+    "pages/mine/mybill/datadetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -1,0 +1,27 @@
+<!--pages/mine/mybill/billDetail.wxml-->
+<wxs src="../../../wxs/tools.wxs" module="tools" />
+<view>
+  <view class="title">申请详情</view>
+  <view class="loan-content">
+    <view class="item-name">  商品/服务金额(元)  </view>
+    <view class="item-amount">  {{loanDatail.loanAmount}}  </view>
+    <image class="state-img" src="{{tools.repayImg(loanDatail.showStatus)}}" />
+  </view>
+
+  <view class="bottom-panel">
+      <view class="item" bindtap="bindView" data-url="{{'/pages/mine/mybill/applyData?loanOrderUuid='+loanOrderUuid}}">
+         <view class="content">查看贷款资料</view>
+         <view class="icon">
+           <image src="../../../assets/images/src_pages_mine_mybill_grey_arrow.png" />
+         </view>
+      </view>
+      <view class="item" bindtap="bindView" data-url="/pages/mine/bill/index">
+         
+         <view class="content">查看还款计划</view>
+         <view class="icon">
+           <image src="../../../assets/images/src_pages_mine_mybill_grey_arrow.png" />
+         </view>
+      </view>
+      
+   </view>
+</view>

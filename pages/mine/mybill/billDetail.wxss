@@ -1,0 +1,65 @@
+/* pages/mine/mybill/billDetail.wxss */
+page{
+  background: #f8f8f8;
+}
+.title{
+  padding: 40rpx;
+  font-size: 60rpx;
+  font-weight: bold;
+  color: #333;
+  background-color: white;
+}
+
+.loan-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+}
+.loan-content .item-name{
+  font-size: 30rpx;
+  color: #333;
+  margin-top: 60rpx;
+}
+.loan-content .item-amount{
+  font-size: 80rpx;
+  color: #3C8BF1;
+  font-weight: bold;
+  margin-top: 50rpx;
+}
+.state-img{
+  width: 178rpx;
+  height: 117rpx;
+  margin-bottom: 80rpx;
+}
+
+.bottom-panel{
+  margin-top: 20rpx;
+  padding: 0 0 0 30rpx;
+  background: #fff;
+}
+.bottom-panel .item{
+  display: flex;
+  height: 100rpx;
+  border-bottom:solid 1rpx #eee; 
+}
+.bottom-panel .item .icon,.bottom-panel .item .content{
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.bottom-panel .item .icon{
+ width:100rpx;
+ justify-content: center;
+}
+.bottom-panel .item .icon image{
+ width: 40rpx;
+ height: 40rpx;
+}
+.bottom-panel .item .content{
+ flex: 1;
+ font-size: 30rpx;
+}
+.bottom-panel .item:last-child {
+ border: none;
+}

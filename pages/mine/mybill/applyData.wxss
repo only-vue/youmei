@@ -1,0 +1,41 @@
+/* pages/mine/mybill/applyData.wxss */
+page{
+  background: #f8f8f8;
+}
+.title{
+  padding: 40rpx;
+  font-size: 60rpx;
+  font-weight: bold;
+  color: #333;
+  background-color: white;
+}
+.bottom-panel{
+  margin: 30rpx 0 60rpx 0;
+  background: #fff;
+}
+.bottom-panel .item{
+  display: flex;
+  height: 100rpx;
+}
+.bottom-panel .item .icon,.bottom-panel .item .content{
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.bottom-panel .item .icon{
+ width:100rpx;
+ justify-content: center;
+}
+.bottom-panel .item .icon image{
+ width: 40rpx;
+ height: 40rpx;
+}
+.bottom-panel .item .content{
+ flex: 1;
+ border-bottom:solid 1rpx #eee; 
+ font-size: 36rpx;
+ font-weight: 500;
+}
+.bottom-panel .item:last-child .content{
+ border: none;
+}

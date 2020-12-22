@@ -1,1 +1,70 @@
 /* pages/mine/mybill/index.wxss */
+page{
+  background: #f8f8f8;
+}
+.title{
+  padding: 40rpx;
+  font-size: 60rpx;
+  font-weight: bold;
+  color: #333;
+  background-color: white;
+}
+.list-view{
+  margin-top: 20rpx;
+  background-color: white;
+}
+.item{
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx;
+}
+.loan-amount{
+  display: flex;
+  align-items: center;
+}
+.loan-amount text{
+  flex-grow: 1;
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #333;
+}
+.arrow{
+  width: 40rpx;
+  height: 40rpx;
+}
+.state-img{
+  width: 116rpx;
+  height: 78rpx;
+}
+.bottom-layout{
+  display: flex;
+  margin-top: 10rpx;
+}
+.give-up{
+  border: 1px solid #999; 
+  border-radius: 36rpx;  
+  background-color: white;
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+  padding-bottom: 3rpx;
+}
+/* .certification{
+  border-radius: 36rpx;  
+  padding-left: 15rpx;
+  padding-right: 15rpx;
+  padding-bottom: 3rpx;
+  margin-left: 20rpx;
+  background: -webkit-linear-gradient(left,pink,lightblue,skyblue);
+} */
+.empty-view{
+ color: #999;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-direction: column;
+}
+.empty-view image{
+margin-top: 50%;
+width: 400rpx;
+height: 300rpx;
+}

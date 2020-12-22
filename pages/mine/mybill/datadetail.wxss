@@ -1,0 +1,5 @@
+/* pages/mine/mybill/datadetail.wxss */
+.container{
+  display: flex;
+  align-items: center;
+}

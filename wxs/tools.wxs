@@ -1,0 +1,39 @@
+
+ /**
+* 还款状态
+* value 状态值
+*/
+var repayImg = function getRepayState(showStatus) {
+  switch (showStatus) {
+    case "1"://1：审核中
+      result = '../../../assets/images/resource_image_check_pending.png'
+      break
+    case "2"://2：审核失败
+      result = '../../../assets/images/resource_image_check_fail.png'
+      break
+    case "3"://3：待放款
+      result = '../../../assets/images/resource_image_check_pending.png'
+      break
+    case "4"://4：已放款
+      result = '../../../assets/images/resource_image_check_pending.png'
+      break
+    case "5"://5：放款失败
+      result = '../../../assets/images/resource_image_check_pending.png'
+      break
+    case "6"://6：还款中
+      result = '../../../assets/images/resource_image_check_pending.png'
+      break
+    case "7"://7：已结清
+      result = '../../../assets/images/resource_image_check_pending.png'
+      break
+    case "8"://8：已取消
+      result = '../assets/images/resource_image_check_pending.png'
+      break
+  }
+  return result
+}
+
+
+module.exports = {
+  repayImg: repayImg,
+}

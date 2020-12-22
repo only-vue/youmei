@@ -16,11 +16,13 @@ Component({
     },
     label:String,
     placeholder:String,
-    value:String
+    value:String,
+    itemkey:String
   },
  
   data: {
     pickerValue:'',
+    picker_id:0
   },
   /**
    * 组件的方法列表
@@ -38,12 +40,12 @@ Component({
       this.triggerEvent('myPickerHide', '');
     },
     freeBack: function () {
-      if(!this.data.radioChange_value){
-        return
+      if(!this.data.radioChange_value&&this.data.picker_id==0){
+        this.setData({
+          radioChange_value:this.properties.list[0]
+        })
       }
-      // var that = this
       this.triggerEvent('myPickerHide', '');
-      // console.log('radioChange_value', this.data.radioChange_value)
       this.triggerEvent('myPickerChange', {
         value:this.data.radioChange_value,
         position:this.data.picker_id

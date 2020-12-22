@@ -1,0 +1,4 @@
+<!--pages/mine/mybill/datadetail.wxml-->
+<view class="container">
+  <image src="{{img}}" />
+</view>

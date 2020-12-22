@@ -1,8 +1,30 @@
 <!--pages/mine/mybill/index.wxml-->
+<wxs src="../../../wxs/tools.wxs" module="tools" />
+
 <view  wx:if="{{dataList}}">
-  <text>我的订单</text>
+  <view class="title">我的订单</view>
+
+  <scroll-view class="list-view" scroll-y='true'>
+      <view  wx:for="{{dataList}}" wx:key="id" data-data='{{item}}' data-id="{{index}}" >
+      
+       <view class="item" bindtap="toDetail" data-url="{{'billDetail?loanOrderUuid='+item.loanOrderUuid}}">
+          <text>{{item.productName}}</text>
+          <text>{{item.projectName}}</text>
+          <view class="loan-amount">
+            <text >{{item.loanAmount}}</text>
+            <image class="state-img" src="{{tools.repayImg(item.showStatus)}}" />
+            <image class="arrow" src="../../../assets/images/src_pages_mine_mybill_grey_arrow.png" />
+          </view>
+          <text>{{item.date}}</text>
+          <view class="bottom-layout">
+            <view class="give-up" bindtap="giveUp" data-data="{{item}}" >放弃申请</view>
+            
+          </view>
+       </view>
+      </view></scroll-view>
 </view>
 
-<view wx:else>
-
+<view class="empty-view" wx:else>
+  <image  src="../../../assets/images/src_components_emptydataview_empty_data.png" />
+  <view>暂无订单</view>
 </view>

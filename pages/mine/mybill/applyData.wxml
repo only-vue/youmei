@@ -1,0 +1,24 @@
+<!--pages/mine/mybill/applyData.wxml-->
+<view>
+  <view class="title">申请资料</view>
+  <view class="bottom-panel">
+      <view class="item" bindtap="bindView" data-url="{{'/pages/mine/mybill/datadetail?img='+loanData.frontUrl}}">
+         <view class="icon">
+           <image src="../../../assets/images/src_pages_mine_myinstallment_detail_loanpicinfo_checkedstar.png" />
+         </view>
+         <view class="content">身份证正面</view>
+      </view>
+      <view class="item" bindtap="bindView" data-url="{{'/pages/mine/mybill/datadetail?img='+loanData.oppositeUrl}}">
+         <view class="icon">
+           <image src="../../../assets/images/src_pages_mine_myinstallment_detail_loanpicinfo_checkedstar.png" />
+         </view>
+         <view class="content">身份证反面</view>
+      </view>
+       <view class="item" bindtap="bindView" data-url="{{'/pages/mine/mybill/datadetail?img='+loanData.holdUrl}}">
+         <view class="icon">
+           <image src="../../../assets/images/src_pages_mine_myinstallment_detail_loanpicinfo_checkedstar.png" />
+         </view>
+         <view class="content">手持身份证</view>
+      </view>
+   </view>
+</view>

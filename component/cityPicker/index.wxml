@@ -1,0 +1,16 @@
+<!--component/labelSelect/index.wxml-->
+<view class="label-view">
+  <view class="label-content">
+    <text class="label-text">{{label}}</text>
+
+    <picker mode="region" class="label-input" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}" >
+      <view wx:if="{{region[0]}}" class="picker">
+        {{region[0]}}{{region[1]}}{{region[2]}}
+      </view>
+      <text class="placeholder" wx:else>{{placeholder}}</text>
+    </picker>
+    <image class="arrow" src="../../assets/images/src_pages_mine_mybill_grey_arrow.png" />
+  </view>
+  <view class="line"></view>
+
+</view>

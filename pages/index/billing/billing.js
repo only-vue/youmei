@@ -26,14 +26,20 @@ Page({
     verifyList: [],//需验证列表
     productDetailUuid: '',
     uptoken: '',//七牛token
-    //手持身份证图片
-    handCardImg: "",
+    handCardImg: "",//手持身份证图片
     idCardInfo: undefined,//身份证信息
     bankCardList:[],
     bankInfo:undefined,//当前选中的银行卡
     showBankList:false,
     personInfo:undefined,//基本信息
     personIdCard:undefined,
+    marryList:undefined,
+    showMarrydialog:false,
+    educationList:undefined,
+    showEducationdialog:false,
+    region: undefined,
+    customItem: '全部',
+    iswork:1
   },
   /**
    * 生命周期函数--监听页面加载
@@ -57,7 +63,7 @@ Page({
         idCardInfo: data
       })
     });
-    // this.getNewestPersonInfo();
+    this.getNewestPersonInfo();
   },
   //获取所有进件项
   getItemNumberList: function (incomingPartsTemplateList) {
@@ -156,6 +162,98 @@ Page({
       })
     })
   },
+  //婚姻状况
+  marryClick:function(){
+    if(!this.data.marryList){
+      postRequest(this, api.getDictionaries, {
+        datumType:'datum_type_marry'
+      }, (data) => {
+        this.setData({
+          marryList:data,
+          showMarrydialog:true
+        })
+      })
+    }else{
+      this.setData({
+        showMarrydialog:true
+      })
+    }
+  },
+  marryPickerChange:function(event){
+    let { value, position } = event.detail
+    this.setData({
+      marryData:value
+    })
+  },
+  marryPickerHide:function(){
+      this.setData({
+        showMarrydialog:false
+      })
+  },
+  //学历
+  educationClick:function(){
+    if(!this.data.educationList){
+      postRequest(this, api.getDictionaries, {
+        datumType:'datum_type_education'
+      }, (data) => {
+        this.setData({
+          educationList:data,
+          showEducationdialog:true
+        })
+      })
+    }else{
+      this.setData({
+        showEducationdialog:true
+      })
+    }
+  },
+  educationPickerChange:function(event){
+    let { value, position } = event.detail
+    this.setData({
+      educationData:value
+    })
+  },
+  educationPickerHide:function(){
+      this.setData({
+        showEducationdialog:false
+      })
+  },
+  //住房类型
+  housingClick:function(){
+    if(!this.data.housingList){
+      postRequest(this, api.getDictionaries, {
+        datumType:'datum_type_housing'
+      }, (data) => {
+        this.setData({
+          housingList:data,
+          showHousingdialog:true
+        })
+      })
+    }else{
+      this.setData({
+        showHousingdialog:true
+      })
+    }
+  },
+  housingPickerChange:function(event){
+    let { value, position } = event.detail
+    this.setData({
+      housingData:value
+    })
+  },
+  housingPickerHide:function(){
+      this.setData({
+        showHousingdialog:false
+      })
+  },
+  regionChange: function (event) {
+    let {value, code} =  event.detail
+    this.setData({
+      region: value,
+      code
+    })
+  },
+
   bankClick:function(){
     this.getBankCardInfo();
   },
@@ -164,6 +262,12 @@ Page({
     this.setData({
       bankInfo:bankInfo
     })
+  },
+  tapwork:function(e){
+    this.setData({
+      iswork:e.currentTarget.dataset.work
+    })
+    
   },
   pickerHide:function(){
     this.setData({
@@ -251,7 +355,41 @@ Page({
         this.calculateNext();
       })
     } else if (this.data.step === ItemIndexMap.baseInfo) {
-      this.calculateNext()
+      let {educationData,housingData,marryData,region,code} = this.data
+
+      if(marryData==undefined){
+        showToast('请选择婚姻状况')
+        return false;
+      }
+      if(educationData==undefined){
+        showToast('请选择学历')
+        return false;
+      }
+      if(housingData==undefined){
+        showToast('请选择住房类型')
+        return false;
+      }
+      if(region==undefined){
+        showToast('请选择居住地址')
+        return false;
+      }
+      let params = {
+        "contactList": [],
+        "datumTypeEducationId": educationData.id,
+        "datumTypeHousingId":housingData.id,
+        "datumTypeMarryId": marryData.id,
+        "isWork": 0,
+        "liveCity": code[1],
+        "liveCityName":  region[1],
+        "liveDetail": 'liveDetail',
+        "liveProvince": code[0],
+        "liveProvinceName": region[0],
+        "liveRegion": code[2],
+        "liveRegionName": region[2],
+      }
+      postRequest(this, api.savePersonInfo, params, (data) => {
+        this.calculateNext();
+      })
     } else if (this.data.step === ItemIndexMap.workingInfo) {
       this.calculateNext()
     } else if (this.data.step === ItemIndexMap.specialInfo) {

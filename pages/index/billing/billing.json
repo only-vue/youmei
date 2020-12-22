@@ -1,5 +1,7 @@
 {
   "usingComponents": {
-    "bankPicker": "../../../component/bankPicker/index"
+    "bankPicker": "../../../component/bankPicker/index",
+    "myPicker": "../../../component/MyPicker/index",
+    "cityPicker": "../../../component/cityPicker/index"
   }
 }

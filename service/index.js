@@ -28,10 +28,15 @@ export const api = {
   saveOrcInfo: '/api/78dk/app/process/saveOrcInfo', //保存人脸识别信息
   // getBankCardInfo: '/api/78dk/app/process/getBankCardInfo', //获取银行卡列表
   choiceBankCard: '/api/78dk/app/process/choiceBankCard', //选择银行卡
-  idCardInit: '/api/78dk/app/common/idCardInit', //？？？？拿取基本信息中的手机号
+  // idCardInit: '/api/78dk/app/common/idCardInit', //？？？？拿取基本信息中的手机号
   getNewestPersonInfo: '/api/78dk/app/process/getNewestPersonInfo', //获取个人信息
   viewByStagesLists: '/api/78dk/app/perCenter/viewByStagesLists', //订单列表
-  // getNewestIdCardInfo: '/api/78dk/app/process/getNewestIdCardInfo', //
-  // getNewestIdCardInfo: '/api/78dk/app/process/getNewestIdCardInfo', //
-  // getNewestIdCardInfo: '/api/78dk/app/process/getNewestIdCardInfo', //
+  loanDatail: '/api/78dk/app/perCenter/loanDatail', //订单详情
+  loanData: 'api/78dk/app/perCenter/loanData', //申请资料
+  renounceApplication: 'api/78dk/app/perCenter/renounceApplication', //放弃申请
+  getDictionaries: 'api/78dk/app/common/getDictionaries', //选择信息
+  getAllCites: 'api/78dk/app/common/getAllCites', //城市信息
+  savePersonInfo: 'api/78dk/app/process/savePersonInfo', //保存基本信息
+  getNewestWorkInfo: 'api/78dk/app/process/getNewestWorkInfo', //获取工作信息
+  // getNewestIdCardInfo: 'api/78dk/app/process/getNewestIdCardInfo', //
 }
