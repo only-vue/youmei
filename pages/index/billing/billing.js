@@ -20,7 +20,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    step: 5,
+    step: 7,
     currentIndex: 0,
     progress: 0,
     verifyList: [],//需验证列表
@@ -33,12 +33,8 @@ Page({
     showBankList:false,
     personInfo:undefined,//基本信息
     personIdCard:undefined,
-    marryList:undefined,
-    showMarrydialog:false,
-    educationList:undefined,
-    showEducationdialog:false,
     region: undefined,
-    customItem: '全部',
+    workRegion: undefined,
     iswork:1
   },
   /**
@@ -63,7 +59,7 @@ Page({
         idCardInfo: data
       })
     });
-    this.getNewestPersonInfo();
+    this.getNewestWorkInfo();
   },
   //获取所有进件项
   getItemNumberList: function (incomingPartsTemplateList) {
@@ -154,6 +150,23 @@ Page({
     postRequest(this, api.getNewestPersonInfo, {}, (data) => {
       this.setData({
         personInfo:data,
+        marryData:{
+          typeName:data.datumTypeMarryName,
+          id:data.datumTypeMarryId
+        },
+        educationData:{
+          typeName:data.datumTypeEducationName,
+          id:data.datumTypeEducationId
+        },
+        housingData:{
+          typeName:data.datumTypeHousingName,
+          id:data.datumTypeHousingId
+        },
+        liveDetail:data.liveDetail,
+        iswork:data.isWork,
+        region:[data.liveProvinceName,data.liveCityName,data.liveRegionName],
+        code:[data.liveProvince,data.liveCity,data.liveRegion]
+
       })
     })
     postRequest(this, api.idCardInit, {}, (data) => {
@@ -163,94 +176,39 @@ Page({
     })
   },
   //婚姻状况
-  marryClick:function(){
-    if(!this.data.marryList){
-      postRequest(this, api.getDictionaries, {
-        datumType:'datum_type_marry'
-      }, (data) => {
-        this.setData({
-          marryList:data,
-          showMarrydialog:true
-        })
-      })
-    }else{
-      this.setData({
-        showMarrydialog:true
-      })
-    }
-  },
-  marryPickerChange:function(event){
-    let { value, position } = event.detail
+   
+  marryChange:function(event){
+    let { value } = event.detail
     this.setData({
       marryData:value
     })
   },
-  marryPickerHide:function(){
-      this.setData({
-        showMarrydialog:false
-      })
-  },
   //学历
-  educationClick:function(){
-    if(!this.data.educationList){
-      postRequest(this, api.getDictionaries, {
-        datumType:'datum_type_education'
-      }, (data) => {
-        this.setData({
-          educationList:data,
-          showEducationdialog:true
-        })
-      })
-    }else{
-      this.setData({
-        showEducationdialog:true
-      })
-    }
-  },
-  educationPickerChange:function(event){
-    let { value, position } = event.detail
+  educationChange:function(event){
+    let { value } = event.detail
     this.setData({
       educationData:value
     })
   },
-  educationPickerHide:function(){
-      this.setData({
-        showEducationdialog:false
-      })
-  },
   //住房类型
-  housingClick:function(){
-    if(!this.data.housingList){
-      postRequest(this, api.getDictionaries, {
-        datumType:'datum_type_housing'
-      }, (data) => {
-        this.setData({
-          housingList:data,
-          showHousingdialog:true
-        })
-      })
-    }else{
-      this.setData({
-        showHousingdialog:true
-      })
-    }
-  },
-  housingPickerChange:function(event){
-    let { value, position } = event.detail
+  housingChange:function(event){
+    let { value } = event.detail
     this.setData({
       housingData:value
     })
   },
-  housingPickerHide:function(){
-      this.setData({
-        showHousingdialog:false
-      })
-  },
+ 
   regionChange: function (event) {
     let {value, code} =  event.detail
     this.setData({
       region: value,
       code
+    })
+  },
+  addressInput:function(e){
+    console.log(e.detail.value)
+    this.setData({
+      liveDetail:e.detail.value
     })
   },
 
@@ -269,6 +227,88 @@ Page({
     })
     
   },
+  //第六步，工作信息
+  getNewestWorkInfo: function () {
+    postRequest(this, api.getNewestWorkInfo, {}, (data) => {
+        this.setData({
+          workName:data.companyName,
+          propertiesData:{
+            id:data.propertiesId,
+            typeName:data.propertiesName
+          },
+          scaleData:{
+            id:data.scaleId,
+            typeName:data.scaleName
+          },
+          workyearData:{
+            id:data.datumTypeWorktimeId,
+            typeName:data.datumTypeWorktimeName
+          },
+          position:data.position,
+          incomeData:{
+            id:data.datumTypeIncomeId,
+            typeName:data.datumTypeIncomeName
+          },
+          workRegion:[data.companyProvinceName,data.companyCityName,data.companyRegionName],
+          workCode:[data.companyProvince,data.companyCity,data.companyRegion],
+          workAddress:data.companyDetail,
+          workPhone:data.workPhone
+        })
+    })
+   
+  },
+  propertiesChange:function(event){
+    let { value } = event.detail
+    this.setData({
+      propertiesData:value
+    })
+  },
+  scaleChange:function(event){
+    let { value } = event.detail
+    this.setData({
+      scaleData:value
+    })
+  },
+  workyearChange:function(event){
+    let { value } = event.detail
+    this.setData({
+      workyearData:value
+    })
+  },
+  incomeChange:function(event){
+    let { value } = event.detail
+    this.setData({
+      incomeData:value
+    })
+  },
+  //工作信息地址
+  workRegionChange: function (event) {
+    let {value, code} =  event.detail
+    this.setData({
+      workRegion: value,
+      workCode:code
+    })
+  },
+  workAddressInput:function(e){
+    this.setData({
+      workAddress:e.detail.value
+    })
+  },
+  workNameChange:function(e){
+    this.setData({
+      workName:e.detail.value
+    })
+  },
+  position:function(e){
+    this.setData({
+      position:e.detail.value
+    })
+  },
+  workPhone:function(e){
+    this.setData({
+      workPhone:e.detail.value
+    })
+  },
   pickerHide:function(){
     this.setData({
       showBankList:false
@@ -280,25 +320,34 @@ Page({
   //计算下一步进度
   calculateNext:function(){
     let curStep = this.data.verifyList[this.data.currentIndex + 1]
-    this.setData({
-      currentIndex: this.data.currentIndex + 1,
-      step: curStep,
-      progress: this.getProgress(curStep)
-    },()=>{
-      if (this.data.step === ItemIndexMap.baseInfo){
-        this.getNewestPersonInfo();
-      }
-    })
+
+    if(this.data.step === this.data.verifyList[this.data.verifyList.length-1]){
+      navigateTo('billResult');
+    }else{
+      this.setData({
+        currentIndex: this.data.currentIndex + 1,
+        step: curStep,
+        progress: this.getProgress(curStep)
+      },()=>{
+        if (this.data.step === ItemIndexMap.baseInfo){
+          this.getNewestPersonInfo();
+        }else if(this.data.step === ItemIndexMap.workingInfo){
+          this.getNewestWorkInfo();
+        }
+      })
+    }
+
+    
   },
   //点击下一步
   nexttap: function () {
     if (this.data.step === ItemIndexMap.idcardDetect) {
-      if (!checkNull(this.data.idCardInfo.frontKey, '请上传身份证正面')) {
-        return false;
-      }
-      if (!checkNull(this.data.idCardInfo.oppositeKey, '请上传身份证反面')) {
-        return false;
-      }
+      // if (!checkNull(this.data.idCardInfo.frontKey, '请上传身份证正面')) {
+      //   return false;
+      // }
+      // if (!checkNull(this.data.idCardInfo.oppositeKey, '请上传身份证反面')) {
+      //   return false;
+      // }
       let params = {
         "cardScanIdcardNo": this.data.idCardInfo.cardScanIdcardNo,
         "cardScanName": this.data.idCardInfo.cardScanName,
@@ -308,9 +357,10 @@ Page({
         "oppositeNote": this.data.idCardInfo.oppositeNote,
       }
       postRequest(this, api.saveIdCardInfo, params, (data) => {
-        this.calculateNext();
+        // this.calculateNext();
         this.getQiniuToken();
       })
+      this.calculateNext();
     } else if (this.data.step === ItemIndexMap.handIdCardPick) {
       if (!checkNull(this.data.handCardImg, '请上传手持身份证照片')) {
         return false;
@@ -355,7 +405,7 @@ Page({
         this.calculateNext();
       })
     } else if (this.data.step === ItemIndexMap.baseInfo) {
-      let {educationData,housingData,marryData,region,code} = this.data
+      let {educationData,housingData,marryData,region,code,iswork,liveDetail} = this.data
 
       if(marryData==undefined){
         showToast('请选择婚姻状况')
@@ -373,25 +423,60 @@ Page({
         showToast('请选择居住地址')
         return false;
       }
+      if (!checkNull(liveDetail, '请输入详情地址')) {
+        return false;
+      }
+      
       let params = {
         "contactList": [],
         "datumTypeEducationId": educationData.id,
         "datumTypeHousingId":housingData.id,
         "datumTypeMarryId": marryData.id,
-        "isWork": 0,
+        "isWork": iswork,
         "liveCity": code[1],
         "liveCityName":  region[1],
-        "liveDetail": 'liveDetail',
+        "liveDetail": liveDetail,
         "liveProvince": code[0],
         "liveProvinceName": region[0],
         "liveRegion": code[2],
         "liveRegionName": region[2],
       }
       postRequest(this, api.savePersonInfo, params, (data) => {
-        this.calculateNext();
+        if(iswork==0){
+          //无工作
+          let curStep = this.data.verifyList[this.data.currentIndex + 1]
+          this.setData({
+            currentIndex: this.data.currentIndex + 1,
+            step: curStep,
+          },()=>{
+            this.calculateNext();
+          });
+        }else{
+          this.calculateNext();
+        }
       })
     } else if (this.data.step === ItemIndexMap.workingInfo) {
-      this.calculateNext()
+      let {workName,propertiesData,scaleData,workyearData,position,incomeData,workRegion,workCode,workAddress,workPhone} = this.data
+      //工作信息所有非必填
+      let params = {
+        "companyCity": workCode[1],
+        "companyCityName": workRegion[1],
+        "companyDetail":workAddress,
+        "companyName": workName,
+        "companyProvince": workCode[0],
+        "companyProvinceName": workRegion[0],
+        "companyRegion":  workCode[2],
+        "companyRegionName": workRegion[2],
+        "datumTypeIncomeId": incomeData.id,
+        "datumTypeWorktimeId": workyearData.id,
+        "position": position,
+        "propertiesId": propertiesData.id,
+        "scaleId": scaleData.id,
+        "workPhone": workPhone,
+      }
+      postRequest(this, api.saveWorkInfo, params, (data) => {
+        this.calculateNext();
+      })
     } else if (this.data.step === ItemIndexMap.specialInfo) {
       this.calculateNext()
     }
@@ -494,7 +579,11 @@ Page({
     return bytes;
 
 
-  }
+  },
+  // 跳转到操作页
+  bindView(e){
+    navigateTo(e.currentTarget.dataset.url);
+  },
 
 
 })

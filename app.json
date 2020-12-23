@@ -20,7 +20,9 @@
     "pages/user/register",
     "pages/index/billing/productDetail",
     "pages/index/billing/productList",
-    "pages/mine/mybill/datadetail"
+    "pages/mine/mybill/datadetail",
+    "pages/index/billing/imageInfo",
+    "pages/index/billing/billResult"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -38,5 +38,8 @@ export const api = {
   getAllCites: 'api/78dk/app/common/getAllCites', //城市信息
   savePersonInfo: 'api/78dk/app/process/savePersonInfo', //保存基本信息
   getNewestWorkInfo: 'api/78dk/app/process/getNewestWorkInfo', //获取工作信息
-  // getNewestIdCardInfo: 'api/78dk/app/process/getNewestIdCardInfo', //
+  saveWorkInfo: 'api/78dk/app/process/saveWorkInfo', //保存工作信息
+  // saveWorkInfo: 'api/78dk/app/process/saveWorkInfo', //
+  // saveWorkInfo: 'api/78dk/app/process/saveWorkInfo', //
+  // saveWorkInfo: 'api/78dk/app/process/saveWorkInfo', //
 }

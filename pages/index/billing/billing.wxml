@@ -102,47 +102,38 @@
   <!--基本信息-->
   <view class=" margin-common" wx:elif="{{step==5}}">
     <labelInput class="formInput" label="手机号" placeholder="" disabled="{{true}}" value="{{personIdCard.mobile}}" />
-    <myPicker class="formInput" label="婚姻状况" placeholder="请选择" list="{{marryList}}" itemkey="{{'typeName'}}"
-      value="{{marryData.typeName}}" bind:inputClick="marryClick" showDialog="{{showMarrydialog}}"
-      bindmyPickerChange="marryPickerChange" bindmyPickerHide="marryPickerHide" />
-    <myPicker class="formInput" label="学历" placeholder="请选择" list="{{educationList}}" itemkey="{{'typeName'}}"
-      value="{{educationData.typeName}}" bind:inputClick="educationClick" showDialog="{{showEducationdialog}}"
-      bindmyPickerChange="educationPickerChange" bindmyPickerHide="educationPickerHide" />
-    <view>
-      <view class="work">
-        <text>是否有工作</text>
-        <view class="{{iswork==1?'work-item-select':'work-item'}}" bindtap="tapwork" data-work="1">是</view>
-        <view class="{{iswork==0?'work-item-select':'work-item'}}" bindtap="tapwork" data-work="0">否</view>
-      </view>
-      <view class="line1"></view>
+    <infoPicker class="formInput" label="婚姻状况" placeholder="请选择" value="{{marryData.typeName}}" bindmyPickerChange="marryChange" datumType="marry"/>
+    <infoPicker class="formInput" label="学历" placeholder="请选择" value="{{educationData.typeName}}" bindmyPickerChange="educationChange" datumType="education"/>
+    <view class="work">
+      <text>是否有工作</text>
+      <view class="{{iswork==1?'work-item-select':'work-item'}}" bindtap="tapwork" data-work="1">是</view>
+      <view class="{{iswork==0?'work-item-select':'work-item'}}" bindtap="tapwork" data-work="0">否</view>
     </view>
-    <myPicker class="formInput" label="住房类型" placeholder="请选择" list="{{housingList}}" itemkey="{{'typeName'}}"
-      value="{{housingData.typeName}}" bind:inputClick="housingClick" showDialog="{{showHousingdialog}}"
-      bindmyPickerChange="housingPickerChange" bindmyPickerHide="housingPickerHide" />
+    <infoPicker class="formInput" label="住房类型" placeholder="请选择" value="{{housingData.typeName}}" bindmyPickerChange="housingChange" datumType="housing"/>
     <cityPicker class="formInput" label="居住地址" placeholder="请选择" region="{{region}}" bindregionChange="regionChange" />
-    <input class="label-input" placeholder="输入详情地址，如永华北大街649号" />
+    <textarea class="address" maxlength="50" bindinput="addressInput" value="{{liveDetail}}" placeholder="输入详情地址，如永华北大街649号" />
 
   </view>
 
   <!--有工作-->
   <view class=" margin-common" wx:elif="{{step==6}}">
-    <labelInput class="formInput" label="单位名称" placeholder="输入单位全名" />
-    <labelSelect class="formInput" label="单位性质" placeholder="请选择单位性质" />
-    <labelSelect class="formInput" label="单位规模" placeholder="请选择单位规模" />
-    <labelSelect class="formInput" label="现单位工作年限(月)" placeholder="请选择单位规模" />
-    <labelInput class="formInput" label="职位" placeholder="请输入职位" />
-    <labelSelect class="formInput" label="薪资" placeholder="请选择薪资" />
-    <labelSelect class="formInput" label="居住地址" placeholder="请选择" />
-    <labelSelect class="formInput" label="单位地址" placeholder="" />
-    <input class="label-input" placeholder="输入详情地址，如永华北大街649号" />
-    <labelInput class="formInput" label="工作电话" placeholder="区号-电话号码" />
-    <text class="comment-text">请务必提交真实信息，确保能够通过审核</text>
+    <labelInput class="formInput" label="单位名称" placeholder="输入单位全名" bindinputChange="workNameChange" value="{{workName}}"/>
+    <infoPicker class="formInput" label="单位性质" placeholder="请选择单位性质" value="{{propertiesData.typeName}}" bindmyPickerChange="propertiesChange" datumType="properties"/>
+    <infoPicker class="formInput" label="单位规模" placeholder="请选择单位规模" value="{{scaleData.typeName}}" bindmyPickerChange="scaleChange" datumType="scale"/>
+    <infoPicker class="formInput" label="现单位工作年限(月)" placeholder="请选择工作年限" value="{{workyearData.typeName}}" bindmyPickerChange="workyearChange" datumType="workyear"/>
+    <labelInput class="formInput" label="职位" placeholder="请输入职位" bindinputChange="position" value="{{position}}"/>
+    <infoPicker class="formInput" label="薪资" placeholder="请选择薪资" value="{{incomeData.typeName}}" bindmyPickerChange="incomeChange" datumType="income"/>
+    <cityPicker class="formInput" label="单位地址" placeholder="请选择" region="{{workRegion}}" bindregionChange="workRegionChange" />
+    <textarea class="address" maxlength="50" bindinput="workAddressInput" value="{{workAddress}}" placeholder="输入详情地址，如永华北大街649号" />
+    <!-- <input class="label-input" placeholder="输入详情地址，如永华北大街649号" /> -->
+    <labelInput class="formInput" label="工作电话" placeholder="区号-电话号码" bindinputChange="workPhone" value="{{workPhone}}"/>
   </view>
 
-  <view class=" margin-common" wx:else>
-    <text class="comment-text">影像资料</text>
-
+  <view class=" margin-common image-item" wx:else>
+    <text >影像资料</text>
+    <view class="image-info" bindtap="bindView" data-url="imageInfo">去完善</view>
   </view>
+  <text class="margin-common comment-text margin-top">请务必提交真实信息，确保能够通过审核</text>
   <view class="next" bindtap="nexttap">
     下一步
   </view>

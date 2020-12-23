@@ -71,11 +71,11 @@
 }
 .line{
   height: 10rpx;
-  background-color: rgba(233, 233, 233,1);
+  background-color: #eee;
 }
 .line1{
   height: 1rpx;
-  background-color: rgba(233, 233, 233,1);
+  background-color: #eee;
 }
 .label-content{
   display: flex;
@@ -142,6 +142,7 @@
   flex-direction: row;
   padding-top: 20rpx;
   padding-bottom: 20rpx;
+  border-bottom:solid 1px #eee;
 }
 .work .work-item{
   border: 1px solid #999; 
@@ -170,7 +171,37 @@
 .work text{
   flex-grow: 1;
 }
+.address{
+  height: 100rpx;
+  margin-top: 10rpx;
+  border-bottom:solid 1px #eee;
+}
+.image-item{
+  display: flex;
+  flex-direction: row;
+  margin-top: 20rpx;
+  padding-bottom: 20rpx;
+  border-bottom:solid 1px #eee;
+}
+.image-item text{
+  flex-grow: 1;
+}
+.image-item .image-info{
+  border: 1px solid yellowgreen; 
+  border-radius: 36rpx;  
+  background-color: white;
+  padding-left: 20rpx;
+  padding-right: 20rpx;
+  padding-top: 3rpx;
+  margin-left: 30rpx;
+  font-size: 20rpx;
+  text-align: center;
+  color: yellowgreen;
+}
 
+.margin-top{
+  margin-top: 20rpx;
+}
 
 .next{
   width: 300rpx;
@@ -193,3 +224,4 @@
   font-size: 30rpx;
   margin-bottom: 100rpx;
 }
+

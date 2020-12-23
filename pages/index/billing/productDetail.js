@@ -18,7 +18,6 @@ Page({
     serviceAmount: '',//服务金额
     projectName: '',//项目名称
     listService: [],//服务列表
-    listServiceData: [],
     listSA: [],//线下业务员
     saUuid: '',
     showListService: false,
@@ -78,9 +77,9 @@ Page({
   },
   servicePickerChange: function (event) {
     let { value, position } = event.detail
-    let { prePrincipal, preHandlingFee,productDetailConfigUuid } = this.data.listServiceData[position]
+    let {prePeriod, prePrincipal, preHandlingFee,productDetailConfigUuid } = value
     this.setData({
-      pickerValue: value,
+      pickerValue: prePeriod,
       showListService: false,
       productDetailConfigUuid:productDetailConfigUuid,
       prePrincipal: prePrincipal,
@@ -104,10 +103,8 @@ Page({
       storeUuid: this.data.storeUuid
     }
     postRequest(this, api.loanCalculator, params, (data) => {
-      let list = data.map(item => item.prePeriod)
       this.setData({
-        listService: list,
-        listServiceData: data,
+        listService: data,
         showListService: true
       })
     })
