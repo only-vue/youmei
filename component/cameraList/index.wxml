@@ -1,0 +1,13 @@
+<!--component/cameraList/index.wxml-->
+<view class="camrea-view">
+
+  <view  wx:for="{{imgList}}" wx:key="id" catchtap="radioChange" data-data='{{item}}' data-id="{{index}}" >
+    <view class="img-item">
+      <image  class="add-img" src="{{item.imageUrl}}" mode="aspectFill" />
+      <image  class="delete-img" bindtap="deleteImg" data-position="{{index}}" src="../../assets/images/resource_image_delete.png" />
+    </view>
+  </view>
+  <image wx:if="{{imgList.length<maxLength}}" class="add-img" bindtap="takeImg" src="../../assets/images/resource_image_add01.png" />
+  <!--解决最后一行不能左对齐的情况-->
+  <view wx:if="{{imgList.length%3==1}}" class="add-img" />
+</view>

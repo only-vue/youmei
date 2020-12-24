@@ -25,6 +25,27 @@ Page({
     prePrincipal: '',//每次金额
     preHandlingFee: ''//每次服务费
   },
+  /**
+   * 生命周期函数--监听页面加载
+   */
+  onLoad: function (options) {
+    var { name, storeUuid, productDetailUuid, storeName, storeLocation } = options
+    this.setData({
+      name: name,
+      storeUuid: storeUuid,
+      productDetailUuid: productDetailUuid,
+      storeName: storeName,
+      storeLocation: storeLocation,
+    })
+
+    postRequest(this, api.querySaList, {}, (data) => {
+      // console.log(data)
+      this.setData({
+        listSA: data
+      })
+    })
+  },
+
   onSaChange: function (e) {
    console.log(  )
    let index = e.detail.value
@@ -59,7 +80,7 @@ Page({
     }
     postRequest(this, api.createContract, params, (data) => {
       // console.log(data)
-      navigateTo('billing?productDetailUuid='+this.data.productDetailUuid)
+      navigateTo(`billing?productDetailUuid=${this.data.productDetailUuid}&storeUuid=${this.data.storeUuid}&productDetailConfigUuid=${this.data.productDetailConfigUuid}&projectName=${this.data.projectName}&loanAmount=${this.data.serviceAmount}`)
     })
   },
   projectNameChange: function (event) {
@@ -109,25 +130,5 @@ Page({
       })
     })
   },
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
-    var { name, storeUuid, productDetailUuid, storeName, storeLocation } = options
-    this.setData({
-      name: name,
-      storeUuid: storeUuid,
-      productDetailUuid: productDetailUuid,
-      storeName: storeName,
-      storeLocation: storeLocation,
-    })
-
-    postRequest(this, api.querySaList, {}, (data) => {
-      // console.log(data)
-      this.setData({
-        listSA: data
-      })
-    })
-  },
-
+  
 })

@@ -1,3 +1,5 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "cameraList": "../../../component/cameraList/index"
+  }
 }

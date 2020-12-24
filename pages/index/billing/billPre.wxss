@@ -1,0 +1,132 @@
+/* pages/index/billing/billResult.wxss */
+
+.title{
+  color: #333;
+  font-size: 60rpx;
+  font-weight: 600;
+  margin-left: 20rpx;
+  margin-top: 20rpx;
+ }
+ 
+.store{
+  margin-left: 20rpx;
+  margin-top: 40rpx;
+  display: flex;
+}
+.avater{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 6rpx;
+  background-color: white;
+  padding-top: 5rpx;
+}
+.avater-circle{
+  width: 70rpx;
+  height: 70rpx;
+  margin: 5rpx;
+  border-radius: 360rpx;
+  background-color: rgba(85, 178, 206,0.5);
+  text-align: center;
+
+}
+.avater-text{
+  margin: 5rpx;
+  line-height: 70rpx;
+  font-size: 40rpx;
+  color:rgb(218, 83, 250);
+}
+.store-title{
+  color: #333;
+  margin-left: 30rpx;
+  margin-bottom: 5rpx;
+  display: block;
+}
+.store-location{
+  color: white;
+  margin-left: 30rpx;
+ 
+}
+.recommended-view{
+  display: flex;
+  align-items: center;
+  padding: 20rpx;
+}
+.project-name{
+  margin: 20rpx;
+}
+.loan-top{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.loan-top .loan-item{
+  padding: 20rpx;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.item-title{
+  font-size: 30rpx;
+  padding-bottom: 20rpx;
+}
+.formInput{
+  margin: 20rpx;
+}
+.icon_expand{
+  width: 40rpx;
+  height: 30rpx;
+}
+.pre_title{
+  padding: 10rpx 20rpx 10rpx 20rpx ;
+  display: flex;
+  align-items: center;
+}
+ .item-label2{
+  font-size: 26rpx;
+}
+.pre_title .space{
+  flex-grow: 1;
+}
+
+.repayPlan-item{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20rpx;
+  border-bottom: 1rpx solid #eee;
+}
+.text-amount{
+  font-size: 26rpx;
+  font-weight: 550;
+}
+.text-periods{
+  font-size: 26rpx;
+  color: #999;
+}
+.repayPlan-item .item-loan{
+  margin-left: 50rpx;
+  flex-grow: 1;
+}
+.line1{
+  height: 1rpx;
+  background-color: #eee;
+}
+.line10{
+  height: 10rpx;
+  background-color: #eee;
+}
+.line20{
+  height: 20rpx;
+  background-color: #eee;
+}
+.next{
+  width: 300rpx;
+  text-align: center;
+  background-color: rgb(207, 79, 142);
+  padding: 15rpx 50rpx 15rpx 50rpx;
+  border-radius: 36rpx;
+  color: white;
+  margin: 50rpx auto;
+  font-size: 30rpx;
+}

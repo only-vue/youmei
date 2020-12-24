@@ -17,7 +17,7 @@
           </view>
           <text>{{item.date}}</text>
           <view class="bottom-layout">
-            <view class="give-up" bindtap="giveUp" data-data="{{item}}" >放弃申请</view>
+            <view class="give-up" catchtap="giveUp" data-data="{{item}}" >放弃申请</view>
             
           </view>
        </view>

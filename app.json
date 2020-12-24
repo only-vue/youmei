@@ -1,7 +1,10 @@
 {
   "pages": [
-    "pages/index/billing/billing",
     "pages/index/index",
+    "pages/index/billing/productResult",
+    "pages/index/billing/billPre",
+    "pages/index/billing/imageInfo",
+    "pages/index/billing/billing",
     "pages/mine/mybill/applyData",
     "pages/mine/mybill/billDetail",
     "pages/mine/mybill/index",
@@ -20,9 +23,7 @@
     "pages/user/register",
     "pages/index/billing/productDetail",
     "pages/index/billing/productList",
-    "pages/mine/mybill/datadetail",
-    "pages/index/billing/imageInfo",
-    "pages/index/billing/billResult"
+    "pages/mine/mybill/datadetail"
   ],
   "window": {
     "backgroundTextStyle": "light",

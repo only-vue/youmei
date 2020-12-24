@@ -1,1 +1,30 @@
 /* pages/index/billing/imageInfo.wxss */
+page{
+  background: white;
+}
+.container{
+  padding: 30rpx;
+}
+.title{
+  font-size: 60rpx;
+  font-weight: bold;
+  color: #333;
+  background-color: white;
+  
+}
+.item-title{
+  padding-top: 30rpx;
+}
+.item-title .item-must{
+  color: red;
+}
+.next{
+  width: 300rpx;
+  text-align: center;
+  background-color: rgb(207, 79, 142);
+  padding: 15rpx 50rpx 15rpx 50rpx;
+  border-radius: 36rpx;
+  color: white;
+  margin: 50rpx auto;
+  font-size: 30rpx;
+}

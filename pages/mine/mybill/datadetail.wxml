@@ -1,4 +1,4 @@
 <!--pages/mine/mybill/datadetail.wxml-->
 <view class="container">
-  <image src="{{img}}" />
+  <image mode="aspectFit" src="{{img}}" />
 </view>

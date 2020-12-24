@@ -39,7 +39,10 @@ export const api = {
   savePersonInfo: 'api/78dk/app/process/savePersonInfo', //保存基本信息
   getNewestWorkInfo: 'api/78dk/app/process/getNewestWorkInfo', //获取工作信息
   saveWorkInfo: 'api/78dk/app/process/saveWorkInfo', //保存工作信息
-  // saveWorkInfo: 'api/78dk/app/process/saveWorkInfo', //
-  // saveWorkInfo: 'api/78dk/app/process/saveWorkInfo', //
-  // saveWorkInfo: 'api/78dk/app/process/saveWorkInfo', //
+  getContractImages: 'api/78dk/app/process/getContractImages', //获取影像资料
+  saveContractImages: 'api/78dk/app/process/saveContractImages', //保存影像资料
+  repayPlanCalculator: 'api/78dk/app/process/repayPlanCalculator', //计算费用 首期还款时间
+  submitApply: 'api/78dk/app/process/submitApply', //提交订单
+  // getStoreAndProduct: 'api/78dk/app/process/getStoreAndProduct', //
+  // getStoreAndProduct: 'api/78dk/app/process/getStoreAndProduct', //
 }

@@ -19,7 +19,8 @@
       <view class="free-radio" wx:for="{{list}}" wx:key="id" catchtap="radioChange" data-data='{{item}}' data-id="{{index}}" style="{{index==picker_id?'color:#48c23d;':'color:#999;'}}">
       
        <view class="free-text">{{item[itemkey]}}</view>
-      </view></scroll-view>
+      </view>
+    </scroll-view>
  
  </view>
 </view>

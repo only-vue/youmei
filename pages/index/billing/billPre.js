@@ -1,5 +1,5 @@
 // pages/index/billing/billResult.js
-import { navigateTo } from '../../../utils/util.js'
+import { navigateTo, showToast } from '../../../utils/util.js'
 import { postRequest } from '../../../utils/http.js'
 import { api } from '../../../service/index.js'
 Page({
@@ -10,25 +10,23 @@ Page({
   data: {
     showListService:false,
     showListDate:false,
-    loanAmount: 100000,
-    productDetailUuid:'a0f7ff136b5348daa57816721795d71d',
-    storeUuid:"5565faa3039c400e98c1dea560e88df9",
-    productDetailConfigUuid:'e7d24f23ec934874a3e15f5c8a8f9661'
+    // loanAmount: 100000,
+    // productDetailUuid:'a0f7ff136b5348daa57816721795d71d',
+    // storeUuid:"5565faa3039c400e98c1dea560e88df9",
+    // productDetailConfigUuid:'e7d24f23ec934874a3e15f5c8a8f9661'
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const { storeUuid, productDetailUuid, productDetailConfigUuid, projectName, loanAmount } = this.options;
-    // this.setData({
-    //   storeUuid, productDetailUuid, productDetailConfigUuid, projectName, loanAmount
-    // }, () => {
-
-    //   this.getStoreAndProduct(storeUuid)
-    //   this.loanCalculator()
-    // })
-    this.getStoreAndProduct(storeUuid)
-    this.loanFQItem()
+    const { storeUuid, productDetailUuid, productDetailConfigUuid, projectName, loanAmount } = options;
+    console.log(storeUuid, productDetailUuid, productDetailConfigUuid, projectName, loanAmount)
+    this.setData({
+      storeUuid, productDetailUuid, productDetailConfigUuid, projectName, loanAmount
+    }, () => {
+      this.getStoreAndProduct()
+      this.loanFQItem()
+    })
     let dateList=[]
     for (let i = 1; i <= 28; i++) {
         dateList.push({
@@ -39,17 +37,17 @@ Page({
       dateList
     })
   },
-  getStoreAndProduct: function (storeUuid) {
+  getStoreAndProduct: function () {
     let params = {
       isDiscount: false,
-      storeUuid: '5565faa3039c400e98c1dea560e88df9'//options.uuid
+      storeUuid: this.data.storeUuid
     }
     postRequest(this, api.getStoreAndProduct, params, (data) => {
       const product = data.productList.find(item => {
         return item.productDetailUuid === this.data.productDetailUuid
       })
       this.setData({
-        product: data.productList[0],
+        product: product,
         store: data.store
       })
     })
@@ -113,6 +111,7 @@ Page({
     this.setData({
       selectDate:value
     })
+   
   },
   datepickerHide:function(){
     this.setData({
@@ -135,21 +134,23 @@ Page({
       })
     })
   },
-    //提交
-    submitApply: function () {
-      let {loanAmount,productDetailUuid,selectDate} = this.data
-
-      let params = {
-        loanAmount:loanAmount,
-        productDetailUuid:productDetailUuid,
-        repaymentDate:selectDate.date,
-      }
-      postRequest(this, api.submitApply, params, (data) => {
-       
-        this.setData({
-          repayPlan:data
-        })
-      })
-    },
-
+  next:function(){
+    this.submitApply()
+  },
+  //费率
+  submitApply: function () {
+    let {loanAmount,productDetailUuid,selectDate} = this.data
+    if(!selectDate){
+      showToast('请选择首期还款时间')
+      return false
+    }
+    let params = {
+      loanAmount:loanAmount,
+      repaymentDate:selectDate.date,
+      productDetailUuid:productDetailUuid,
+    }
+    postRequest(this, api.submitApply, params, (data) => {
+      navigateTo('productResult')
+    })
+  },
 })

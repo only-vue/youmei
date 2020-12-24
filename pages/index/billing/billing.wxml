@@ -131,7 +131,7 @@
 
   <view class=" margin-common image-item" wx:else>
     <text >影像资料</text>
-    <view class="image-info" bindtap="bindView" data-url="imageInfo">去完善</view>
+    <view class="{{imgInfo?'image-info-complete':'image-info'}}" bindtap="bindView" data-url="imageInfo">{{imgInfo?'已认证':'去完善' }}</view>
   </view>
   <text class="margin-common comment-text margin-top">请务必提交真实信息，确保能够通过审核</text>
   <view class="next" bindtap="nexttap">

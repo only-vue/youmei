@@ -21,13 +21,12 @@ Page({
       uuid: options.uuid,
       hideModal: true, //模态框的状态  true-隐藏  false-显示
     })
-    console.log(this.data.uuid)
+    // console.log(this.data.uuid)
     let params = {
       isDiscount: false,
       storeUuid: options.uuid
     }
     postRequest(this, api.getStoreAndProduct, params, (data) => {
-        console.log(data)
         this.setData({
           productList:data.productList,
           store:data.store

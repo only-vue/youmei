@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "myPicker": "../../../component/MyPicker/index"
+  }
+}

@@ -1,6 +1,6 @@
 // pages/mine/mybill/index.js
 import { postRequest } from '../../../utils/http.js'
-import { navigateTo, showToast,formatTime } from '../../../utils/util.js'
+import { navigateTo, showToast, formatTime } from '../../../utils/util.js'
 import { api } from '../../../service/index.js'
 Page({
 
@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    dataList:undefined
+    dataList: undefined
   },
 
   /**
@@ -17,32 +17,39 @@ Page({
   onLoad: function (options) {
     this.getList()
   },
-  getList:function(){
+  getList: function () {
     let params = {
       "pageCurrent": 1,
       "pageSize": 100,
     }
     postRequest(this, api.viewByStagesLists, params, (data) => {
-     data.dataList.forEach(function(item, index){
-        item.date = formatTime(new Date(parseInt(item.created,10)),'ymd')
-      })
-      this.setData({
-        dataList:data.dataList
-      })
+      if (data.dataList) {
+        data.dataList.forEach(function (item, index) {
+          item.date = formatTime(new Date(parseInt(item.created, 10)), 'ymd')
+        })
+        this.setData({
+          dataList: data.dataList
+        })
+      }else{
+        this.setData({
+          dataList: []
+        })
+      }
+
     })
   },
-  toDetail:function(e){
+  toDetail: function (e) {
     navigateTo(e.currentTarget.dataset.url);
   },
-  giveUp:function(e){
-   let data = e.currentTarget.dataset.data
-   let params = {
-    "loanOrderUuid": data.loanOrderUuid
-  }
-  postRequest(this, api.renounceApplication, params, (data) => {
-    this.getList()
-  })
+  giveUp: function (e) {
+    let data = e.currentTarget.dataset.data
+    let params = {
+      "loanOrderUuid": data.loanOrderUuid
+    }
+    postRequest(this, api.renounceApplication, params, (data) => {
+      this.getList()
+    })
   }
 
-  
+
 })

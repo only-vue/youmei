@@ -28,22 +28,27 @@ Page({
     uptoken: '',//七牛token
     handCardImg: "",//手持身份证图片
     idCardInfo: undefined,//身份证信息
-    bankCardList:[],
-    bankInfo:undefined,//当前选中的银行卡
-    showBankList:false,
-    personInfo:undefined,//基本信息
-    personIdCard:undefined,
+    bankCardList: [],
+    bankInfo: undefined,//当前选中的银行卡
+    showBankList: false,
+    personInfo: undefined,//基本信息
+    personIdCard: undefined,
     region: undefined,
     workRegion: undefined,
-    iswork:1
+    iswork: 1,
+    imgInfo: false,
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var { productDetailUuid } = options
+    var { storeUuid, productDetailUuid, productDetailConfigUuid,projectName,loanAmount } = options
     this.setData({
-      productDetailUuid: productDetailUuid
+      storeUuid,
+      productDetailConfigUuid,
+      productDetailUuid: productDetailUuid,
+      projectName,
+      loanAmount
     })
     postRequest(this, api.getProductDetail, {
       productDetailUuid: productDetailUuid
@@ -113,7 +118,7 @@ Page({
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
-      sourceType: ['camera'], 
+      sourceType: ['camera'],
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths[0]
@@ -126,22 +131,22 @@ Page({
   //保存手持身份证照7牛key 成功后下一步
   saveHoldKey: function (imgHoldKey) {
     postRequest(this, api.saveHoldKey, {
-      holdKey:imgHoldKey
+      holdKey: imgHoldKey
     }, (data) => {
-     this.calculateNext()
+      this.calculateNext()
     })
   },
   //第三步，人脸识别
-  faceVerif:function(){
-    
+  faceVerif: function () {
+
   },
   //第四步，关联银行卡
   getBankCardInfo: function () {
     postRequest(this, api.getBankCardInfo, {}, (data) => {
       // let list = [...data,...data,...data]
       this.setData({
-        bankCardList:data,
-        showBankList:true
+        bankCardList: data,
+        showBankList: true
       })
     })
   },
@@ -149,195 +154,211 @@ Page({
   getNewestPersonInfo: function () {
     postRequest(this, api.getNewestPersonInfo, {}, (data) => {
       this.setData({
-        personInfo:data,
-        marryData:{
-          typeName:data.datumTypeMarryName,
-          id:data.datumTypeMarryId
+        personInfo: data,
+        marryData: {
+          typeName: data.datumTypeMarryName,
+          id: data.datumTypeMarryId
         },
-        educationData:{
-          typeName:data.datumTypeEducationName,
-          id:data.datumTypeEducationId
+        educationData: {
+          typeName: data.datumTypeEducationName,
+          id: data.datumTypeEducationId
         },
-        housingData:{
-          typeName:data.datumTypeHousingName,
-          id:data.datumTypeHousingId
+        housingData: {
+          typeName: data.datumTypeHousingName,
+          id: data.datumTypeHousingId
         },
-        liveDetail:data.liveDetail,
-        iswork:data.isWork,
-        region:[data.liveProvinceName,data.liveCityName,data.liveRegionName],
-        code:[data.liveProvince,data.liveCity,data.liveRegion]
+        liveDetail: data.liveDetail,
+        iswork: data.isWork,
+        region: [data.liveProvinceName, data.liveCityName, data.liveRegionName],
+        code: [data.liveProvince, data.liveCity, data.liveRegion]
 
       })
     })
     postRequest(this, api.idCardInit, {}, (data) => {
       this.setData({
-        personIdCard:data,
+        personIdCard: data,
       })
     })
   },
   //婚姻状况
-   
-  marryChange:function(event){
+
+  marryChange: function (event) {
     let { value } = event.detail
     this.setData({
-      marryData:value
+      marryData: value
     })
   },
   //学历
-  educationChange:function(event){
+  educationChange: function (event) {
     let { value } = event.detail
     this.setData({
-      educationData:value
+      educationData: value
     })
   },
   //住房类型
-  housingChange:function(event){
+  housingChange: function (event) {
     let { value } = event.detail
     this.setData({
-      housingData:value
+      housingData: value
     })
   },
- 
+
   regionChange: function (event) {
-    let {value, code} =  event.detail
+    let { value, code } = event.detail
     this.setData({
       region: value,
       code
     })
   },
-  addressInput:function(e){
-    console.log(e.detail.value)
+  addressInput: function (e) {
+    // console.log(e.detail.value)
     this.setData({
-      liveDetail:e.detail.value
+      liveDetail: e.detail.value
     })
   },
 
-  bankClick:function(){
+  bankClick: function () {
     this.getBankCardInfo();
   },
-  bankChange:function(event){
+  bankChange: function (event) {
     let bankInfo = event.detail.value
     this.setData({
-      bankInfo:bankInfo
+      bankInfo: bankInfo
     })
   },
-  tapwork:function(e){
+  tapwork: function (e) {
     this.setData({
-      iswork:e.currentTarget.dataset.work
+      iswork: e.currentTarget.dataset.work
     })
-    
+
   },
   //第六步，工作信息
   getNewestWorkInfo: function () {
     postRequest(this, api.getNewestWorkInfo, {}, (data) => {
-        this.setData({
-          workName:data.companyName,
-          propertiesData:{
-            id:data.propertiesId,
-            typeName:data.propertiesName
-          },
-          scaleData:{
-            id:data.scaleId,
-            typeName:data.scaleName
-          },
-          workyearData:{
-            id:data.datumTypeWorktimeId,
-            typeName:data.datumTypeWorktimeName
-          },
-          position:data.position,
-          incomeData:{
-            id:data.datumTypeIncomeId,
-            typeName:data.datumTypeIncomeName
-          },
-          workRegion:[data.companyProvinceName,data.companyCityName,data.companyRegionName],
-          workCode:[data.companyProvince,data.companyCity,data.companyRegion],
-          workAddress:data.companyDetail,
-          workPhone:data.workPhone
-        })
+      this.setData({
+        workName: data.companyName,
+        propertiesData: {
+          id: data.propertiesId,
+          typeName: data.propertiesName
+        },
+        scaleData: {
+          id: data.scaleId,
+          typeName: data.scaleName
+        },
+        workyearData: {
+          id: data.datumTypeWorktimeId,
+          typeName: data.datumTypeWorktimeName
+        },
+        position: data.position,
+        incomeData: {
+          id: data.datumTypeIncomeId,
+          typeName: data.datumTypeIncomeName
+        },
+        workRegion: [data.companyProvinceName, data.companyCityName, data.companyRegionName],
+        workCode: [data.companyProvince, data.companyCity, data.companyRegion],
+        workAddress: data.companyDetail,
+        workPhone: data.workPhone
+      })
     })
-   
+
   },
-  propertiesChange:function(event){
+  propertiesChange: function (event) {
     let { value } = event.detail
     this.setData({
-      propertiesData:value
+      propertiesData: value
     })
   },
-  scaleChange:function(event){
+  scaleChange: function (event) {
     let { value } = event.detail
     this.setData({
-      scaleData:value
+      scaleData: value
     })
   },
-  workyearChange:function(event){
+  workyearChange: function (event) {
     let { value } = event.detail
     this.setData({
-      workyearData:value
+      workyearData: value
     })
   },
-  incomeChange:function(event){
+  incomeChange: function (event) {
     let { value } = event.detail
     this.setData({
-      incomeData:value
+      incomeData: value
     })
   },
   //工作信息地址
   workRegionChange: function (event) {
-    let {value, code} =  event.detail
+    let { value, code } = event.detail
     this.setData({
       workRegion: value,
-      workCode:code
+      workCode: code
     })
   },
-  workAddressInput:function(e){
+  workAddressInput: function (e) {
     this.setData({
-      workAddress:e.detail.value
+      workAddress: e.detail.value
     })
   },
-  workNameChange:function(e){
+  workNameChange: function (e) {
     this.setData({
-      workName:e.detail.value
+      workName: e.detail.value
     })
   },
-  position:function(e){
+  position: function (e) {
     this.setData({
-      position:e.detail.value
+      position: e.detail.value
     })
   },
-  workPhone:function(e){
+  workPhone: function (e) {
     this.setData({
-      workPhone:e.detail.value
+      workPhone: e.detail.value
     })
   },
-  pickerHide:function(){
+  //特殊信息
+  getImageInfo: function () {
+    postRequest(this, api.getContractImages, {}, (data) => {
+      if (data.length > 0) {//已完成
+        this.setData({
+          imgInfo: true
+        })
+      } else {
+        this.setData({
+          imgInfo: false
+        })
+      }
+    });
+  },
+  pickerHide: function () {
     this.setData({
-      showBankList:false
+      showBankList: false
     })
   },
   getProgress: function (step) {
     return ((100 / this.data.verifyList.length) * step).toFixed(0)
   },
   //计算下一步进度
-  calculateNext:function(){
+  calculateNext: function () {
     let curStep = this.data.verifyList[this.data.currentIndex + 1]
 
-    if(this.data.step === this.data.verifyList[this.data.verifyList.length-1]){
-      navigateTo('billResult');
-    }else{
+    if (this.data.step === this.data.verifyList[this.data.verifyList.length - 1]) {
+      navigateTo(`billPre?productDetailUuid=${this.data.productDetailUuid}&storeUuid=${this.data.storeUuid}&productDetailConfigUuid=${this.data.productDetailConfigUuid}&projectName=${this.data.projectName}&loanAmount=${this.data.loanAmount}`)
+    } else {
       this.setData({
         currentIndex: this.data.currentIndex + 1,
         step: curStep,
         progress: this.getProgress(curStep)
-      },()=>{
-        if (this.data.step === ItemIndexMap.baseInfo){
+      }, () => {
+        if (this.data.step === ItemIndexMap.baseInfo) {
           this.getNewestPersonInfo();
-        }else if(this.data.step === ItemIndexMap.workingInfo){
+        } else if (this.data.step === ItemIndexMap.workingInfo) {
           this.getNewestWorkInfo();
+        } else if (this.data.step === ItemIndexMap.specialInfo) {
+          this.getImageInfo();
         }
       })
     }
 
-    
+
   },
   //点击下一步
   nexttap: function () {
@@ -384,17 +405,16 @@ Page({
           // console.log('上传进度', progress.progress);
           // console.log('已经上传的数据长度', progress.totalBytesSent);
           // console.log('预期需要上传的数据总长度', progress.totalBytesExpectedToSend);
-        }, cancelTask => 
-       {
+        }, cancelTask => {
         // that.setData({ cancelTask })
-       }
+      }
       );
 
     } else if (this.data.step === ItemIndexMap.idLiveDetect) {
       this.calculateNext()
     } else if (this.data.step === ItemIndexMap.bankcard) {
-     
-      if(this.data.bankInfo==undefined){
+
+      if (this.data.bankInfo == undefined) {
         showToast('请选择关联银行卡')
         return false;
       }
@@ -405,36 +425,36 @@ Page({
         this.calculateNext();
       })
     } else if (this.data.step === ItemIndexMap.baseInfo) {
-      let {educationData,housingData,marryData,region,code,iswork,liveDetail} = this.data
+      let { educationData, housingData, marryData, region, code, iswork, liveDetail } = this.data
 
-      if(marryData==undefined){
+      if (marryData == undefined) {
         showToast('请选择婚姻状况')
         return false;
       }
-      if(educationData==undefined){
+      if (educationData == undefined) {
         showToast('请选择学历')
         return false;
       }
-      if(housingData==undefined){
+      if (housingData == undefined) {
         showToast('请选择住房类型')
         return false;
       }
-      if(region==undefined){
+      if (region == undefined) {
         showToast('请选择居住地址')
         return false;
       }
       if (!checkNull(liveDetail, '请输入详情地址')) {
         return false;
       }
-      
+
       let params = {
         "contactList": [],
         "datumTypeEducationId": educationData.id,
-        "datumTypeHousingId":housingData.id,
+        "datumTypeHousingId": housingData.id,
         "datumTypeMarryId": marryData.id,
         "isWork": iswork,
         "liveCity": code[1],
-        "liveCityName":  region[1],
+        "liveCityName": region[1],
         "liveDetail": liveDetail,
         "liveProvince": code[0],
         "liveProvinceName": region[0],
@@ -442,30 +462,30 @@ Page({
         "liveRegionName": region[2],
       }
       postRequest(this, api.savePersonInfo, params, (data) => {
-        if(iswork==0){
+        if (iswork == 0) {
           //无工作
           let curStep = this.data.verifyList[this.data.currentIndex + 1]
           this.setData({
             currentIndex: this.data.currentIndex + 1,
             step: curStep,
-          },()=>{
+          }, () => {
             this.calculateNext();
           });
-        }else{
+        } else {
           this.calculateNext();
         }
       })
     } else if (this.data.step === ItemIndexMap.workingInfo) {
-      let {workName,propertiesData,scaleData,workyearData,position,incomeData,workRegion,workCode,workAddress,workPhone} = this.data
+      let { workName, propertiesData, scaleData, workyearData, position, incomeData, workRegion, workCode, workAddress, workPhone } = this.data
       //工作信息所有非必填
       let params = {
         "companyCity": workCode[1],
         "companyCityName": workRegion[1],
-        "companyDetail":workAddress,
+        "companyDetail": workAddress,
         "companyName": workName,
         "companyProvince": workCode[0],
         "companyProvinceName": workRegion[0],
-        "companyRegion":  workCode[2],
+        "companyRegion": workCode[2],
         "companyRegionName": workRegion[2],
         "datumTypeIncomeId": incomeData.id,
         "datumTypeWorktimeId": workyearData.id,
@@ -478,9 +498,13 @@ Page({
         this.calculateNext();
       })
     } else if (this.data.step === ItemIndexMap.specialInfo) {
+     if(this.data.imgInfo){
       this.calculateNext()
+     }else{
+       showToast('请完善影像资料')
+     }
     }
-  
+
   },
   lasttap: function () {
     let curStep = this.data.verifyList[this.data.currentIndex - 1]
@@ -488,6 +512,10 @@ Page({
       currentIndex: this.data.currentIndex - 1,
       step: curStep,
       progress: this.getProgress(curStep)
+    },()=>{
+      // if (this.data.step === ItemIndexMap.specialInfo){
+      //     this.getImageInfo()
+      // }
     })
   },
   startFace: function () {
@@ -581,9 +609,12 @@ Page({
 
   },
   // 跳转到操作页
-  bindView(e){
+  bindView(e) {
     navigateTo(e.currentTarget.dataset.url);
   },
+  onShow:function(){
+    this.getImageInfo()
+  }
 
 
 })

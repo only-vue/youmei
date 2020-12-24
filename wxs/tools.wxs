@@ -1,5 +1,5 @@
 
- /**
+/**
 * 还款状态
 * value 状态值
 */
@@ -29,6 +29,8 @@ var repayImg = function getRepayState(showStatus) {
     case "8"://8：已取消
       result = '../assets/images/resource_image_check_pending.png'
       break
+    default:
+      result = ''
   }
   return result
 }

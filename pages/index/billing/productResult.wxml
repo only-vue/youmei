@@ -1,0 +1,11 @@
+<!--pages/index/billing/productResult.wxml-->
+<view>
+  <text class="title">结果详情</text>
+  <view class="container">
+      <image class="product-img" src="../../../assets/images/src_pages_home_productapplyresult_wait.png" />
+      <view>等待审核</view>
+      <view class="text-hint">审核结果将以短信的方式告知</view>
+
+      <view class="next" bindtap="next">返回首页</view>
+  </view>
+</view>
