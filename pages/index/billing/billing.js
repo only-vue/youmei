@@ -20,7 +20,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    step: 1,
+    step: 4,
     currentIndex: 0,
     progress: 0,
     verifyList: [],//需验证列表

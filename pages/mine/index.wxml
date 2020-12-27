@@ -23,12 +23,7 @@
          </view>
          <view class="content">我的订单</view>
       </view>
-       <view class="item" bindtap="bindView" data-url="/pages/mine/card/index">
-         <view class="icon">
-           <image src="../../assets/images/mine_2.jpg" />
-         </view>
-         <view class="content">银行卡管理</view>
-      </view>
+       
    </view>
    <view class="form-btns" bindtap="bindLogin">
    退出

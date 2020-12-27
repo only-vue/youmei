@@ -9,15 +9,10 @@
   </view>
 
   <view class="bottom-panel">
-      <view class="item" bindtap="bindView" data-url="{{'/pages/mine/mybill/applyData?loanOrderUuid='+loanOrderUuid}}">
-         <view class="content">查看贷款资料</view>
-         <view class="icon">
-           <image src="../../../assets/images/src_pages_mine_mybill_grey_arrow.png" />
-         </view>
-      </view>
+     
       <view class="item" bindtap="bindView" data-url="/pages/mine/bill/index">
          
-         <view class="content">查看还款计划</view>
+         <view class="content">查看服务计划</view>
          <view class="icon">
            <image src="../../../assets/images/src_pages_mine_mybill_grey_arrow.png" />
          </view>

@@ -1,9 +1,7 @@
 <!--pages/mine/bill/repayment.wxml-->
 <view class="container">
-  <view class="title">立即还款</view>
+  <view class="title">立即HK</view>
   <view class="tips">
-     <view>请在每期最终还款日前进行还款</view>
-     <view>请主动联系平台客户或线下业务员进行还款，以免造成不必要的麻烦</view>
   </view>
   <view class="wx-title">客服微信</view>
   <view class="wx-content">
@@ -14,7 +12,7 @@
       <image src="{{imgurl}}" data-url="{{imgurl}}" bindlongpress="saveImage" />
       <view>长按保存二维码图片至手机</view>
   </view>
-   <!--弹框立即还款 -->
+   <!--弹框 -->
    <view class="popup-warp" wx:if="{{replayStatus || bankStatus}}">
     <view class="popup-panel" wx:if="{{replayStatus}}">
       <view class="popup-title">确认还款</view>
@@ -42,7 +40,7 @@
                         <block wx:else>请选择银行卡</block> 
                         ></view>
                  </view>
-                 <view class="form-btns" bindtap="bindRepaySubmit">立即还款</view>
+                 <view class="form-btns" bindtap="bindRepaySubmit">立即HK</view>
               </view>
           </view>
       </view>

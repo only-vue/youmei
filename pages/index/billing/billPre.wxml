@@ -26,7 +26,7 @@
     <myPicker label="服务次数" placeholder="选择服务次数" list="{{loanList}}" value="{{selectedFQItem.prePeriod}}"
       bind:inputClick="serviceClick" itemkey="{{'prePeriod'}}" showDialog="{{showListService}}"
       bindmyPickerChange="servicePickerChange" bindmyPickerHide="pickerHide" />
-    <myPicker label="首期还款时间" placeholder="请选择" list="{{dateList}}" value="{{selectDate.date}}"
+    <myPicker label="首次服务时间" placeholder="请选择" list="{{dateList}}" value="{{selectDate.date}}"
       bind:inputClick="dateClick" itemkey="{{'date'}}" showDialog="{{showListDate}}"
       bindmyPickerChange="datePickerChange" bindmyPickerHide="datepickerHide" />
   </view>
