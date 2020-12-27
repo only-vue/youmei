@@ -19,8 +19,8 @@
      <view bindtap='freeBack' class="free-button free-dialog-submit">确定</view></view> -->
  
      <scroll-view class='free-radios' scroll-y='true'>
-      <view class="free-radio" wx:for="{{list}}" wx:key="id" catchtap="radioChange" data-data='{{item}}' data-id="{{index}}" style="{{index==picker_id?'color:#333;':'color:#333;'}}">
-       <view class="card-item" bindtap='freeBack'>
+      <view class="free-radio" wx:for="{{list}}" wx:key="id"  style="{{index==picker_id?'color:#333;':'color:#333;'}}">
+       <view class="card-item" bindtap='freeBack' data-data='{{item}}' data-id="{{index}}">
         <image class="add-label-icon"  src="{{errImg?errImg:item.bankImageUrl}}" binderror="cardImgErr"/>
         <text class="free-text">{{item.bankName+'('+item.bankCardNo+')'}}</text>
         <image wx:if="{{index==picker_id}}" class="close-icon"  src="../../assets/images/src_pages_home_productapply_bankcardselect_select02.png" />

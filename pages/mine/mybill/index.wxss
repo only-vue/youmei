@@ -48,14 +48,14 @@ page{
   padding-right: 15rpx;
   padding-bottom: 3rpx;
 }
-/* .certification{
+.goodsCheck{
   border-radius: 36rpx;  
   padding-left: 15rpx;
   padding-right: 15rpx;
   padding-bottom: 3rpx;
   margin-left: 20rpx;
   background: -webkit-linear-gradient(left,pink,lightblue,skyblue);
-} */
+}
 .empty-view{
  color: #999;
  display: flex;

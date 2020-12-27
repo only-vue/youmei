@@ -18,7 +18,9 @@
           <text>{{item.date}}</text>
           <view class="bottom-layout">
             <view class="give-up" catchtap="giveUp" data-data="{{item}}" >放弃申请</view>
-            
+            <!-- {data.signState !== "sign_again" && data.takegoodsCheck === 'takegoods_check_pending'//需要确认收货 -->
+            <view wx:if="{{item.signState !== 'sign_again' && item.takegoodsCheck == 'takegoods_check_pending'}}" 
+            class="goodsCheck" catchtap="goodsCheck" data-data="{{item}}" >确认收货</view>
           </view>
        </view>
       </view></scroll-view>

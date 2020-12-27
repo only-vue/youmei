@@ -32,7 +32,7 @@ Page({
         })
       }else{
         this.setData({
-          dataList: []
+          dataList: undefined
         })
       }
 
@@ -49,7 +49,15 @@ Page({
     postRequest(this, api.renounceApplication, params, (data) => {
       this.getList()
     })
+  },
+  goodsCheck:function(e){
+    let data = e.currentTarget.dataset.data
+    let params = {
+      "contractUuid": data.loanOrderUuid
+    }
+    postRequest(this, api.takeGoods, params, (data) => {
+      this.getList()
+    })
   }
-
 
 })

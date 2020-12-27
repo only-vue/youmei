@@ -20,7 +20,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    step: 7,
+    step: 1,
     currentIndex: 0,
     progress: 0,
     verifyList: [],//需验证列表
@@ -150,6 +150,15 @@ Page({
       })
     })
   },
+  bankClick: function () {
+    this.getBankCardInfo();
+  },
+  bankChange: function (event) {
+    let bankInfo = event.detail.value
+    this.setData({
+      bankInfo: bankInfo
+    })
+  },
   //第五步，基本信息
   getNewestPersonInfo: function () {
     postRequest(this, api.getNewestPersonInfo, {}, (data) => {
@@ -217,15 +226,7 @@ Page({
     })
   },
 
-  bankClick: function () {
-    this.getBankCardInfo();
-  },
-  bankChange: function (event) {
-    let bankInfo = event.detail.value
-    this.setData({
-      bankInfo: bankInfo
-    })
-  },
+
   tapwork: function (e) {
     this.setData({
       iswork: e.currentTarget.dataset.work

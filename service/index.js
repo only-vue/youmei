@@ -43,6 +43,6 @@ export const api = {
   saveContractImages: 'api/78dk/app/process/saveContractImages', //保存影像资料
   repayPlanCalculator: 'api/78dk/app/process/repayPlanCalculator', //计算费用 首期还款时间
   submitApply: 'api/78dk/app/process/submitApply', //提交订单
-  // getStoreAndProduct: 'api/78dk/app/process/getStoreAndProduct', //
-  // getStoreAndProduct: 'api/78dk/app/process/getStoreAndProduct', //
+  getTakeGoodsContent: 'api/78dk/app/perCenter/getTakeGoodsContent', //
+  takeGoods: 'api/78dk/app/perCenter/takeGoods', //收货
 }
