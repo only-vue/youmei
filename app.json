@@ -1,11 +1,8 @@
 {
   "pages": [
-    "pages/mine/mybill/index",
-
     "pages/index/index",
-
+    "pages/mine/mybill/index",
     "pages/index/billing/billPre",
-
     "pages/index/billing/billing",
     "pages/index/billing/productResult",
     "pages/index/billing/imageInfo",

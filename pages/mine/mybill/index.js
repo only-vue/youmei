@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    dataList: undefined
+    dataList: undefined,
+    isShowModal:false,
   },
 
   /**
@@ -50,10 +51,25 @@ Page({
       this.getList()
     })
   },
-  goodsCheck:function(e){
-    let data = e.currentTarget.dataset.data
+  getTakeGoodsContent:function(e){
+    let selectedData = e.currentTarget.dataset.data
     let params = {
-      "contractUuid": data.loanOrderUuid
+      "contractUuid": selectedData.loanOrderUuid
+    }
+    postRequest(this, api.getTakeGoodsContent, params, (data) => {
+      this.setData({
+        isShowModal:true,
+        receivingAgreementInfo:data,
+        selectedData:selectedData
+      })
+    })
+  },
+  onTakeGoods:function(){
+    this.goodsCheck()
+  },
+  goodsCheck:function(){
+    let params = {
+      "contractUuid": this.data.selectedData.loanOrderUuid
     }
     postRequest(this, api.takeGoods, params, (data) => {
       this.getList()
