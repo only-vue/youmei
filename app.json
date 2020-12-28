@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/mine/bill/index",
     "pages/user/login",
     "pages/index/index",
     "pages/mine/mybill/index",
@@ -11,7 +10,7 @@
     "pages/mine/mybill/applyData",
     "pages/mine/mybill/billDetail",
     "pages/mine/index",
-    
+    "pages/mine/bill/index",
     "pages/mine/bill/allBill",
     "pages/mine/bill/detail",
     "pages/mine/bill/repayment",

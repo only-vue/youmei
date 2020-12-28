@@ -48,7 +48,8 @@ Page({
           iMeiId:res.model
         }
         postRequest(this, api.repayBillOnline, params, (data) => {
-          
+           let token=data.gatewayUrl.split('=')[1];
+           navigateTo(`/pages/mine/bill/pay?token=${token}`);
         })    
       }
     })
