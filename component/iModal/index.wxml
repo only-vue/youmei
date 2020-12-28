@@ -1,0 +1,44 @@
+<!--component/iModal/index.wxml-->
+
+<view wx:if='{{isShow}}'>
+  <view class='mask_layer' bindtap='modal_click_Hidden' />
+  <view class='modal_box'>
+    <view class="title">商品/服务交付确认书</view>
+    <view class='content'>
+      <text class="color-black">本人（又称“买方”）</text>
+      <view class="underline">{{receivingAgreementInfo.name}}</view>
+      <view class="color-black">身份证件号码：</view>
+      <view class="underline">{{receivingAgreementInfo.idcardNumber}}</view>
+      <view class="paragraph">
+        确认自己已通过<text class="color-black underline">四川悟能之背信息科技有限公司(以下简称“悟能之背”)</text>
+        的“悠美”平台向悠美的合作商户赊购了<text class="color-black font-bold">医美服务</text>
+        从而商户享有对本人的应收账款，同时本人认可并同意商户通过“悠美”平台将对本人的应收账款所有权转让给辽宁亿顺承商业保理有限公司，（以下简称“亿顺承保理”）以实现保理融资，亿顺承保理将应收账款受让款支付给商户，本人即按照在“悠美”平台申请的分期数按期向亿顺承保理偿付。
+      </view>
+      <view class="paragraph">
+        本人已向悟能之背申请了分期偿付服务，本人承诺以按时、足额向辽宁亿顺承商业保理有限公司履行偿付义务。
+        <text class="color-black font-bold">现本人对商户已向本人提供医美服务等信息作出如下确认：</text>
+      </view>
+      <view class="margin-top">商品/服务信息</view>
+      <view class="color-black">商户名称：{{receivingAgreementInfo.merchantName}}</view>
+      <view class="color-black">商品或服务名称：{{receivingAgreementInfo.productName}}</view>
+      <view class="color-black">商品或服务的价款总额：￥
+        <text
+          class="color-black underline">{{receivingAgreementInfo.loanAmount}}</text>元（大写:{{receivingAgreementInfo.loanAmountHZ}}
+      </view>）
+      <view class="margin-top">买方确认信息</view>
+      <text class="color-black font-bold">本人确认自己已向上述商户购买了医美服务</text>
+      ,本人已经接受商户向本人提供的医美服务。
+      <text class="color-black font-bold">本人确认已仔细阅读、充分理解，并完全同意本确认书中的全部内容。</text>
+      <view class="color-black">确认人（签字）:{{receivingAgreementInfo.name}}</view>
+      <view class="color-black">确认时间：
+        <text>{{receivingAgreementInfo.takeGoodsYear}}</text>年
+        <text>{{receivingAgreementInfo.takeGoodsMonth}}</text>月
+        <text>{{receivingAgreementInfo.takeGoodsDay}}</text>日
+      </view>
+    </view>
+    <view class='btn1'>
+      <text bindtap='close' class='close'>取消</text>
+      <text bindtap='sure' class='sure'>确认收货</text>
+    </view>
+  </view>
+</view>

@@ -192,10 +192,10 @@
   background-color: white;
   padding-left: 20rpx;
   padding-right: 20rpx;
-  padding-top: 3rpx;
+  line-height: 40rpx;
   margin-left: 30rpx;
   font-size: 20rpx;
-  text-align: center;
+  text-align: center; 
   color: yellowgreen;
 }
 .image-item .image-info-complete{
@@ -203,9 +203,9 @@
   background-color: #eee;
   padding-left: 20rpx;
   padding-right: 20rpx;
-  padding-top: 3rpx;
   margin-left: 30rpx;
   font-size: 20rpx;
+  line-height: 40rpx;
   text-align: center;
   color: yellowgreen;
 }

@@ -5,14 +5,14 @@ import { navigateTo,formatTime } from '../../../utils/util.js'
 import { checkNull } from '../../../utils/rule.js'
 Page({
   data: {
-    replayStatus:false, //还款弹框状态
-    bankStatus:false, //选择银行弹框状态
+    replayStatus:false, //弹框状态
+    bankStatus:false, //选择弹框状态
     topObj:{},//顶部信息
-    list:[],//账单列表
-    rows:{},//账单选中行内容
-    bankList:[],//银行啦列表
-    bankRows:{userBankCardUuid:''},//银行卡选中行内容
-    billDate:null,//账单日期
+    list:[],//列表
+    rows:{},//选中行内容
+    bankList:[],//列表
+    bankRows:{userBankCardUuid:''},//卡选中行内容
+    billDate:null,//日期
     page:1,//页码
     pageSize:10 //每页数
   },
@@ -24,7 +24,7 @@ Page({
     this.getBankCardInfo();
    //  this.getBillPage();
   },
-  //获取账单信息
+  //获取服务信息
   getMyBill(){
     postRequest(this, api.getMyBill, {billDate:this.data.billDate}, (data) => {
       let res = data;
@@ -39,7 +39,7 @@ Page({
       })
     })
   },
-  //获取银行卡列表
+  //获取卡列表
   getBankCardInfo(){
     postRequest(this, api.getBankCardInfo, {}, (data) => {
       data.forEach(item=>{
@@ -50,7 +50,7 @@ Page({
       })
    })
   },
-  //获取账单列表
+  //获取列表
   getBillPage(){
     let params={
       pageCurrent:this.data.page,
@@ -62,9 +62,9 @@ Page({
       })
     })
   },
-  //立即还款提交
+  //HK
   bindRepaySubmit(){
-    if (!checkNull(this.data.bankRows.userBankCardUuid, '请选择银行卡')) {
+    if (!checkNull(this.data.bankRows.userBankCardUuid, '请选择卡')) {
       return false;
     }
     wx.getSystemInfo({
@@ -85,17 +85,17 @@ Page({
     })
     
   },
-  //添加银行卡提交
+  //添加卡提交
   bindBankSubmit(){
     navigateTo("/pages/mine/card/cardForm");
   },
-  //选择全部账单月份
+  //选择月份
   bindMonthChange(e){
     this.setData({
       index: e.detail.value
     })
   },
-  //跳转全部账单
+  //跳转全部服务计划
   bindAllBill(){
     navigateTo("/pages/mine/bill/allBill");
   },
@@ -104,7 +104,7 @@ Page({
     let id=e.currentTarget.dataset.id;
     navigateTo(`/pages/mine/bill/detail?id=${id}`);
   },
-  //开启立即还款弹框
+  //弹框
   openReplay(e){
     this.setData({
       replayStatus: true,
@@ -118,14 +118,14 @@ Page({
       bankStatus: false
     })
   },
-  //开启银行卡选择
+  //开启卡选择
   openBank(){
     this.setData({
       replayStatus: false,
       bankStatus: true
     })
   },
-  //选择银行卡
+  //选择卡
   bindSelBank(e){
     this.setData({
       bankRows:e.currentTarget.dataset.bankrows,

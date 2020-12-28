@@ -11,9 +11,12 @@ Page({
     showListService:false,
     showListDate:false,
     // loanAmount: 100000,
+    isexpand:false,
     // productDetailUuid:'a0f7ff136b5348daa57816721795d71d',
     // storeUuid:"5565faa3039c400e98c1dea560e88df9",
-    // productDetailConfigUuid:'e7d24f23ec934874a3e15f5c8a8f9661'
+    // productDetailConfigUuid:'e7d24f23ec934874a3e15f5c8a8f9661',
+    // projectName:'ddsdsd'
+
   },
   /**
    * 生命周期函数--监听页面加载
@@ -93,7 +96,6 @@ Page({
       showListService: false,
       selectedFQItem:value
     })
-    console.log(value)
     this.repayPlanCalculator(value.productDetailConfigUuid)
   },
   pickerHide:function(){
@@ -108,10 +110,33 @@ Page({
   },
   datePickerChange:function(event){
     let { value } = event.detail
+    let date= this.getYearMonth()+"/"+ ('00'+value.date).slice(-2)
+    console.log(date)
     this.setData({
-      selectDate:value
+      selectDate:{
+        date:date,
+      },
+      apiDate:value.date
     })
    
+  },
+  expandAll:function(){
+   
+    let list = !this.data.isexpand?this.data.repayPlanList:this.data.repayPlanList.slice(0,3)
+      this.setData({
+        isexpand:!this.data.isexpand,
+        repayPlan:list
+      })
+  },
+  loanAmountChange:function(e){
+    this.setData({
+      loanAmount:e.detail.value,
+      repayPlan:undefined,
+      repayPlanList:undefined,
+      isexpand:false,
+      selectDate:undefined,
+      selectedFQItem:undefined,
+    })
   },
   datepickerHide:function(){
     this.setData({
@@ -125,32 +150,47 @@ Page({
       loanAmount:this.data.loanAmount,
       productDetailUuid:this.data.productDetailUuid,
       storeUuid:this.data.storeUuid,
+      // repaymentDate:1,
       productDetailConfigUuid:productDetailConfigUuid,
     }
     postRequest(this, api.repayPlanCalculator, params, (data) => {
-     
       this.setData({
-        repayPlan:data
+        repayPlan:data.slice(0,3),
+        repayPlanList:data
       })
     })
   },
   next:function(){
     this.submitApply()
   },
-  //费率
   submitApply: function () {
-    let {loanAmount,productDetailUuid,selectDate} = this.data
-    if(!selectDate){
+    let {loanAmount,productDetailUuid,apiDate} = this.data
+    if(!apiDate){
       showToast('请选择首期还款时间')
       return false
     }
     let params = {
       loanAmount:loanAmount,
-      repaymentDate:selectDate.date,
+      repaymentDate:apiDate,
       productDetailUuid:productDetailUuid,
     }
     postRequest(this, api.submitApply, params, (data) => {
       navigateTo('productResult')
     })
   },
+  //获取下月年月时间
+  getYearMonth:function () {
+    let myDate = new Date();
+    let tYear = myDate.getFullYear();
+    let tMonth = myDate.getMonth()+2;//下月
+    if (tMonth == 13) {
+        tMonth=1;
+        tYear+=1;
+    }
+    let m= tMonth.toString();
+    if (m.length == 1) {
+        m = "0" + m;
+    }
+    return tYear +'/'+ m;
+},
 })

@@ -21,7 +21,7 @@
   <labelInput wx:if="{{preHandlingFee}}" class="formInput" label="每次服务费" bind:inputChange="projectNameChange" placeholder ="" disabled="{{true}}" value="{{preHandlingFee}}"/>
   <view class="formInput packge">
     <switch class="switch" checked="{{switch1Checked}}" bindchange="switch1Change"/>
-    <text >还款优惠包</text>
+    <text>优惠包</text>
   </view>
   <view class="next" bindtap="nexttap">
     下一步

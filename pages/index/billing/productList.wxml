@@ -32,7 +32,7 @@
       <view class="item-content">
         <view>
           <text class='item-title'>{{item.name}}</text>
-          <text class="big-gift" bindtap="bigGift" wx:if="{{item.repayDiscountPackageShow === 'show_state_yes'}}">大礼包说明>></text>
+          
         </view>
         <view class="btn_get" bindtap="btnGet" data-product="{{item}}"> 立即领取 </view>
       </view>
@@ -40,67 +40,5 @@
     </view>
 
   </view>
-<!--还款优惠包-->
-  <view class="modals modals-bottom-dialog" hidden="{{hideModal}}">
-    <view class="modals-cancel" bindtap="hideModal"></view>
-    <view class="bottom-dialog-body bottom-pos" animation="{{animationData}}">
-      <view class="modal-title">大礼包说明
-        <image class="modal-close" bindtap="hideModal" src="../../../assets/images/src_pages_home_productlist_close.png" />
-      </view>
-      <view class="modal-content">
-        <view class="gift-title">购买大礼包产品，您可以获得以下优惠</view>
 
-        <view class="gift-title2">
-          <text class="gift-title2-order">1</text>
-           最长可分24期
-        </view>
-        <view class="gift-item-info">原政策：1-12期</view>
-        <view class="gift-title2">
-          <text class="gift-title2-order">2</text>
-           还款时期自由选择:
-        </view>
-        <view class="gift-item-info">可自由选择下月1-28日进行还款,第一期最长还款不超过40天(如今日为10号,则第一期还款日最多为下月20号;如今日为28号,则最多只可选择下月28号)</view>
-        <view class="gift-title2">
-          <text class="gift-title2-order">3</text>
-           预期两天内可豁免,不产生任何违约金
-        </view>
-        <view class="gift-item-info">原政策：没有任何豁免期</view>
-        <view class="gift-title margin-top20">大礼包价格</view>
-        <view class="table-content margin-top20">
-          <view class="table-title table-color">
-              <view class="table-title-item title-color">分期金额</view>
-              <view class="table-title-item title-color">12期以内(包含)</view>
-              <view class="table-title-item title-color">12期以上</view>
-          </view>
-          <view class="table-title">
-              <view class="table-title-item">2万以下(含2万)</view>
-              <view class="table-title-item">199</view>
-              <view class="table-title-item">299</view>
-          </view>
-          <view class="table-title table-color">
-              <view class="table-title-item">2-3万(含3万)</view>
-              <view class="table-title-item">299</view>
-              <view class="table-title-item">399</view>
-          </view>
-          <view class="table-title">
-              <view class="table-title-item">3-4万(含4万)</view>
-              <view class="table-title-item">399</view>
-              <view class="table-title-item">499</view>
-          </view>
-          <view class="table-title table-color">
-              <view class="table-title-item">4-7万(含7万)</view>
-              <view class="table-title-item">499</view>
-              <view class="table-title-item">599</view>
-          </view>
-          <view class="table-title">
-              <view class="table-title-item">7万以上</view>
-              <view class="table-title-item">699</view>
-              <view class="table-title-item">799</view>
-          </view>
-        </view>
-        <view class=" margin-top20">大礼包不支持线下购买哦</view>
-      </view>
-     
-    </view>
-  </view>
 </view>

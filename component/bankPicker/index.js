@@ -1,5 +1,5 @@
 // component/MyPicker/index.js
-
+import { navigateTo} from '../../utils/util.js'
 Component({
   /**
    * 组件的属性列表
@@ -22,33 +22,27 @@ Component({
   data: {
     pickerValue:'',
     errImg:'',
-    picker_id:0
   },
   /**
    * 组件的方法列表
    */
   methods: {
-    radioChange: function (e) {
+    
+    myPickerHide() {
+      this.triggerEvent('myPickerHide', '');
+    },
+    freeBack: function (e) {
       let radioChange_value = e.currentTarget.dataset.data;
       let picker_id = e.currentTarget.dataset.id
       this.setData({
         radioChange_value, picker_id
       })
-      // console.log('value值为：', radioChange_value, 'picker_id值为：', picker_id)
-    },
-    myPickerHide() {
-      this.triggerEvent('myPickerHide', '');
-    },
-    freeBack: function () {
-      if(!this.data.radioChange_value){
-        return
-      }
       // var that = this
       this.triggerEvent('myPickerHide', '');
       // console.log('radioChange_value', this.data.radioChange_value)
       this.triggerEvent('myPickerChange', {
-        value:this.data.radioChange_value,
-        position:this.data.picker_id
+        value:radioChange_value,
+        position:picker_id
       });
     },
     onClick:function(){
@@ -62,7 +56,8 @@ Component({
       })
     },
     addCard:function(){
-      
+      this.myPickerHide()
+      navigateTo("/pages/mine/card/cardForm")
     }
   }
 })

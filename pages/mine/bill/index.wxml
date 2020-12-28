@@ -9,14 +9,14 @@
              <view class="time">{{topObj.lastPayDate}}</view>
              <view class="picker-warp">
                 <view class="picker" bindtap="bindAllBill">
-                  全部账单
+                  全部服务计划
                 </view>
              </view>
           </view>
           <view class="other">
-              <view class="tag">剩余待还（元）</view>
+              <view class="tag">剩余金额（元）</view>
               <view class="money">{{topObj.remainPayAmount}}</view>
-              <view class="tips">你已逾期{{topObj.overdueDay}}天，请尽快还款</view>
+              
           </view>
        </view>
     </view>
@@ -37,7 +37,7 @@
              </view>
              <view class="right">
                <view class="money">¥ <text>{{item.remainPayAmount}}</text></view>
-               <block wx:if="{{item.payStateNopay==='at_once'}}"> <view class="btns paywait" catchtap="openReplay" data-rows="{{item}}">立即还款</view></block>
+               <block wx:if="{{item.payStateNopay==='at_once'}}"> <view class="btns paywait" catchtap="openReplay" data-rows="{{item}}">立即HK</view></block>
                <block wx:if="{{item.payStateNopay==='doing'}}"> <view class="btns paying">还款中</view></block>
                <block wx:if="{{item.payStateNopay==='no_pay'}}"> <view class="btns">已还清</view></block>
              </view>
@@ -45,10 +45,10 @@
        </view>
     </view>
   </view>
-  <!--弹框立即还款 -->
+  <!--弹框HK -->
   <view class="popup-warp" wx:if="{{replayStatus || bankStatus}}">
     <view class="popup-panel" wx:if="{{replayStatus}}">
-      <view class="popup-title">确认还款</view>
+      <view class="popup-title">确认</view>
       <view class="popup-close" catchtap="onClose">×</view>
       <view class="popup-content">
           <view class="replay-warp">
@@ -73,7 +73,7 @@
                        <block wx:else>请选择银行卡</block> >
                       </view>
                  </view>
-                 <view class="form-btns" catchtap="bindRepaySubmit">立即还款</view>
+                 <view class="form-btns" catchtap="bindRepaySubmit">立即完成HK</view>
               </view>
           </view>
       </view>

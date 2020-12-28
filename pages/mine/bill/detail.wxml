@@ -45,11 +45,11 @@
   <block wx:else>
       <block wx:if="{{obj.payStateNopay==='at_once'}}">
          <view class="form-btns" bindtap="bindSubmit">
-            立即还款
+            立即HK
          </view>
       </block>
       <block wx:else>
-         <view class="form-btns">还款中</view>
+         <view class="form-btns">HKing</view>
       </block>
   </block>
 

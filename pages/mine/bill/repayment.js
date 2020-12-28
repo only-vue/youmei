@@ -32,9 +32,9 @@ Page({
       })
    })
   },
-  //立即还款
+  //立即HK
   bindRepaySubmit(){
-    if (!checkNull(this.data.bankRows.userBankCardUuid, '请选择银行卡')) {
+    if (!checkNull(this.data.bankRows.userBankCardUuid, '请选择卡')) {
       return false;
     }
     wx.getSystemInfo({
@@ -53,11 +53,11 @@ Page({
       }
     })
   },
-  //添加银行卡提交
+  //添加卡提交
   bindBankSubmit(){
     navigateTo("/pages/mine/card/cardForm");
   },
-  //开启立即还款弹框
+  //hk
   openReplay(){
     this.setData({
       replayStatus: true

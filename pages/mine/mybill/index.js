@@ -8,7 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    dataList: undefined
+    dataList: undefined,
+    isShowModal:false,
   },
 
   /**
@@ -32,7 +33,7 @@ Page({
         })
       }else{
         this.setData({
-          dataList: []
+          dataList: undefined
         })
       }
 
@@ -47,6 +48,30 @@ Page({
       "loanOrderUuid": data.loanOrderUuid
     }
     postRequest(this, api.renounceApplication, params, (data) => {
+      this.getList()
+    })
+  },
+  getTakeGoodsContent:function(e){
+    let selectedData = e.currentTarget.dataset.data
+    let params = {
+      "contractUuid": selectedData.loanOrderUuid
+    }
+    postRequest(this, api.getTakeGoodsContent, params, (data) => {
+      this.setData({
+        isShowModal:true,
+        receivingAgreementInfo:data,
+        selectedData:selectedData
+      })
+    })
+  },
+  onTakeGoods:function(){
+    this.goodsCheck()
+  },
+  goodsCheck:function(){
+    let params = {
+      "contractUuid": this.data.selectedData.loanOrderUuid
+    }
+    postRequest(this, api.takeGoods, params, (data) => {
       this.getList()
     })
   }

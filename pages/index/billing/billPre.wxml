@@ -17,8 +17,8 @@
   </view>
   <view class="line10"></view>
   <view class="project-name">
-    <text>{{product.name}}</text>
-    <text>{{projectName}}</text>
+    <view>{{product.name}}</view>
+    <view>{{projectName}}</view>
   </view>
   <view class="line20"></view>
   <view class="formInput">
@@ -26,7 +26,7 @@
     <myPicker label="服务次数" placeholder="选择服务次数" list="{{loanList}}" value="{{selectedFQItem.prePeriod}}"
       bind:inputClick="serviceClick" itemkey="{{'prePeriod'}}" showDialog="{{showListService}}"
       bindmyPickerChange="servicePickerChange" bindmyPickerHide="pickerHide" />
-    <myPicker label="首期还款时间" placeholder="请选择" list="{{dateList}}" value="{{selectDate.date}}"
+    <myPicker label="首次服务时间" placeholder="请选择" list="{{dateList}}" value="{{selectDate.date}}"
       bind:inputClick="dateClick" itemkey="{{'date'}}" showDialog="{{showListDate}}"
       bindmyPickerChange="datePickerChange" bindmyPickerHide="datepickerHide" />
   </view>
@@ -53,11 +53,11 @@
       <view class="item-label2">含手续费</view>
     </view>
     <view class="space"></view>
-    <view>展开全部
+    <view wx:if="{{repayPlanList.length>3}}" bindtap="expandAll">{{isexpand?'收起全部':'展开全部'}}
       <image class="icon_expand" src="../../../assets/images/src_pages_home_productapply_baseinfo_spread.png" />
     </view>
   </view>
-  <view class="free-radio" wx:for="{{repayPlan}}" wx:key="id" catchtap="radioChange" data-data='{{item}}' data-id="{{index}}">
+  <view class="free-radio" wx:for="{{(repayPlan)}}" wx:key="id" catchtap="radioChange" data-data='{{item}}' data-id="{{index}}">
     <view class="repayPlan-item">
       <text class="text-periods">{{index+1}}</text>
       <view class="item-loan">

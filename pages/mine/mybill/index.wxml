@@ -17,8 +17,9 @@
           </view>
           <text>{{item.date}}</text>
           <view class="bottom-layout">
-            <view class="give-up" catchtap="giveUp" data-data="{{item}}" >放弃申请</view>
-            
+            <view wx:if="{{item.isCancel==1}}" class="give-up" catchtap="giveUp" data-data="{{item}}" >放弃申请</view>
+            <view wx:if="{{item.signState !== 'sign_again' && item.takegoodsCheck == 'takegoods_check_pending'}}"
+            class="goodsCheck" catchtap="getTakeGoodsContent" data-data="{{item}}" >确认收货</view>
           </view>
        </view>
       </view></scroll-view>
@@ -28,3 +29,5 @@
   <image  src="../../../assets/images/src_components_emptydataview_empty_data.png" />
   <view>暂无订单</view>
 </view>
+<iModal isShow="{{isShowModal}}" receivingAgreementInfo="{{receivingAgreementInfo}}"  bindSuccess='onTakeGoods' ></iModal>
+

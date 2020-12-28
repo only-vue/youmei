@@ -23,7 +23,7 @@ Page({
          }) 
     })
   },
-  //立即还款
+  //立即HK
   bindSubmit(){
     setSession('objData', JSON.stringify(this.data.obj));
     navigateTo(`/pages/mine/bill/repayment?id=${this.data.id}`);
