@@ -1,0 +1,4 @@
+<!--pages/mine/bill/pay.wxml-->
+<view class="container">
+ <web-view src="{{payUrl}}"></web-view>
+</view>

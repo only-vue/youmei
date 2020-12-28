@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/mine/bill/index",
+    "pages/user/login",
     "pages/index/index",
     "pages/index/billing/productResult",
     "pages/index/billing/billPre",
@@ -9,14 +11,14 @@
     "pages/mine/mybill/billDetail",
     "pages/mine/mybill/index",
     "pages/mine/index",
-    "pages/mine/bill/index",
+    
     "pages/mine/bill/allBill",
     "pages/mine/bill/detail",
     "pages/mine/bill/repayment",
+    "pages/mine/bill/pay",
     "pages/mine/card/index",
     "pages/mine/card/cardForm",
     "pages/mine/card/bank",
-    "pages/user/login",
     "pages/user/phoneLogin",
     "pages/user/forget",
     "pages/user/updataPassword",
