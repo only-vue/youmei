@@ -351,14 +351,16 @@ Page({
       }, () => {
         if (this.data.step === ItemIndexMap.baseInfo) {
           this.getNewestPersonInfo();
-        } else if (this.data.step === ItemIndexMap.workingInfo) {
+        } else if (this.data.step === ItemIndexMap.handIdCardPick) {
+          this.getQiniuToken();
+        }else if (this.data.step === ItemIndexMap.workingInfo) {
           this.getNewestWorkInfo();
         } else if (this.data.step === ItemIndexMap.specialInfo) {
           this.getImageInfo();
         }
       })
     }
-
+    
 
   },
   //点击下一步
@@ -379,8 +381,8 @@ Page({
         "oppositeNote": this.data.idCardInfo.oppositeNote,
       }
       postRequest(this, api.saveIdCardInfo, params, (data) => {
-        // this.calculateNext();
-        this.getQiniuToken();
+        this.calculateNext();
+        
       })
       this.calculateNext();
     } else if (this.data.step === ItemIndexMap.handIdCardPick) {
@@ -395,11 +397,12 @@ Page({
         // console.log('file url is: ' + res.fileURL);
         this.saveHoldKey(res.key)
       }, (error) => {
+        showToast('error: ' + JSON.stringify(error))
         console.error('error: ' + JSON.stringify(error));
       }, {
         region: 'SCN',	//华南
         // key: 'customFileName.jpg',
-        // domain: 'http://[yourBucketId].bkt.clouddn.com', // 
+        domain: 'https://umas.qiniu.wunzb.cn', // 
         uptoken: this.data.uptoken, // 由其他程序生成七牛 uptoken
       },
         (progress) => {
