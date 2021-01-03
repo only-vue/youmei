@@ -23,7 +23,7 @@
         <view class="photo-view">
           <image class="bg-img" mode="aspectFill"
             src="{{idCardInfo.oppositeUrl?idCardInfo.oppositeUrl:'../../../assets/images/src_pages_home_productapply_imgs_card_back.png'}}" />
-          <image class="add-img" src="../../../assets/images/src_pages_home_productapply_imgs_add.png" />
+          <image class="add-img" bindtap="startOpposite" src="../../../assets/images/src_pages_home_productapply_imgs_add.png" />
         </view>
         <text class="font-size-30">上传身份证反面照</text>
       </view>
@@ -33,14 +33,15 @@
     <view class="label-view margin-common">
       <view class="label-content">
         <text class="label-text">姓名</text>
-        <input class="label-input" placeholder="" value="{{idCardInfo.cardScanName}}" />
+        <input class="label-input" placeholder="" value="{{idCardInfo.cardScanName}}" bindinput="cardNameChange"/>
       </view>
       <view class="label-line"></view>
     </view>
     <view class="label-view margin-common">
       <view class="label-content">
         <text class="label-text">身份证</text>
-        <input class="label-input" placeholder="" value="{{idCardInfo.cardScanIdcardNo}}" />
+        <input class="label-input" placeholder="" value="{{idCardInfo.cardScanIdcardNo}}" maxlength="18" 
+        bindinput="cardNoChange" type="number"/>
       </view>
       <view class="label-line"></view>
     </view>

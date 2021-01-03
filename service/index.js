@@ -45,4 +45,5 @@ export const api = {
   submitApply: 'api/78dk/app/process/submitApply', //提交订单
   getTakeGoodsContent: 'api/78dk/app/perCenter/getTakeGoodsContent', //
   takeGoods: 'api/78dk/app/perCenter/takeGoods', //收货
+  getSign: 'api/78dk/app/getSign', //获取faceidsign
 }

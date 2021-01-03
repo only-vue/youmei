@@ -112,6 +112,63 @@ Page({
       })
     })
   },
+  //第一步，上传身份证
+  //获取sign
+  getSign: function () {
+    postRequest(this, api.getSign, {}, (data) => {
+      this.setData({
+        sign: data,
+      })
+    })
+  },
+  startFace: function () {
+    // this.getToken();
+    // navigateTo(`../verify/verify?token=${token}`)
+  },
+  //获取 face id token
+  getToken: function () {
+    var sign = this.getSign();
+    console.log(sign)
+    wx.request({
+      url: 'https://openapi.faceid.com/lite_ocr/v1/get_biz_token',
+      method: 'POST',
+      data: {
+        sign: sign,
+        sign_version: 'hmac_sha1',
+        capture_image: 0,//0:双面，1:人像面
+        return_url: 'https://api.megvii.com/faceid/lite/do',
+        notify_url: 'https://api.megvii.com/faceid/lite/do',
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {                       //返回结果
+        // navigateTo(`../../verify/verify?token=${token}`)
+        console.log(res.data)
+      },
+      fail(err) {
+        console.log(err)
+      },
+      complete: function (res) {
+        console.log('complete后的res数据：')
+      }
+    })
+  },
+  cardNameChange:function(e){
+    let data = this.data.idCardInfo
+    data.cardScanName = e.detail.value
+      this.setData({
+        idCardInfo:data
+      })
+  },
+  cardNoChange:function(e){
+    let data = this.data.idCardInfo
+    data.cardScanIdcardNo = e.detail.value
+      this.setData({
+        idCardInfo:data
+      })
+  },
+  
   //第二步，上传手持身份证照片
   handCard: function () {
     var that = this;
@@ -375,9 +432,9 @@ Page({
       let params = {
         "cardScanIdcardNo": this.data.idCardInfo.cardScanIdcardNo,
         "cardScanName": this.data.idCardInfo.cardScanName,
-        "frontKey": this.data.idCardInfo.frontKey,
+        "frontKey": this.data.idCardInfo.frontKey?'':'ggg.jpg',
         "frontNote": this.data.idCardInfo.frontNote,
-        "oppositeKey": this.data.idCardInfo.oppositeKey,
+        "oppositeKey": this.data.idCardInfo.oppositeKey?'':'ggg.jpg',
         "oppositeNote": this.data.idCardInfo.oppositeNote,
       }
       postRequest(this, api.saveIdCardInfo, params, (data) => {
@@ -392,9 +449,7 @@ Page({
       // 向七牛云上传
       // console.log(this.data.handCardImg)
       qiniuUploader.upload(this.data.handCardImg, (res) => {
-        // console.log(res)
-        // console.log('提示: wx.chooseImage 目前微信官方尚未开放获取原图片名功能(2020.4.22)');
-        // console.log('file url is: ' + res.fileURL);
+
         this.saveHoldKey(res.key)
       }, (error) => {
         showToast('error: ' + JSON.stringify(error))
@@ -407,8 +462,7 @@ Page({
       },
         (progress) => {
           // console.log('上传进度', progress.progress);
-          // console.log('已经上传的数据长度', progress.totalBytesSent);
-          // console.log('预期需要上传的数据总长度', progress.totalBytesExpectedToSend);
+
         }, cancelTask => {
         // that.setData({ cancelTask })
       }
@@ -430,21 +484,16 @@ Page({
       })
     } else if (this.data.step === ItemIndexMap.baseInfo) {
       let { educationData, housingData, marryData, region, code, iswork, liveDetail } = this.data
-
-      if (marryData == undefined) {
-        showToast('请选择婚姻状况')
+      if (!checkNull(marryData.id, '请选择婚姻状况')) {
         return false;
       }
-      if (educationData == undefined) {
-        showToast('请选择学历')
+      if (!checkNull(educationData.id, '请选择学历')) {
         return false;
       }
-      if (housingData == undefined) {
-        showToast('请选择住房类型')
+      if (!checkNull(housingData.id, '请选择住房类型')) {
         return false;
       }
-      if (region == undefined) {
-        showToast('请选择居住地址')
+      if (!checkNull(region[0], '请选择居住地址')) {
         return false;
       }
       if (!checkNull(liveDetail, '请输入详情地址')) {
@@ -522,96 +571,9 @@ Page({
       // }
     })
   },
-  startFace: function () {
-    this.getToken();
-  },
-  //获取 face id token
-  getToken: function () {
-    var sign = this.getSign();
-    console.log(sign)
-    wx.request({
-      url: 'https://openapi.faceid.com/lite_ocr/v1/get_biz_token',
-      method: 'POST',
-      data: {
-        sign: sign,
-        sign_version: 'hmac_sha1',
-        capture_image: 0,//0:双面，1:人像面
-        return_url: 'https://api.megvii.com/faceid/lite/do',
-        notify_url: 'https://api.megvii.com/faceid/lite/do',
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success(res) {                       //返回结果
-        // navigateTo(`../../verify/verify?token=${token}`)
-        console.log(res.data)
-      },
-      fail(err) {
-        console.log(err)
-      },
-      complete: function (res) {
-        console.log('complete后的res数据：')
-      }
-    })
-  },
-  //生成 faceId sign
-  getSign: function () {
-
-    let api_key = "5P4ZC5tDnRsk6G4PU0yYJtQGLHZT1ohq";
-    let api_Secret = "g4hP0P77CBcbPh25M3pbpRSvRhMsPLTf";
-    let current_time = parseInt((new Date().getTime()) / 1000);
-    let expire_time = current_time + 100;
-    let random = Math.random().toString(36).substr(2, 10);
-    // var api_key= "ICVvC_xUs6177WEtyUNwIH8J6NfGu50t";
-    // var api_Secret= "UjYGdN9CBZKsDBLB5-5v3DykPXY6dw3q";
-    // var current_time= 1530762118;
-    // var expire_time= current_time+100;
-    // var random= "0799687066";
-    // var raw =`a=${api_key}&b=${expire_time}&c=${current_time}&d=${random}`;
-    var raw = "a=5P4ZC5tDnRsk6G4PU0yYJtQGLHZT1ohq&b=1608082375&c=1608082275&d=545547482"
-    var CryptoJS = require('../../../utils/hmac-sha1.js');
-    var sign_temp = CryptoJS.HmacSHA1(raw, api_Secret);
-    console.log(raw)
-    console.log(this.stringToByte(sign_temp.toString()));
-    console.log(this.stringToByte(raw));
-    var base64 = require('../../../utils/base64.js');
-    var sign = base64.encode(sign_temp.toString() + raw)
-    // const crypto = require('crypto');
-    // console.log(crypto)
-    // var hmac = crypto.createHmac('sha1', api_Secret);
-    // hmac.update(raw); // write in to the stream
-    // var digest = hmac.digest();
-    // var buffer = Buffer.from(raw);
-    // var result = Buffer.concat([digest, buffer]).toString('base64')
-    return sign;
-  },
-
-  stringToByte: function (str) {
-    var bytes = new Array();
-    var len, c;
-    len = str.length;
-    for (var i = 0; i < len; i++) {
-      c = str.charCodeAt(i);
-      if (c >= 0x010000 && c <= 0x10FFFF) {
-        bytes.push(((c >> 18) & 0x07) | 0xF0);
-        bytes.push(((c >> 12) & 0x3F) | 0x80);
-        bytes.push(((c >> 6) & 0x3F) | 0x80);
-        bytes.push((c & 0x3F) | 0x80);
-      } else if (c >= 0x000800 && c <= 0x00FFFF) {
-        bytes.push(((c >> 12) & 0x0F) | 0xE0);
-        bytes.push(((c >> 6) & 0x3F) | 0x80);
-        bytes.push((c & 0x3F) | 0x80);
-      } else if (c >= 0x000080 && c <= 0x0007FF) {
-        bytes.push(((c >> 6) & 0x1F) | 0xC0);
-        bytes.push((c & 0x3F) | 0x80);
-      } else {
-        bytes.push(c & 0xFF);
-      }
-    }
-    return bytes;
-
-
-  },
+  
+  
+ 
   // 跳转到操作页
   bindView(e) {
     navigateTo(e.currentTarget.dataset.url);

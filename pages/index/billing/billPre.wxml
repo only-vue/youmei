@@ -62,10 +62,10 @@
       <text class="text-periods">{{index+1}}</text>
       <view class="item-loan">
         <view class="text-periods">[{{index+1+"/"+repayPlan.length}}]</view>
-        <view class="text-amount">{{item.handlingFee+item.principal}}</view>
+        <view class="text-amount">{{item.payAmount}}</view>
       </view>
 
-      <view class="text-periods">待定</view>
+      <view class="text-periods">{{apiDate? item.payDate:'待定'}}</view>
     </view>
   </view>
   <view class="next" bindtap="next">下一步</view>

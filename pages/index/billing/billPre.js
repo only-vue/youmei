@@ -1,5 +1,5 @@
 // pages/index/billing/billResult.js
-import { navigateTo, showToast } from '../../../utils/util.js'
+import { navigateTo, showToast,formatTime } from '../../../utils/util.js'
 import { postRequest } from '../../../utils/http.js'
 import { api } from '../../../service/index.js'
 Page({
@@ -10,8 +10,10 @@ Page({
   data: {
     showListService:false,
     showListDate:false,
-    // loanAmount: 100000,
     isexpand:false,
+
+    //测试信息
+    // loanAmount: 100000,
     // productDetailUuid:'a0f7ff136b5348daa57816721795d71d',
     // storeUuid:"5565faa3039c400e98c1dea560e88df9",
     // productDetailConfigUuid:'e7d24f23ec934874a3e15f5c8a8f9661',
@@ -23,7 +25,7 @@ Page({
    */
   onLoad: function (options) {
     const { storeUuid, productDetailUuid, productDetailConfigUuid, projectName, loanAmount } = options;
-    console.log(storeUuid, productDetailUuid, productDetailConfigUuid, projectName, loanAmount)
+    //console.log(storeUuid, productDetailUuid, productDetailConfigUuid, projectName, loanAmount)
     this.setData({
       storeUuid, productDetailUuid, productDetailConfigUuid, projectName, loanAmount
     }, () => {
@@ -117,6 +119,8 @@ Page({
         date:date,
       },
       apiDate:value.date
+    },()=>{
+      this.repayPlanCalculator(this.data.selectedFQItem.productDetailConfigUuid)
     })
    
   },
@@ -131,11 +135,8 @@ Page({
   loanAmountChange:function(e){
     this.setData({
       loanAmount:e.detail.value,
-      repayPlan:undefined,
-      repayPlanList:undefined,
-      isexpand:false,
-      selectDate:undefined,
-      selectedFQItem:undefined,
+    },()=>{
+      this.repayPlanCalculator(this.data.selectedFQItem.productDetailConfigUuid)
     })
   },
   datepickerHide:function(){
@@ -150,10 +151,15 @@ Page({
       loanAmount:this.data.loanAmount,
       productDetailUuid:this.data.productDetailUuid,
       storeUuid:this.data.storeUuid,
-      // repaymentDate:1,
+      repaymentDate:this.data.apiDate,
       productDetailConfigUuid:productDetailConfigUuid,
     }
     postRequest(this, api.repayPlanCalculator, params, (data) => {
+      data.forEach( (item) => {
+       item.payDate = formatTime(new Date(parseInt(item.lastPayDate,10)))
+       item.payAmount = (item.handlingFee+item.principal).toFixed(2)
+      });
+
       this.setData({
         repayPlan:data.slice(0,3),
         repayPlanList:data

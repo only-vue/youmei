@@ -8,6 +8,7 @@ Component({
     placeholder:String,
     disabled:Boolean,
     value:String,
+    type:String,
   },
 
   /**

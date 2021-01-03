@@ -89,11 +89,11 @@
   justify-content: space-between;
 }
 .item_line{
-  height: 4rpx;
-  background-color: rgba(233, 233, 233,1);
+  height: 2rpx;
+  background-color: #e5e5e5;
   margin-left: 50rpx;
   margin-top: 30rpx;
-}
+} 
 .item-title{
   font-weight: bold;
 }
