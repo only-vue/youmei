@@ -48,7 +48,7 @@ export function getRequest(that, api, data, callback) {
 /**
  * post请求
  */
-export function postRequest(that, api, data, callback, completeBack) {
+export function postRequest(that, api, data, callback, completeBack,errorback) {
   showLoad();
   wx.request({
     url: base + api,
@@ -68,6 +68,7 @@ export function postRequest(that, api, data, callback, completeBack) {
     },
     fail: (res) => {
       callError();
+      errorback();
     },
     complete: () => {
       if (completeBack) {

@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/index/billing/billing",
     "pages/index/index",
     "pages/user/login",
     "pages/mine/mybill/index",
     "pages/index/billing/billPre",
-    "pages/index/billing/billing",
     "pages/index/billing/productResult",
     "pages/index/billing/imageInfo",
     "pages/mine/mybill/applyData",

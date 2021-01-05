@@ -115,15 +115,23 @@ Page({
   //第一步，上传身份证
   //获取sign
   getSign: function () {
-    postRequest(this, api.getSign, {}, (data) => {
-      this.setData({
-        sign: data,
+    return new Promise((resolve, reject) => {
+      postRequest(this, api.getSign, {}, (data) => {
+        resolve(data)
+      },null,()=>{
+        reject("")
       })
-    })
+    });
+    
   },
-  startFace: function () {
-    // this.getToken();
+  //正面
+  async startFace () {
+    let sign = await  this.getSign();
     // navigateTo(`../verify/verify?token=${token}`)
+  },
+  //反面
+  async startOpposite(){
+    let sign = await  this.getSign();
   },
   //获取 face id token
   getToken: function () {
@@ -143,7 +151,7 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {                       //返回结果
-        // navigateTo(`../../verify/verify?token=${token}`)
+        navigateTo(`../../verify/verify?token=${token}`)
         console.log(res.data)
       },
       fail(err) {
