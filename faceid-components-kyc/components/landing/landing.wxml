@@ -1,0 +1,26 @@
+<!--plugin/components/landing/landing.wxml-->
+
+<base id="base" style="display: {{showAgreement ? 'none':'block'}}"
+    step="{{0}}"
+    token="{{token}}">
+    <view slot="content" class="content">
+        <image slot="bg-image"  src="../_resource/images/front_demo.png"  class="landing-bg-img"/>
+        <view slot="tips" class="tips">
+            <text>{{tips}}</text>
+        </view>
+        <view slot="agreement" class="agreement" >
+            <view class="check-zone" bindtap="onChangeAgreement">
+                <image src="../../resources/images/{{agreement_reviewed ? 'checkbox_sel':'checkbox'}}.png"/>
+            </view>
+            <view>我已阅读并同意<view class="link"  bindtap="onClickReviewAgreement">《FaceID用户协议》</view></view>
+        </view>
+    </view>
+    <view slot="action" wx:if="{{!agreement_reviewed}}" class="btn-disabled">
+        <text >开始</text>
+    </view>
+    <button wx:if="{{agreement_reviewed}}"  slot="action" class="start" type="default" size="defaultSize" bindtap="onStart">
+        <text >开始</text>
+    </button>
+</base>
+<agreement wx:if="{{showAgreement}}" bind:back="back"/>
+

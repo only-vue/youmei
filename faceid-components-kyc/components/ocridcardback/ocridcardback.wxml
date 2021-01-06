@@ -1,0 +1,56 @@
+<!--plugin/components/ocridcardback/ocridcardback.wxml-->
+<base id="base" step="4" token="{{token}}" bind:uploadfile="onTakePhotoBack">
+
+    <view slot="content" class="content">
+        <view class="slides">
+            <view class="image-box client" >
+                <image src="{{idcardback_image}}" mode="aspectFit"/>
+            </view>
+            <view class="re-shoot" bindtap="onTakePhoto" wx:if="{{idcard_back_retry_time>0}}">
+                <image src="../../resources/images/ocridcard/icamera.png" mode="aspectFit"/>
+                <text>点击拍摄</text>
+            </view>
+        </view>
+        <view class="desc">
+            <text class="title">信息确认</text>
+        </view>
+        <view class="idcard-form-box">
+            <form bindsubmit="" bindreset="" class="idcard-form">
+                <view class="form-item">
+                    <text class="label">签发机关：</text>
+                    <input wx:if="{{edit_issued_by}}" focus="{{true}}" type="text" placeholder="如:北京市"
+                        value="{{issued_by}}" bindblur="onBlur" bindinput="bindinput" data-field="issued_by"/>
+                    <text wx:else class="control multi-line {{issued_by_is_single_line ? 'single-line': ''}}">{{issued_by}}</text>
+                    <view wx:if="{{issuedByEditable}}" bindtap="enableEdit" data-field="issued_by" class="edit-btn">
+                        <image  src="../../resources/images/ocridcard/edit.png"/>
+                    </view>
+                    <view wx:else data-field="issued_by" class="edit-btn" >
+                        <image src=""/>
+                    </view>
+
+                </view>
+                <view class="form-item">
+                    <text class="label">有效期限：</text>
+                    <input wx:if="{{edit_valid_date}}" focus="{{true}}" type="text" placeholder="如:20060922-20260922"
+                        value="{{valid_date}}" bindblur="onBlur" bindinput="bindinput" data-field="valid_date"/>
+                    <text wx:else class="control valid_date">{{valid_date}}</text>
+                    <view wx:if="{{validDateEditable}}" bindtap="enableEdit" data-field="valid_date" class="edit-btn">
+                        <image src="../../resources/images/ocridcard/edit.png"/>
+                    </view>
+                    <view wx:else data-field="valid_date" class="edit-btn" >
+                        <image src=""/>
+                    </view>
+                </view>
+            </form>
+        </view>
+    </view>
+
+    <view wx:if="{{disabled}}" slot="action"  class="btn-disabled">
+        <text >下一步</text>
+    </view>
+    <button wx:else slot="action" class="start" type="default" size="defaultSize" bindtap="onNexStep">
+        <text class="next">下一步</text>
+    </button>
+</base>
+
+

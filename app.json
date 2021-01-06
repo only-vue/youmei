@@ -25,7 +25,8 @@
     "pages/index/billing/productDetail",
     "pages/index/billing/productList",
     "pages/mine/mybill/datadetail",
-    "pages/verify/verify"
+    "pages/verify/verify",
+    "pages/verifykyc/verify"
   ],
   "window": {
     "backgroundTextStyle": "light",

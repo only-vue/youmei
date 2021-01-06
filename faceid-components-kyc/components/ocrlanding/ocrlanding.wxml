@@ -1,0 +1,28 @@
+<!--plugin/components/ocrlanding/ocrlanding.wxml-->
+<base id="base" token="{{token}}" step="{{side === 'back'? 3 : 1}}">
+    <view slot="content" class="content">
+        <view style="" class="slides">
+
+            <view class="image-box" >
+                <image src="../../resources/images/ocridcard/{{side}}.png"/>
+            </view>
+            <view class="re-shoot" bindtap="onTakePhoto" wx:if="{{has_retry_times}}">
+                <image src="../../resources/images/ocridcard/icamera.png" mode="aspectFit"/>
+                <text>点击拍摄</text>
+            </view>
+        </view>
+
+        <view class="desc">
+            <text class="title">拍摄身份证{{side === 'front' ? '人像面' : '国徽面'}}</text>
+            <text class="item margin">请正对身份证{{side === 'front' ? '人像面' : '国徽面'}}拍摄</text>
+            <text class="item">请保证身份证字迹清晰</text>
+        </view>
+    </view>
+
+    <button wx:if="{{fileuploaded}}" slot="action" class="start" type="default" size="defaultSize" bindtap="onNext" >
+        <text >下一步</text>
+    </button>
+    <view wx:else slot="action" class="btn-disabled">
+        <text >下一步</text>
+    </view>
+</base>

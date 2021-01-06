@@ -1,0 +1,1 @@
+"use strict";Component({properties:{},data:{},methods:{back:function(){this.triggerEvent("back",{})}}});

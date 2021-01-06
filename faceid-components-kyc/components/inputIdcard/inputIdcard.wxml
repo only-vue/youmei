@@ -1,0 +1,49 @@
+<!--sdk/liveness/inputIdcard/inputIdcard.wxml-->
+<base id="base" headerClass="hidden-header" bodyClass="expand-body">
+    <view slot="content" class="content">
+        <view class="banner">
+            <image src="../_resource/images/banner.png" class="bg"/>
+            <text>FaceID 人脸核身服务</text>
+        </view>
+        <view class="container">
+            <view class="input-idcard title">用户信息</view>
+            <view class="form">
+                <view class="form-control">
+                    <image src="../_resource/images/idcard_name.png" />
+                    <view class="inputer">
+                        <input type="text" placeholder="请输入真实姓名" placeholder-class="input-placeholder"
+                            class="{{activeField == 'idcard_name' ? 'active' : ''}}"
+                            maxlength="32"
+                            value="{{idcard_name}}"
+                            data-field="idcard_name"
+                            bindfocus="onFieldFocus"
+                            bindblur="onFieldBlur"
+                            bindinput="onInputing"/>
+                        <view class="clear" bindtap="clearField" data-field="idcard_name"><image wx:if="{{clear_idcard_name}}" src="../_resource/images/clear.png"/></view>
+                    </view>
+                </view>
+                <view class="form-control">
+                    <image src="../_resource/images/idcard_number.png" />
+                    <view class="inputer">
+                        <input type="text" placeholder="请输入身份证号" placeholder-class="input-placeholder"
+                            class="{{activeField == 'idcard_number' ? 'active' : ''}}"
+                            maxlength="18"
+                            value="{{idcard_number}}"
+                            data-field="idcard_number"
+                            bindfocus="onFieldFocus"
+                            bindblur="onFieldBlur"
+                            bindinput="onInputing"/>
+                        <view class="clear" bindtap="clearField" data-field="idcard_number"><image wx:if="{{clear_idcard_number}}"  src="../_resource/images/clear.png"/></view>
+                    </view>
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view wx:if="{{disabled}}" slot="action" class="btn-disabled">
+        <text >下一步</text>
+    </view>
+    <button wx:else slot="action" class="start" type="default" size="defaultSize" bindtap="onStart">
+        <text >下一步</text>
+    </button>
+</base>

@@ -118,6 +118,7 @@
                         success(dataObject);
                     }
                 } catch (e) {
+                    console.log(e)
                     console.log('parse JSON failed, origin String is: ' + dataString)
                     if (fail) {
                         fail(e);

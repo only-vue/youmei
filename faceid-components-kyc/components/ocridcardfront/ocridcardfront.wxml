@@ -1,0 +1,56 @@
+<!--plugin/components/ocridcardfront/ocridcardfront.wxml-->
+<base id="base" step="2" token="{{token}}" bind:uploadfile="onTakePhotoFront">
+
+    <view slot="content" class="content">
+        <view  class="slides">
+            <view class="image-box client" >
+                <image class="client" src="{{idcardfront_image}}" mode="aspectFit"/>
+            </view>
+            <view class="re-shoot" bindtap="onTakePhoto" wx:if="{{idcard_front_retry_time>0}}">
+                <image src="../../resources/images/ocridcard/icamera.png" mode="aspectFit"/>
+                <text>点击拍摄</text>
+            </view>
+        </view>
+        <view class="desc">
+            <text class="title">信息确认</text>
+        </view>
+        <view class="idcard-form-box">
+            <form bindsubmit="" bindreset="" class="idcard-form">
+                <view class="form-item">
+                    <text class="label">姓　　名：</text>
+                    <input wx:if="{{edit_name}}" focus="{{true}}" type="text" placeholder=""
+                        value="{{name}}" bindblur="onBlur" bindinput="bindinput" data-field="name"/>
+                    <text wx:else class="control multi-line {{name_is_single_line ? 'single-line' : ''}}">{{name}}</text>
+                    <view wx:if="{{nameEditable}}" bindtap="enableEdit"
+                        data-field="name" class="edit-btn">
+                        <image src="../../resources/images/ocridcard/edit.png"/>
+                    </view>
+                    <view wx:else data-field="name" class="edit-btn" >
+                        <image src=""/>
+                    </view>
+                </view>
+                <view class="form-item">
+                    <text class="label">身份证号：</text>
+                    <input wx:if="{{edit_idcard_number}}" focus="{{true}}" type="text"
+                        value="{{idcard_number}}" bindblur="onBlur"
+                        bindinput="bindinput" data-field="idcard_number"/>
+                    <text wx:else class="control">{{idcard_number}}</text>
+                    <view wx:if="{{numberEditable}}" bindtap="enableEdit"
+                        data-field="idcard_number"  class="edit-btn">
+                        <image src="../../resources/images/ocridcard/edit.png"/>
+                    </view>
+                    <view wx:else data-field="idcard_number" class="edit-btn" >
+                        <image src=""/>
+                    </view>
+                </view>
+            </form>
+        </view>
+    </view>
+
+    <view wx:if="{{disabled}}" slot="action"  class="btn-disabled">
+        <text >下一步</text>
+    </view>
+    <button wx:else slot="action" class="start"  type="default" size="defaultSize" bindtap="onNext">
+        <text class="next">下一步</text>
+    </button>
+</base>

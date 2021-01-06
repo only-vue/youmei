@@ -1,6 +1,6 @@
 // pages/billing/billing.js
 import { postRequest } from '../../../utils/http.js'
-import { navigateTo, showToast } from '../../../utils/util.js'
+import { navigateTo, showToast, getBase64ImageUrl } from '../../../utils/util.js'
 import { api } from '../../../service/index.js'
 import { checkNull } from '../../../utils/rule.js'
 const qiniuUploader = require("../../../utils/qiniuUploader");
@@ -20,7 +20,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    step: 1,
+    step: 3,
     currentIndex: 0,
     progress: 0,
     verifyList: [],//需验证列表
@@ -42,7 +42,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var { storeUuid, productDetailUuid, productDetailConfigUuid,projectName,loanAmount } = options
+    var { storeUuid, productDetailUuid, productDetailConfigUuid, projectName, loanAmount } = options
     this.setData({
       storeUuid,
       productDetailConfigUuid,
@@ -64,7 +64,7 @@ Page({
         idCardInfo: data
       })
     });
-    this.getNewestWorkInfo();
+    this.getQiniuToken();
   },
   //获取所有进件项
   getItemNumberList: function (incomingPartsTemplateList) {
@@ -118,32 +118,31 @@ Page({
     return new Promise((resolve, reject) => {
       postRequest(this, api.getSign, {}, (data) => {
         resolve(data)
-      },null,()=>{
+      }, null, () => {
         reject("")
       })
     });
-    
+
   },
   //正面
-  async startFace () {
-    let sign = await  this.getSign();
-    // navigateTo(`../verify/verify?token=${token}`)
+  startFace() {
+    this.getToken(1);
   },
   //反面
-  async startOpposite(){
-    let sign = await  this.getSign();
+  startOpposite() {
+    this.getToken(2);
   },
   //获取 face id token
-  getToken: function () {
-    var sign = this.getSign();
-    console.log(sign)
+  async getToken(capture_image) {
+    var sign = await this.getSign();
+    let that = this
     wx.request({
       url: 'https://openapi.faceid.com/lite_ocr/v1/get_biz_token',
       method: 'POST',
       data: {
         sign: sign,
         sign_version: 'hmac_sha1',
-        capture_image: 0,//0:双面，1:人像面
+        capture_image: capture_image,//0:双面，1:人像面 2 反面  
         return_url: 'https://api.megvii.com/faceid/lite/do',
         notify_url: 'https://api.megvii.com/faceid/lite/do',
       },
@@ -151,32 +150,86 @@ Page({
         'content-type': 'application/json' // 默认值
       },
       success(res) {                       //返回结果
-        navigateTo(`../../verify/verify?token=${token}`)
-        console.log(res.data)
+        console.log(res)
+        if (res.errMsg == "request:ok") {
+
+          wx.navigateTo({
+            url: `../../verify/verify?token=${res.data.biz_token}`,
+            events: {
+              // 为指定事件添加一个监听器，获取被打开页面传送到当前页面的数据
+              acceptDataFromOpenedPage: function (data) {
+                let image_frontside = data.image_frontside;
+                let image_backside = data.image_backside;
+                if (image_frontside) {//身份证正面
+                  let name = data.name.result;
+                  let idcard_number = data.idcard_number.result;
+                  let base64ImgUrl = getBase64ImageUrl(image_frontside)
+                  let idCardInfo = that.data.idCardInfo
+                  idCardInfo.cardScanName = name
+                  idCardInfo.cardScanIdcardNo = idcard_number
+                  idCardInfo.frontUrl = base64ImgUrl
+                  idCardInfo.frontNote = data.frontside_card_rect;
+                  that.setData({
+                    idCardInfo
+                  })
+                  //转换图片上传7牛云
+                  that.base64tofile(base64ImgUrl, (file) => {
+                    that.upLoadImg(file, (key, imageUrl) => {
+                      idCardInfo.frontKey = key
+                      that.setData({
+                        idCardInfo
+                      })
+                    })
+                  })
+                }
+                if (image_backside) {//身份证反面
+                  let idCardInfo = that.data.idCardInfo
+                  let backImgUrl = getBase64ImageUrl(image_backside)
+                  //转换图片上传7牛云
+                  that.base64tofile(backImgUrl, (file) => {
+                    that.upLoadImg(file, (key, imageUrl) => {
+                      idCardInfo.oppositeKey = key
+                      idCardInfo.oppositeUrl = backImgUrl
+                      idCardInfo.oppositeNote = data.backside_card_rect
+                      that.setData({
+                        idCardInfo
+                      })
+                    })
+                  })
+                }
+              },
+            },
+            success: function (res) {
+              // 通过eventChannel向被打开页面传送数据
+              res.eventChannel.emit('sign', sign)
+            }
+          })
+
+        }
       },
       fail(err) {
         console.log(err)
       },
       complete: function (res) {
-        console.log('complete后的res数据：')
+
       }
     })
   },
-  cardNameChange:function(e){
+  cardNameChange: function (e) {
     let data = this.data.idCardInfo
     data.cardScanName = e.detail.value
-      this.setData({
-        idCardInfo:data
-      })
+    this.setData({
+      idCardInfo: data
+    })
   },
-  cardNoChange:function(e){
+  cardNoChange: function (e) {
     let data = this.data.idCardInfo
     data.cardScanIdcardNo = e.detail.value
-      this.setData({
-        idCardInfo:data
-      })
+    this.setData({
+      idCardInfo: data
+    })
   },
-  
+
   //第二步，上传手持身份证照片
   handCard: function () {
     var that = this;
@@ -203,7 +256,52 @@ Page({
   },
   //第三步，人脸识别
   faceVerif: function () {
+    this.getKycToken()
+  },
+  //获取 face id token
+  async getKycToken() {
+    var sign = await this.getSign();
+    let that = this
+    const {cardScanName,cardScanIdcardNo} = this.data.idCardInfo
+    wx.request({
+      url: 'https://openapi.faceid.com/lite/v1/get_biz_token',
+      method: 'POST',
+      data: {
+        sign: sign,
+        sign_version: 'hmac_sha1',
+        return_url: 'https://api.megvii.com/faceid/lite/do',
+        notify_url: 'https://api.megvii.com/faceid/lite/do',
+        comparison_type: 1,
+        idcard_name: cardScanName,
+        idcard_number: cardScanIdcardNo,
+        liveness_type:'video_number',
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success(res) {                       //返回结果
+        console.log(res)
+        if (res.errMsg == "request:ok") {
+          wx.navigateTo({
+            url: `../../verifykyc/verify?token=${res.data.biz_token}`,
+            events: {
+              acceptDataFromOpenedPage: function (data) {
 
+              },
+            },
+            success: function (res) {
+              res.eventChannel.emit('sign', sign)
+            }
+          })
+        }
+      },
+      fail(err) {
+        console.log(err)
+      },
+      complete: function (res) {
+
+      }
+    })
   },
   //第四步，关联银行卡
   getBankCardInfo: function () {
@@ -417,39 +515,38 @@ Page({
         if (this.data.step === ItemIndexMap.baseInfo) {
           this.getNewestPersonInfo();
         } else if (this.data.step === ItemIndexMap.handIdCardPick) {
-          this.getQiniuToken();
-        }else if (this.data.step === ItemIndexMap.workingInfo) {
+          // this.getQiniuToken();
+        } else if (this.data.step === ItemIndexMap.workingInfo) {
           this.getNewestWorkInfo();
         } else if (this.data.step === ItemIndexMap.specialInfo) {
           this.getImageInfo();
         }
       })
     }
-    
+
 
   },
   //点击下一步
   nexttap: function () {
     if (this.data.step === ItemIndexMap.idcardDetect) {
-      // if (!checkNull(this.data.idCardInfo.frontKey, '请上传身份证正面')) {
-      //   return false;
-      // }
-      // if (!checkNull(this.data.idCardInfo.oppositeKey, '请上传身份证反面')) {
-      //   return false;
-      // }
+      if (!checkNull(this.data.idCardInfo.frontKey, '请上传身份证正面')) {
+        return false;
+      }
+      if (!checkNull(this.data.idCardInfo.oppositeKey, '请上传身份证反面')) {
+        return false;
+      }
       let params = {
         "cardScanIdcardNo": this.data.idCardInfo.cardScanIdcardNo,
         "cardScanName": this.data.idCardInfo.cardScanName,
-        "frontKey": this.data.idCardInfo.frontKey?'':'ggg.jpg',
+        "frontKey": this.data.idCardInfo.frontKey,
         "frontNote": this.data.idCardInfo.frontNote,
-        "oppositeKey": this.data.idCardInfo.oppositeKey?'':'ggg.jpg',
+        "oppositeKey": this.data.idCardInfo.oppositeKey,
         "oppositeNote": this.data.idCardInfo.oppositeNote,
       }
       postRequest(this, api.saveIdCardInfo, params, (data) => {
+        console.log("calculateNext")
         this.calculateNext();
-        
       })
-      this.calculateNext();
     } else if (this.data.step === ItemIndexMap.handIdCardPick) {
       if (!checkNull(this.data.handCardImg, '请上传手持身份证照片')) {
         return false;
@@ -457,22 +554,14 @@ Page({
       // 向七牛云上传
       // console.log(this.data.handCardImg)
       qiniuUploader.upload(this.data.handCardImg, (res) => {
-
         this.saveHoldKey(res.key)
       }, (error) => {
         showToast('error: ' + JSON.stringify(error))
-        console.error('error: ' + JSON.stringify(error));
+        // console.error('error: ' + JSON.stringify(error));
       }, {
         region: 'SCN',	//华南
-        // key: 'customFileName.jpg',
         domain: 'https://umas.qiniu.wunzb.cn', // 
         uptoken: this.data.uptoken, // 由其他程序生成七牛 uptoken
-      },
-        (progress) => {
-          // console.log('上传进度', progress.progress);
-
-        }, cancelTask => {
-        // that.setData({ cancelTask })
       }
       );
 
@@ -559,11 +648,11 @@ Page({
         this.calculateNext();
       })
     } else if (this.data.step === ItemIndexMap.specialInfo) {
-     if(this.data.imgInfo){
-      this.calculateNext()
-     }else{
-       showToast('请完善影像资料')
-     }
+      if (this.data.imgInfo) {
+        this.calculateNext()
+      } else {
+        showToast('请完善影像资料')
+      }
     }
 
   },
@@ -572,23 +661,58 @@ Page({
     this.setData({
       currentIndex: this.data.currentIndex - 1,
       step: curStep,
-      progress: this.getProgress(curStep)
-    },()=>{
-      // if (this.data.step === ItemIndexMap.specialInfo){
-      //     this.getImageInfo()
-      // }
+      progress: this.getProgress(curStep),
     })
   },
-  
-  
- 
+
+
+
   // 跳转到操作页
   bindView(e) {
     navigateTo(e.currentTarget.dataset.url);
   },
-  onShow:function(){
+  onShow: function () {
     this.getImageInfo()
-  }
+  },
+  upLoadImg: function (img, sucessCallback) {
+    qiniuUploader.upload(img, (res) => {
+      sucessCallback(res.key, res.imageURL)
+    }, (error) => {
+      showToast(JSON.stringify(error))
+      console.error('error: ' + JSON.stringify(error));
+    }, {
+      region: 'SCN',	//华南
+      domain: 'https://umas.qiniu.wunzb.cn', // 
+      uptoken: this.data.uptoken, // 七牛 uptoken
+    }
+    );
+  },
+  //base64转文件地址
+  base64tofile: function (img64, fileCallback) {
+    /*img64是指图片base64格式数据*/
+    //声明文件系统
+    const [, format, bodyData] = /data:image\/(\w+);base64,(.*)/.exec(img64) || [];
+    if (!format) {
+      return (new Error('ERROR_BASE64SRC_PARSE'));
+    }
+    const fs = wx.getFileSystemManager();
+    //随机定义路径名称
+    var times = new Date().getTime();
+    var codeimg = wx.env.USER_DATA_PATH + '/' + times + '.png';
+    const buffer = wx.base64ToArrayBuffer(bodyData);
+    //将base64图片写入
+    fs.writeFile({
+      filePath: codeimg,
+      data: buffer,
+      encoding: 'base64',
+      success: (res) => {
+        //写入成功了的话，新的图片路径就能用了
+        if (res.errMsg == "writeFile:ok") {
+          fileCallback(codeimg)
+        }
 
+      }
+    });
+  }
 
 })

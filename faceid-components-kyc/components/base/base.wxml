@@ -1,0 +1,19 @@
+<!--plugin/components/base/base.wxml-->
+<view class="verify-component" wx:if="{{!finished}}">
+    <view class="header header-class">
+        <text>FaceID 人脸核身服务</text>
+    </view>
+
+    <view class="body video-class body-class">
+        <slot name="content"></slot>
+    </view>
+
+    <view class="footer">
+        <slot name="video-codes"></slot>
+        <slot name="action"></slot>
+        <view class="exit" bindtap="onExit">退出验证</view>
+    </view>
+    <verifyModal id="verify-modal">
+        <button slot="btn-ok" type="default" bindtap="onFinish" class="{{show_exit_btn ? 'exit-plain': ''}}" wx:if="{{show_exit_btn}}">退出验证</button>
+    </verifyModal>
+</view>

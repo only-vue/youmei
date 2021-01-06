@@ -1,0 +1,1 @@
+{"version":"1.0.0","component":true,"usingComponents":{"videoVerify":"../video/video","landing":"../landing/landing","ocridcardfront":"../ocridcardfront/ocridcardfront","ocridcardback":"../ocridcardback/ocridcardback","ocrlanding":"../ocrlanding/ocrlanding","inputIdcard":"../inputIdcard/inputIdcard"}}

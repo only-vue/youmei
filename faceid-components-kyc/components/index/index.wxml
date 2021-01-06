@@ -1,0 +1,31 @@
+
+
+<landing wx:if="{{step === STEP_TO['landing'] }}"
+    token="{{token}}"
+    verify-type="{{verify_type}}"
+    bind:nextstep="onNextStep"/>
+<ocrlanding wx:if="{{step === STEP_TO['ocr-landing']}}"
+    token="{{token}}"
+    side="{{side}}"
+    error-code="{{error_code}}"
+    bind:nextstep="onNextStep"/>
+<ocridcardfront wx:if="{{step === STEP_TO['ocridcardfront'] }}"
+    token="{{token}}"
+    name-editable="{{name_editable}}"
+    number-editable="{{number_editable}}"
+    verify-type="{{verify_type}}"
+    bind:nextstep="onNextStep"/>
+
+<ocridcardback wx:if="{{step === STEP_TO['ocridcardback'] }}"
+    token="{{token}}"
+    issued-by-editable="{{issued_by_editable}}"
+    valid-date-editable="{{valid_date_editable}}"
+    bind:nextstep="onNextStep"/>
+
+<inputIdcard wx:if="{{step === STEP_TO['input-idcard']}}"
+    token="{{token}}"
+    bind:nextstep="onNextStep"/>
+
+<videoVerify wx:if="{{step === STEP_TO['liveness-video']}}"
+    token="{{token}}"
+    number="{{code}}"/>

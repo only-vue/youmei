@@ -1,0 +1,30 @@
+<!--plugin/components/video/video.wxml-->
+
+<base id="base" step="5" token="{{token}}" video-class="video-container">
+    <view slot="content" class="video-content">
+        <view class="bg">
+            <image class="bg-image" src="../_resource/images/video.png"/>
+        </view>
+    </view>
+
+    <view class="code" slot="video-codes">
+        <view class="video-tips">
+            牢记数字<text>></text>开始拍摄<text>></text>边录边读
+        </view>
+        <view class="video-code">
+            <text>{{numbers[0]}}</text>
+            <text>{{numbers[1]}}</text>
+            <text>{{numbers[2]}}</text>
+            <text>{{numbers[3]}}</text>
+        </view>
+    </view>
+    <view slot="action" wx:if="{{disabled}}" class="btn-disabled">
+        记下了，开始拍摄
+        <text >({{timer}}s)</text>
+    </view>
+    <button slot="action" class="start" type="default" size="defaultSize" bindtap="onStart2Record" wx:if="{{!disabled}}">
+        <text class="record-disabled" wx:if="{{disabled}}">记住数字，边读边录</text>
+        <text class="record" wx:if="{{!disabled}}">记下了，开始拍摄</text>
+
+    </button>
+</base>
