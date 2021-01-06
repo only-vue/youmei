@@ -15,7 +15,7 @@
             <image class="state-img" src="{{tools.repayImg(item.showStatus)}}" />
             <image class="arrow" src="../../../assets/images/src_pages_mine_mybill_grey_arrow.png" />
           </view>
-          <text>{{item.date}}</text>
+          <text class="item-date">{{item.date}}</text>
           <view class="bottom-layout">
             <view wx:if="{{item.isCancel==1}}" class="give-up" catchtap="giveUp" data-data="{{item}}" >放弃申请</view>
             <view wx:if="{{item.signState !== 'sign_again' && item.takegoodsCheck == 'takegoods_check_pending'}}"

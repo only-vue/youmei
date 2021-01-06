@@ -20,7 +20,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    step: 3,
+    step: 1,
     currentIndex: 0,
     progress: 0,
     verifyList: [],//需验证列表
@@ -37,6 +37,7 @@ Page({
     workRegion: undefined,
     iswork: 1,
     imgInfo: false,
+    KYCSuccess:false//人脸识别成功 true
   },
   /**
    * 生命周期函数--监听页面加载
@@ -285,8 +286,10 @@ Page({
           wx.navigateTo({
             url: `../../verifykyc/verify?token=${res.data.biz_token}`,
             events: {
-              acceptDataFromOpenedPage: function (data) {
-
+              acceptKYC: function (data) {
+                  that.setData({
+                    KYCSuccess:true
+                  })
               },
             },
             success: function (res) {
@@ -566,7 +569,12 @@ Page({
       );
 
     } else if (this.data.step === ItemIndexMap.idLiveDetect) {
+      if(!this.data.KYCSuccess){
+        showToast('请进行人脸检测')
+        return false;
+      }
       this.calculateNext()
+
     } else if (this.data.step === ItemIndexMap.bankcard) {
 
       if (this.data.bankInfo == undefined) {

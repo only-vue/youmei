@@ -68,7 +68,7 @@
   <view class=" margin-common" wx:elif="{{step==3}}">
     <text class="comment-text">人脸识别：示例图</text>
     <image class="hand-card-img"
-      src="../../../assets/images/src_pages_home_productapply_facerecognition_facerecognition.png" />
+      src="{{KYCSuccess?'../../../assets/images/src_pages_home_productapply_facerecognition_facerecognition_successful.png':'../../../assets/images/src_pages_home_productapply_facerecognition_facerecognition.png'}}" />
     <view class="camera-btn" bindtap="faceVerif">
       <image class="camera-img" src="../../../assets/images/src_pages_home_productapply_handidcardimage_camera.png" />
       点击识别

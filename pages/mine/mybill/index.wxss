@@ -68,3 +68,6 @@ margin-top: 50%;
 width: 400rpx;
 height: 300rpx;
 }
+.item-date{
+  color: #999;
+}

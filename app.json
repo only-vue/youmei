@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/index/billing/billing",
     "pages/index/index",
+    "pages/index/billing/billing",
     "pages/user/login",
     "pages/mine/mybill/index",
     "pages/index/billing/billPre",

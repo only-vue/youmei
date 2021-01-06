@@ -233,6 +233,8 @@
   color: #666666;
   margin: 0 auto;
   font-size: 30rpx;
+  padding-top: 15rpx;
+  padding-bottom: 15rpx;
   margin-bottom: 100rpx;
 }
 

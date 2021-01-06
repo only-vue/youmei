@@ -50,8 +50,8 @@
    background-color: rgb(207, 79, 142);
    padding-left: 50rpx;
    padding-right: 50rpx;
-   padding-top: 10rpx;
-   padding-bottom: 10rpx;
+   padding-top: 15rpx;
+   padding-bottom: 15rpx;
    border-radius: 36rpx;
    color: white;
    margin: 40rpx auto;

@@ -12,19 +12,19 @@ var repayImg = function getRepayState(showStatus) {
       result = '../../../assets/images/resource_image_check_fail.png'
       break
     case "3"://3：待放款
-      result = '../../../assets/images/resource_image_check_pending.png'
+      result = '../../../assets/images/resource_image_loan_pending.png'
       break
     case "4"://4：已放款
-      result = '../../../assets/images/resource_image_check_pending.png'
+      result = '../../../assets/images/resource_image_loan_sucess.png'
       break
     case "5"://5：放款失败
-      result = '../../../assets/images/resource_image_check_pending.png'
+      result = '../../../assets/images/resource_image_loan_fail.png'
       break
     case "6"://6：还款中
-      result = '../../../assets/images/resource_image_check_pending.png'
+      result = '../../../assets/images/resource_image_repayment_pending.png'
       break
     case "7"://7：已结清
-      result = '../../../assets/images/resource_image_check_pending.png'
+      result = '../../../assets/images/src_pages_mine_myinstallment_detail_refundplan_pay_state_settle.png'
       break
     case "8"://8：已取消
       result = '../assets/images/resource_image_check_pending.png'
