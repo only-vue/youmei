@@ -23,23 +23,17 @@ Page({
     showListService: false,
     pickerValue: '',
     prePrincipal: '',//每次金额
-    preHandlingFee: ''//每次服务费
+    preHandlingFee: '',//每次服务费
+    isPackge:false//优惠包
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var { name, storeUuid, productDetailUuid, storeName, storeLocation } = options
-    this.setData({
-      name: name,
-      storeUuid: storeUuid,
-      productDetailUuid: productDetailUuid,
-      storeName: storeName,
-      storeLocation: storeLocation,
-    })
+    var { name, storeUuid, productDetailUuid, storeName, storeLocation,maxQuota } = options
+    this.setData({name, storeUuid, productDetailUuid, storeName, storeLocation, maxQuota})
 
     postRequest(this, api.querySaList, {}, (data) => {
-      // console.log(data)
       this.setData({
         listSA: data
       })
@@ -75,7 +69,7 @@ Page({
       "productDetailUuid": this.data.productDetailUuid,
       "storeUuid": this.data.storeUuid,
       "productDetailConfigUuid": this.data.productDetailConfigUuid,
-      "selectRepayDiscount": "select_repay_discount_yes",//select_repay_discount_no
+      "selectRepayDiscount": this.data.isPackge? "select_repay_discount_yes":'select_repay_discount_no',
       "saUuid": this.data.saUuid
     }
     postRequest(this, api.createContract, params, (data) => {
@@ -89,8 +83,13 @@ Page({
     })
   },
   serviceAmountChange: function (event) {
+    let amount = event.detail.value
+    let maxQuota = parseInt(this.data.maxQuota)
+    if(amount > maxQuota){
+      amount = maxQuota
+    }
     this.setData({
-      serviceAmount: event.detail.value,
+      serviceAmount: amount,
       prePrincipal: '',
       preHandlingFee: '',
       pickerValue: ''
@@ -130,5 +129,11 @@ Page({
       })
     })
   },
+  switch1Change:function(e){
+      let isPackge = e.detail.value
+      this.setData({
+        isPackge
+      })
+  }
   
 })

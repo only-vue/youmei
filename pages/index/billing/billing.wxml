@@ -113,7 +113,11 @@
     <infoPicker class="formInput" label="住房类型" placeholder="请选择" value="{{housingData.typeName}}" bindmyPickerChange="housingChange" datumType="housing"/>
     <cityPicker class="formInput" label="居住地址" placeholder="请选择" region="{{region}}" bindregionChange="regionChange" />
     <textarea class="address" maxlength="50" bindinput="addressInput" value="{{liveDetail}}" placeholder="输入详情地址，如永华北大街649号" />
-
+    <text class="comment-text margin-top">银行级加密，保障您的信息安全</text>
+    <contactPicker class="formInput" label="{{contactTypeNameList[0]}}" placeholder="请输入真实姓名" bindmyPickerChange="contactChange" list="{{relatives}}" contactTypeNameList="{{contactTypeNameList}}" position="0"/>
+    <contactPicker class="formInput" label="{{contactTypeNameList[1]}}" placeholder="请输入真实姓名" bindmyPickerChange="contactChange" list="{{relatives}}" contactTypeNameList="{{contactTypeNameList}}" position="1"/>
+    <contactPicker class="formInput" label="{{contactTypeNameList[2]}}" placeholder="请输入真实姓名" bindmyPickerChange="contactChange" list="{{urgent}}" contactTypeNameList="{{contactTypeNameList}}" position="2"/>
+    <contactPicker class="formInput" label="{{contactTypeNameList[3]}}" placeholder="请输入真实姓名" bindmyPickerChange="contactChange" list="{{urgent}}" contactTypeNameList="{{contactTypeNameList}}" position="3"/>
   </view>
 
   <!--有工作-->

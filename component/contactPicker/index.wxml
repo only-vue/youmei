@@ -1,0 +1,37 @@
+<!--component/MyPicker/index.wxml-->
+<view class="label-view">
+  <view class="label-content">
+    <view class="select-view">
+      <text class="select-label"  bindtap="onClick">{{label}}</text>
+      <image class="arrow" src="../../assets/images/src_pages_home_productapply_baseinfo_spread.png" />
+    </view>
+    <text class="label-text" >姓名</text>
+    <input class="label-input" placeholder="{{placeholder}}" bindinput="bindNameInput"  maxlength="8"/>
+  </view>
+
+  <view class="label-content">
+    <text >手机号码</text>
+    <input class="label-input" placeholder="请输入手机号码" bindinput="bindPhoneInput" type="number"
+      maxlength="11"/>
+  </view>
+</view>
+
+
+
+<!--modal-->
+<view class="free-dialog {{ showDialog ? 'free-dialog--show' : '' }}">
+  <view class="free-dialog__mask" bindtap="myPickerHide" />
+  <view class="free-dialog__container">
+ 
+   <view class='title_line' style="">
+     <view bindtap='myPickerHide' class="free-button free-dialog-reset">取消</view>
+     <view bindtap='freeBack' class="free-button free-dialog-submit">确定</view></view>
+ 
+     <scroll-view class='free-radios' scroll-y='true'>
+      <view class="free-radio" wx:for="{{filterList}}" wx:key="id" catchtap="radioChange" data-data='{{item}}' data-id="{{index}}" style="{{index==picker_id?'color:#48c23d;':'color:#999;'}}">
+      
+       <view class="free-text">{{item.typeName}}</view>
+      </view></scroll-view>
+ 
+ </view>
+</view>

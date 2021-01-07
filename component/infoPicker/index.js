@@ -10,6 +10,8 @@ var datumType={
   marry:"datum_type_marry",//婚姻状况
   education:"datum_type_education",//学历
   housing:"datum_type_housing",//住房类型
+  relatives:"datum_type_contact_relatives",//亲属联系人
+  urgent:"datum_type_contact_urgent",//紧急联系人
 }
 Component({
   /**

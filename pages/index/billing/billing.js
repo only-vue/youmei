@@ -37,7 +37,9 @@ Page({
     workRegion: undefined,
     iswork: 1,
     imgInfo: false,
-    KYCSuccess:false//人脸识别成功 true
+    KYCSuccess:true,//人脸识别成功 true
+    contactTypeNameList:[],
+    contactList:[],
   },
   /**
    * 生命周期函数--监听页面加载
@@ -66,6 +68,7 @@ Page({
       })
     });
     this.getQiniuToken();
+  
   },
   //获取所有进件项
   getItemNumberList: function (incomingPartsTemplateList) {
@@ -399,6 +402,40 @@ Page({
     })
 
   },
+   //获取数据
+   getContactList:function(datumType){
+    postRequest(this, api.getDictionaries, {
+      datumType: datumType
+    }, (data) => {
+      let contactTypeNameList = this.data.contactTypeNameList
+      if(datumType=="datum_type_contact_relatives"){
+        contactTypeNameList[0] = data[0].typeName
+        contactTypeNameList[1] = data[1].typeName
+        this.setData({
+          relatives:data,
+          contactTypeNameList
+        })
+      }else{
+        contactTypeNameList[2] = data[0].typeName
+        contactTypeNameList[3] = data[1].typeName
+        this.setData({
+          urgent:data,
+          contactTypeNameList
+        })
+      }
+      
+    })
+  },
+  contactChange:function(event){
+    let { contactTypeNameList, contact,position } = event.detail
+    let contactList = this.data.contactList
+    contactList[position] = contact
+    this.setData({
+      contactTypeNameList,
+      contactList
+    })
+   
+  }, 
   //第六步，工作信息
   getNewestWorkInfo: function () {
     postRequest(this, api.getNewestWorkInfo, {}, (data) => {
@@ -517,6 +554,8 @@ Page({
       }, () => {
         if (this.data.step === ItemIndexMap.baseInfo) {
           this.getNewestPersonInfo();
+          this.getContactList('datum_type_contact_relatives');
+          this.getContactList('datum_type_contact_urgent');
         } else if (this.data.step === ItemIndexMap.handIdCardPick) {
           // this.getQiniuToken();
         } else if (this.data.step === ItemIndexMap.workingInfo) {
@@ -588,7 +627,7 @@ Page({
         this.calculateNext();
       })
     } else if (this.data.step === ItemIndexMap.baseInfo) {
-      let { educationData, housingData, marryData, region, code, iswork, liveDetail } = this.data
+      let { educationData, housingData, marryData, region, code, iswork, liveDetail,contactList} = this.data
       if (!checkNull(marryData.id, '请选择婚姻状况')) {
         return false;
       }
@@ -604,9 +643,9 @@ Page({
       if (!checkNull(liveDetail, '请输入详情地址')) {
         return false;
       }
-
+      let filtercontactList = contactList.filter((item)=> item !=null)
       let params = {
-        "contactList": [],
+        "contactList": filtercontactList,
         "datumTypeEducationId": educationData.id,
         "datumTypeHousingId": housingData.id,
         "datumTypeMarryId": marryData.id,
@@ -666,8 +705,13 @@ Page({
   },
   lasttap: function () {
     let curStep = this.data.verifyList[this.data.currentIndex - 1]
+    let temp = 1
+    if(curStep==6 && !this.data.iswork){//工作信息 跳步骤
+      curStep= 5
+      temp = 2
+    }
     this.setData({
-      currentIndex: this.data.currentIndex - 1,
+      currentIndex: this.data.currentIndex - temp,
       step: curStep,
       progress: this.getProgress(curStep),
     })

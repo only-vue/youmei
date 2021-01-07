@@ -3,6 +3,7 @@
     "bankPicker": "../../../component/bankPicker/index",
     "myPicker": "../../../component/MyPicker/index",
     "cityPicker": "../../../component/cityPicker/index",
-    "infoPicker": "../../../component/infoPicker/index"
+    "infoPicker": "../../../component/infoPicker/index",
+    "contactPicker": "../../../component/contactPicker/index"
   }
 }

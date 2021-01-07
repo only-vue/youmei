@@ -12,7 +12,8 @@
 
   <view class="drivder"> </view>
   <labelInput class="formInput" label="项目名称" bind:inputChange="projectNameChange" placeholder ="询问商户后输入"/>
-  <labelInput class="formInput" label="商品/服务金额" bind:inputChange="serviceAmountChange" placeholder ="询问商户后输入" type="number"/>
+  <labelInput class="formInput" label="商品/服务金额" bind:inputChange="serviceAmountChange" placeholder ="询问商户后输入" type="number" 
+  value="{{serviceAmount}}"/>
   <myPicker class="formInput" label="服务次数" placeholder ="选择服务次数" list="{{listService}}" value="{{pickerValue}}"
   bind:inputClick="serviceClick" itemkey="{{'prePeriod'}}" showDialog="{{showListService}}" bindmyPickerChange="servicePickerChange" bindmyPickerHide ="pickerHide"/>
   
@@ -20,7 +21,7 @@
   <labelInput wx:if="{{prePrincipal}}" class="formInput" label="每次金额" bind:inputChange="projectNameChange" placeholder ="" disabled="{{true}}" value="{{prePrincipal}}"/>
   <labelInput wx:if="{{preHandlingFee}}" class="formInput" label="每次服务费" bind:inputChange="projectNameChange" placeholder ="" disabled="{{true}}" value="{{preHandlingFee}}"/>
   <view class="formInput packge">
-    <switch class="switch" checked="{{switch1Checked}}" bindchange="switch1Change"/>
+    <switch class="switch" checked="{{isPackge}}" bindchange="switch1Change"/>
     <text>优惠包</text>
   </view>
   <view class="next" bindtap="nexttap">

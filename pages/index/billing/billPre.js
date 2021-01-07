@@ -133,8 +133,13 @@ Page({
       })
   },
   loanAmountChange:function(e){
+    let amount = e.detail.value
+    let maxQuota = parseInt(this.data.product.maxQuota)
+    if(amount > maxQuota){
+      amount = maxQuota
+    }
     this.setData({
-      loanAmount:e.detail.value,
+      loanAmount:amount,
     },()=>{
       this.repayPlanCalculator(this.data.selectedFQItem.productDetailConfigUuid)
     })

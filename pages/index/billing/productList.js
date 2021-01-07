@@ -50,7 +50,7 @@ Page({
   },
   btnGet: function (options) {
     let product = options.currentTarget.dataset.product
-    navigateTo(`productDetail?name=${product.name}&productDetailUuid=${product.productDetailUuid}&storeUuid=${this.data.store.storeUuid}&storeName=${this.data.store.storeName}&storeLocation=${this.data.store.businessAddressGpsLoction}`)
+    navigateTo(`productDetail?name=${product.name}&productDetailUuid=${product.productDetailUuid}&storeUuid=${this.data.store.storeUuid}&storeName=${this.data.store.storeName}&storeLocation=${this.data.store.businessAddressGpsLoction}&maxQuota=${product.maxQuota}`)
   },
   // 隐藏遮罩层 
   hideModal: function() {
