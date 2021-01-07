@@ -37,7 +37,7 @@ Page({
     workRegion: undefined,
     iswork: 1,
     imgInfo: false,
-    KYCSuccess:true,//人脸识别成功 true
+    KYCSuccess:false,//人脸识别成功 true
     contactTypeNameList:[],
     contactList:[],
   },
